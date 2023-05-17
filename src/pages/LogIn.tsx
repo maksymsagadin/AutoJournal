@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
@@ -9,7 +8,7 @@ import Stack from '@mui/material/Stack'
 import { NextPage } from 'next'
 import NavBar from '@/components/NavBar'
 
-const Login: NextPage = () => {
+const login: NextPage = () => {
   const [logIn, setLogIn] = useState(false)
 
   const handleLogIn = () => {
@@ -24,12 +23,12 @@ const Login: NextPage = () => {
           Log In
         </Typography>
         <Typography variant="body2" align="center">
-          <Link href="/SignUp" underline="always">
+          <Link href="/signup" underline="always">
             Don't have an account?
           </Link>
         </Typography>
       </Box>
-      <Box component="form" onSubmit={handleLogIn} noValidate sx={{ mt: 6 }}>
+      <Box component="form" onSubmit={handleLogIn} noValidate sx={{mx: 12, mt: 6 }}>
         <TextField
           autoFocus
           disabled={logIn}
@@ -54,8 +53,8 @@ const Login: NextPage = () => {
             type="submit"
             disabled={logIn}
             onClick={handleLogIn}
-            sx={{ width: '100%' }}
-          >
+            sx={{ width: '100%', height: '4rem' }}
+            >
             {logIn ? 'In progress…' : 'Log In'}
           </Button>
         </Stack>
@@ -64,4 +63,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default login
