@@ -25,7 +25,7 @@ function AppAppBar() {
                 href="/"
                 sx={{ display:'flex' }}
                 >
-                    <Image src={logo} alt='logo for Auto Journal' height={75} width={75} />
+                    <Image src={logo} alt='logo for Auto Journal' priority height={75} width={75} />
                 </Link>
                 <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
                     <Link
