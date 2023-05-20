@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { hash } from 'bcryptjs'
-import clientPromise from '@/lib/mongodb'
+import {connectToDatabase} from '@/lib/mongodb'
 
 interface SignUpData {
     firstName: string
@@ -9,7 +9,7 @@ interface SignUpData {
     password: string
 }
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
     //Only POST mothod is accepted
     if (req.method === 'POST') {
         const { firstName, lastName, email, password }: SignUpData = req.body
@@ -21,7 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         }
 
         //Get client from clientPromise
-        const client = await clientPromise
+        const client = await connectToDatabase()
         const db = client.db()
 
         //Check existing
@@ -49,5 +49,3 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         res.status(500).json({ message: 'Route not valid' })
     }
 }
-
-export default handler
