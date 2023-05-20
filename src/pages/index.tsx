@@ -16,9 +16,11 @@ export default function Home() {
         <meta name="theme-color" content="#014785" />
       </Head>
       <NavBar />
-      <Box height={'100vh'} width={600*3} >
-        <Image src={heroImage} alt='' priority fill style={{objectFit:"cover"}} quality={100} />
-        <Typography color={'whitesmoke'}>AutoJournal</Typography>
+      <Box height='100vh' maxWidth="100%" overflow="hidden" display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+        <Box width={600} mx='auto' >
+          <Image src={heroImage} alt='' priority fill style={{objectFit:'cover', zIndex:'-1'}}  quality={100} />
+          <Typography color={'whitesmoke'} variant='h3' textAlign='center'>AutoJournal</Typography>
+        </Box>
       </Box>
     </>
   )
