@@ -20,7 +20,7 @@ interface SignUpData {
 }
 
 const signup: NextPage = () => {
-    const [sent, setSent] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
     const router = useRouter()
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -37,7 +37,7 @@ const signup: NextPage = () => {
             return
         }
         try {
-            setSent(prevState => !prevState)
+            setSubmitted(prevState => !prevState)
             const res = await fetch('/api/auth/signup', {
                 method: 'POST',
                 headers: {
@@ -75,12 +75,13 @@ const signup: NextPage = () => {
                     </Link>
                 </Typography>
             </Box>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{mx: 12, mt: 6 }}>
+            <Box component="form" onSubmit={handleSubmit} sx={{mx: 12, mt: 6 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
+                            required
                             autoFocus
-                            disabled={sent}
+                            disabled={submitted}
                             fullWidth
                             label="First name"
                             name="firstName"
@@ -89,7 +90,8 @@ const signup: NextPage = () => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
-                            disabled={sent}
+                            required
+                            disabled={submitted}
                             fullWidth
                             label="Last name"
                             name="lastName"
@@ -99,7 +101,7 @@ const signup: NextPage = () => {
                 </Grid>
                 <TextField
                     required
-                    disabled={sent}
+                    disabled={submitted}
                     fullWidth
                     label="Email"
                     name="email"
@@ -109,7 +111,7 @@ const signup: NextPage = () => {
                 <TextField
                     required
                     fullWidth
-                    disabled={sent}
+                    disabled={submitted}
                     label="Password"
                     name="password"
                     type="password"
@@ -120,10 +122,10 @@ const signup: NextPage = () => {
                     <Button
                         variant="contained"
                         type="submit"
-                        disabled={sent}
+                        disabled={submitted}
                         sx={{ width: '100%', height: '4rem' }}
                         >
-                        {sent ? 'In progress…' : 'Sign Up'}
+                        {submitted ? 'In progress…' : 'Sign Up'}
                     </Button>
                 </Stack>
             </Box>
