@@ -1,20 +1,45 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { signIn } from 'next-auth/react'
+
+import NavBar from '@/components/NavBar'
+
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import { NextPage } from 'next'
-import NavBar from '@/components/NavBar'
 
 const login: NextPage = () => {
-  const [logIn, setLogIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
+  const router = useRouter()
 
-  const handleLogIn = () => {
-    setLogIn(prevState => !prevState)
+  const handleLogIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    
+    //Validation
+    if (!event.currentTarget.email.value.includes('@')) {
+      alert('Invalid email')
+      return
+    }
+    //Sign In
+    const result = await signIn('credentials', {
+        redirect: false,
+        email: event.currentTarget.email.value,
+        password: event.currentTarget.password.value,
+    })
+    if (result?.error) {
+      console.error(result.error)
+      alert(`${result.error}`)
+    } else {
+      // Successful login
+      router.push('/dashboard')
+      setLoggedIn(prevState => !prevState)
+    }
   }
-
+  
   return (
     <>
       <NavBar />
@@ -28,10 +53,10 @@ const login: NextPage = () => {
           </Link>
         </Typography>
       </Box>
-      <Box component="form" onSubmit={handleLogIn} noValidate sx={{mx: 12, mt: 6 }}>
+      <Box component="form" onSubmit={handleLogIn} sx={{mx: 12, mt: 6 }}>
         <TextField
           autoFocus
-          disabled={logIn}
+          disabled={loggedIn}
           fullWidth
           label="Email"
           margin="normal"
@@ -40,7 +65,7 @@ const login: NextPage = () => {
         />
         <TextField
           fullWidth
-          disabled={logIn}
+          disabled={loggedIn}
           required
           name="password"
           label="Password"
@@ -51,11 +76,10 @@ const login: NextPage = () => {
           <Button
             variant="contained"
             type="submit"
-            disabled={logIn}
-            onClick={handleLogIn}
+            disabled={loggedIn}
             sx={{ width: '100%', height: '4rem' }}
             >
-            {logIn ? 'In progress…' : 'Log In'}
+            {loggedIn ? 'In progress…' : 'Log In'}
           </Button>
         </Stack>
       </Box>
