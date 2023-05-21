@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { hash } from 'bcryptjs'
 import {connectToDatabase} from '@/lib/mongodb'
+import {hashPassword} from '@/lib/bcryptpw'
 
 interface SignUpData {
     firstName: string
@@ -10,7 +10,7 @@ interface SignUpData {
 }
 
 export default async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
-    //Only POST mothod is accepted
+    //Only POST method is accepted
     if (req.method === 'POST') {
         const { firstName, lastName, email, password }: SignUpData = req.body
         
@@ -38,7 +38,7 @@ export default async function signUpHandler(req: NextApiRequest, res: NextApiRes
             firstName: firstName,
             lastName: lastName,
             email: email,
-            password: await hash(password, 12),
+            password: await hashPassword(password),
             vehicles: []
         })
 

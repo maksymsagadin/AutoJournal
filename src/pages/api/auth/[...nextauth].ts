@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { compare } from 'bcryptjs'
 import {connectToDatabase} from '@/lib/mongodb'
+import {verifyPassword} from '@/lib/bcryptpw'
 
 interface LoginData {
     email: string
@@ -32,7 +32,7 @@ export default NextAuth({
                     throw new Error('No user found with that email')
                 }
                 //Check hashed password with DB password
-                const checkPassword = await compare(credentials.password, result.password)
+                const checkPassword = await verifyPassword(credentials.password, result.password)
                 //Incorrect password - send response
                 if (!checkPassword) {
                     throw new Error('Password doesnt match')
