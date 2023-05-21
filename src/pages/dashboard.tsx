@@ -2,24 +2,23 @@ import { NextPage, GetServerSideProps } from 'next'
 import type { Session } from 'next-auth'
 import { useSession, getSession } from 'next-auth/react'
 
-import NavBar from '@/components/NavBar'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
+import { Box, Typography, Grid } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-
+import NavBar from '@/components/NavBar'
 const dashboard: NextPage = () => {
     const { data: session, status } = useSession()
     const loading = status === 'loading'
 
     // Access user information and vehicles property
   const user = session?.user
-  const vehicles = user?.image
+  const vehicles  = user?.image
   console.log(user, 'user')
   console.log(vehicles, 'vehicles')
 
+//   const handleAddVehicle= async () = {}
+
     return (
-        <>
+        <> = 
             <NavBar />
             <Box mt={4} mx={2}>
                 <Typography variant="h4" component="h1" gutterBottom>
@@ -46,7 +45,8 @@ const dashboard: NextPage = () => {
                     ))}
                     <Grid item>
                         <Box
-                        
+                            component='button'
+                            // onClick={handleAddVehicle}
                             width={150}
                             height={150}
                             border="1px dashed gray"
@@ -55,7 +55,7 @@ const dashboard: NextPage = () => {
                             alignItems="center"
                             justifyContent="center"
                             flexDirection="column"
-                            style={{ cursor: 'pointer' }}
+                            sx={{ cursor: 'pointer' }}
                             >
                             <AddIcon fontSize="large" />
                             Add Vehicle
