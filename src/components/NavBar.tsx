@@ -32,12 +32,12 @@ const NavBar = () => {
             <Toolbar sx={{ justifyContent: 'space-between' }}>
                 <Box sx={{ flex: 1 }} />
                 <Link
-                variant="h6"
-                underline="none"
-                color="inherit"
-                href="/"
-                sx={{ display:'flex' }}
-                >
+                    variant="h6"
+                    underline="none"
+                    color="inherit"
+                    href="/dashboard"
+                    sx={{ display:'flex' }}
+                    >
                     <Image src={logo} alt='logo for Auto Journal' priority height={75} width={75} />
                 </Link>
                 <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
