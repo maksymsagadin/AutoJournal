@@ -3,7 +3,6 @@ import type { Session } from 'next-auth'
 import { useSession, getSession } from 'next-auth/react'
 
 import NavBar from '@/components/NavBar'
-
 import { Box, Typography, Grid } from '@mui/material'
 import Downloading from '@mui/icons-material/DownloadingOutlined'
 import AddIcon from '@mui/icons-material/Add'

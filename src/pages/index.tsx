@@ -2,8 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import NavBar from '../components/NavBar'
 import heroImage from '../../public/Cluster.jpg'
-import Box from '@mui/material/Box'
-import { Typography } from '@mui/material'
+
+import { Box, Typography } from '@mui/material'
 
 export default function Home() {
   return (

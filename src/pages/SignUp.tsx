@@ -4,14 +4,7 @@ import { NextPage } from 'next'
 import { SignUpData } from '@/utils/types'
 
 import NavBar from '@/components/NavBar'
-
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import Stack from '@mui/material/Stack'
+import { Box, Grid, Link, Typography, TextField, Button, Stack } from '@mui/material'
 
 
 const signup: NextPage = () => {

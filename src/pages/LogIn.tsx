@@ -2,16 +2,11 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 import { signIn } from 'next-auth/react'
-import { Credentials } from '@utils/types'
+import { Credentials } from '@/utils/types'
 
 import NavBar from '@/components/NavBar'
+import {Box, Link, Typography, TextField, Button, Stack} from '@mui/material'
 
-import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import Stack from '@mui/material/Stack'
 
 const login: NextPage = () => {
   const [loggedIn, setLoggedIn] = useState(false)
