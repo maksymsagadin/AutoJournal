@@ -3,7 +3,7 @@ import { AppProps } from 'next/app'
 import { SessionProvider, useSession } from 'next-auth/react'
 import { Router as NextRouter, useRouter } from 'next/router'
 import { CacheProvider, EmotionCache } from '@emotion/react'
-import createEmotionCache from '@/utilities/createEmotionCache'
+import createEmotionCache from '@/utils/createEmotionCache'
 import { ThemeProvider, CssBaseline, createTheme } from '@mui/material'
 import darkTheme from '@/styles/themes/darkTheme'
 
