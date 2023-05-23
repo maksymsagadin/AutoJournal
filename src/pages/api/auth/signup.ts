@@ -1,13 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import {connectToDatabase} from '@/lib/mongodb'
 import {hashPassword} from '@/lib/bcryptpw'
-
-interface SignUpData {
-    firstName: string
-    lastName: string
-    email: string
-    password: string
-}
+import { SignUpData } from '@/utils/types'
 
 export default async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
     //Only POST method is accepted

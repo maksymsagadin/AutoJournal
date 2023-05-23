@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 import { signIn } from 'next-auth/react'
+import { Credentials } from '@utils/types'
 
 import NavBar from '@/components/NavBar'
 
@@ -18,6 +19,10 @@ const login: NextPage = () => {
 
   const handleLogIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    const credentials: Credentials = {
+      email: event.currentTarget.email.value,
+      password: event.currentTarget.password.value,
+    }
     
     //Validation
     if (!event.currentTarget.email.value.includes('@')) {
@@ -27,8 +32,7 @@ const login: NextPage = () => {
     //Sign In
     const result = await signIn('credentials', {
         redirect: false,
-        email: event.currentTarget.email.value,
-        password: event.currentTarget.password.value,
+        ...credentials
     })
     if (result?.error) {
       console.error(result.error)

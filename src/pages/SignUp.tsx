@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
+import { SignUpData } from '@/utils/types'
 
 import NavBar from '@/components/NavBar'
 
@@ -12,12 +13,6 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 
-interface SignUpData {
-    firstName: string
-    lastName: string
-    email: string
-    password: string
-}
 
 const signup: NextPage = () => {
     const [submitted, setSubmitted] = useState(false)

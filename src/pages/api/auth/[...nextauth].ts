@@ -2,11 +2,8 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import {connectToDatabase} from '@/lib/mongodb'
 import {verifyPassword} from '@/lib/bcryptpw'
+import { Credentials } from '@/utils/types'
 
-interface LoginData {
-    email: string
-    password: string
-}
 
 export default NextAuth({
     //Configure JWT
@@ -20,7 +17,7 @@ export default NextAuth({
     //Specify Provider
     providers: [
         CredentialsProvider({
-            async authorize(credentials: LoginData) {
+            async authorize(credentials: Credentials) {
                 //Connect to DB
                 const client = await connectToDatabase()
                 //Get all the users
