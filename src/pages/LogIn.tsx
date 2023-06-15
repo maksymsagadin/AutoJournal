@@ -20,7 +20,7 @@ const login: NextPage = () => {
     }
     
     //Validation
-    if (!event.currentTarget.email.value.includes('@')) {
+    if (!credentials.email.includes('@')) {
       alert('Invalid email')
       return
     }
@@ -60,6 +60,7 @@ const login: NextPage = () => {
           label="Email"
           margin="normal"
           name="email"
+          type='email'
           required
         />
         <TextField

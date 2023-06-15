@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import {connectToDatabase} from '@/lib/mongodb'
-import {hashPassword} from '@/lib/bcryptpw'
-import { SignUpData } from '@/utils/types'
+import { connectToDatabase } from '@/lib/mongodb'
+import { hashPassword } from '@/lib/bcryptpw'
+import { UserData } from '@/utils/types'
 
 export default async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
     //Only POST method is accepted
     if (req.method === 'POST') {
-        const { firstName, lastName, email, password }: SignUpData = req.body
+        const { firstName, lastName, email, password }: UserData = req.body
         
         //Validate
         if (!email || !email.includes('@') || !password) {
@@ -14,15 +14,15 @@ export default async function signUpHandler(req: NextApiRequest, res: NextApiRes
             return
         }
 
-        //Get client from clientPromise
+        //Get client connection
         const client = await connectToDatabase()
         const db = client.db()
 
         //Check existing
-        const checkExisting = await db.collection('users').findOne({ email: email })
+        const user = await db.collection('users').findOne({ email: email })
 
         //Send error response if duplicate user is found
-        if (checkExisting) {
+        if (user) {
             res.status(422).json({ message: 'User already exists' })
             return
         }

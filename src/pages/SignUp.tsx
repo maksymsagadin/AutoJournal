@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
-import { SignUpData } from '@/utils/types'
+import { UserData } from '@/utils/types'
 
 import NavBar from '@/components/NavBar'
 import { Box, Grid, Link, Typography, TextField, Button, Stack } from '@mui/material'
@@ -13,16 +13,11 @@ const signup: NextPage = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const { firstName, lastName, email, password }: SignUpData = {
+        const { firstName, lastName, email, password }: UserData = {
             firstName: event.currentTarget.firstName.value,
             lastName: event.currentTarget.lastName.value,
             email: event.currentTarget.email.value,
             password: event.currentTarget.password.value,
-        }
-        //Validation
-        if (!email || !email.includes('@') || !password) {
-            alert('Invalid email / password.')
-            return
         }
         try {
             setSubmitted(prevState => !prevState)
@@ -32,10 +27,10 @@ const signup: NextPage = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    password: password,
+                    firstName,
+                    lastName,
+                    email,
+                    password,
                 }),
             })
             //Await for data for any desirable next steps
@@ -93,6 +88,7 @@ const signup: NextPage = () => {
                     fullWidth
                     label="Email"
                     name="email"
+                    type='email'
                     margin="normal"
                     autoComplete="email"
                 />

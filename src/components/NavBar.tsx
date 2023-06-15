@@ -19,10 +19,9 @@ const NavBar = () => {
     const loading = status === 'loading'
 
     const handleSignOut = async () => {
-        await signOut()
         //After signing out, the user will automatically be redirected to the login page once there is no longer a session.
+        await signOut({ callbackUrl: '/login' })
     }
-
     if (loading) {
         return null // Render nothing while loading
     }

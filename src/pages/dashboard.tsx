@@ -1,6 +1,8 @@
 import { NextPage, GetServerSideProps } from 'next'
 import type { Session } from 'next-auth'
-import { useSession, getSession } from 'next-auth/react'
+import { authOptions } from './api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth/next'
+import { useSession } from 'next-auth/react'
 
 import NavBar from '@/components/NavBar'
 import { Box, Typography, Grid } from '@mui/material'
@@ -17,13 +19,9 @@ const dashboard: NextPage = () => {
     if (!session) {
         return <Box>Error: Not logged in</Box>
     }
-
+    
     const user = session?.user
     const vehicles  = user?.image
-    // console.log(user, 'user')
-    // console.log(vehicles, 'vehicles')
-
-    // const handleAddVehicle= async () = {}
 
     return (
         <>
@@ -77,9 +75,20 @@ const dashboard: NextPage = () => {
 }
 
 export const getServerSideProps: GetServerSideProps<{ session: Session | null }> = async (context) => {
+    const session = await getServerSession(context.req, context.res, authOptions)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            },
+        }
+    }
+
     return {
         props: {
-            session: await getSession(context),
+            session,
         },
     }
 }

@@ -18,7 +18,7 @@ const dark = createTheme(darkTheme)
 function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const protectedRoutes = ['/dashboard']
+  const protectedRoutes = ['/dashboard','/profile']
 
   // Check if the current route is a protected route
   const isProtectedRoute = protectedRoutes.includes(router.pathname)

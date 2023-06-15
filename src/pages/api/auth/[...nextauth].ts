@@ -1,15 +1,19 @@
 import NextAuth from 'next-auth'
+import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import {connectToDatabase} from '@/lib/mongodb'
 import {verifyPassword} from '@/lib/bcryptpw'
 import { Credentials } from '@/utils/types'
 
-
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
     //Configure JWT
     session: {
         strategy: 'jwt',
+        // Seconds - How long until an idle session expires and is no longer valid.
+        maxAge: 30 * 24 * 60 * 60, // 30 days * 2
+        
     },
+    useSecureCookies: process.env.NODE_ENV === 'production',
     secret: process.env.SECRET,
     jwt: {
         secret: process.env.SECRET,
@@ -43,4 +47,6 @@ export default NextAuth({
             },
         }),
     ],
-})
+  }
+
+export default NextAuth(authOptions)

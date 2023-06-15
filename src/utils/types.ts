@@ -3,11 +3,18 @@ export interface Credentials {
     password: string
 }
 
-export interface SignUpData {
+export interface UserData {
     firstName: string
     lastName: string
     email: string
     password: string
+    vehicles?: Vehicle[]
+}
+
+export interface PasswordUpdate {
+    email: string,
+    oldPW: string,
+    newPW: string,
 }
 
 export interface User {
