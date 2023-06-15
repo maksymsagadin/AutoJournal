@@ -1,21 +1,44 @@
 import { useState } from 'react'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import Stack from '@mui/material/Stack'
+import { useRouter } from 'next/router'
 import { NextPage } from 'next'
+import { signIn } from 'next-auth/react'
+import { Credentials } from '@/utils/types'
+
 import NavBar from '@/components/NavBar'
+import {Box, Link, Typography, TextField, Button, Stack} from '@mui/material'
 
-const Login: NextPage = () => {
-  const [logIn, setLogIn] = useState(false)
 
-  const handleLogIn = () => {
-    setLogIn(prevState => !prevState)
+const login: NextPage = () => {
+  const [loggedIn, setLoggedIn] = useState(false)
+  const router = useRouter()
+
+  const handleLogIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const credentials: Credentials = {
+      email: event.currentTarget.email.value,
+      password: event.currentTarget.password.value,
+    }
+    
+    //Validation
+    if (!credentials.email.includes('@')) {
+      alert('Invalid email')
+      return
+    }
+    //Sign In
+    const result = await signIn('credentials', {
+        redirect: false,
+        ...credentials
+    })
+    if (result?.error) {
+      console.error(result.error)
+      alert(`${result.error}`)
+    } else {
+      // Successful login
+      router.push('/dashboard')
+      setLoggedIn(prevState => !prevState)
+    }
   }
-
+  
   return (
     <>
       <NavBar />
@@ -24,24 +47,25 @@ const Login: NextPage = () => {
           Log In
         </Typography>
         <Typography variant="body2" align="center">
-          <Link href="/SignUp" underline="always">
+          <Link href="/signup" underline="always">
             Don't have an account?
           </Link>
         </Typography>
       </Box>
-      <Box component="form" onSubmit={handleLogIn} noValidate sx={{ mt: 6 }}>
+      <Box component="form" onSubmit={handleLogIn} sx={{mx: 12, mt: 6 }}>
         <TextField
           autoFocus
-          disabled={logIn}
+          disabled={loggedIn}
           fullWidth
           label="Email"
           margin="normal"
           name="email"
+          type='email'
           required
         />
         <TextField
           fullWidth
-          disabled={logIn}
+          disabled={loggedIn}
           required
           name="password"
           label="Password"
@@ -52,11 +76,10 @@ const Login: NextPage = () => {
           <Button
             variant="contained"
             type="submit"
-            disabled={logIn}
-            onClick={handleLogIn}
-            sx={{ width: '100%' }}
-          >
-            {logIn ? 'In progress…' : 'Log In'}
+            disabled={loggedIn}
+            sx={{ width: '100%', height: '4rem' }}
+            >
+            {loggedIn ? 'In progress…' : 'Log In'}
           </Button>
         </Stack>
       </Box>
@@ -64,4 +87,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default login

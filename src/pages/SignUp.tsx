@@ -1,91 +1,120 @@
 import { useState } from 'react'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
-import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import Stack from '@mui/material/Stack'
+import { useRouter } from 'next/router'
 import { NextPage } from 'next'
+import { UserData } from '@/utils/types'
+
 import NavBar from '@/components/NavBar'
+import { Box, Grid, Link, Typography, TextField, Button, Stack } from '@mui/material'
 
-const SignUp: NextPage = () => {
-  const [sent, setSent] = useState(false)
 
-  const handleSubmit = () => {
-    setSent(prevState => !prevState)
-  }
+const signup: NextPage = () => {
+    const [submitted, setSubmitted] = useState(false)
+    const router = useRouter()
 
-  return (
-    <>
-        <NavBar />
-        <Box sx={{ m: 6, mb: 8 }}>
-            <Typography variant="h3" gutterBottom align="center">
-                Sign Up
-            </Typography>
-            <Typography variant="body2" align="center">
-                <Link href="/LogIn" underline="always">
-                    Already have an account?
-                </Link>
-            </Typography>
-        </Box>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{mx: 12, mt: 6 }}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        autoFocus
-                        disabled={sent}
-                        autoComplete="given-name"
-                        fullWidth
-                        label="First name"
-                        name="firstName"
-                        required
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const { firstName, lastName, email, password }: UserData = {
+            firstName: event.currentTarget.firstName.value,
+            lastName: event.currentTarget.lastName.value,
+            email: event.currentTarget.email.value,
+            password: event.currentTarget.password.value,
+        }
+        try {
+            setSubmitted(prevState => !prevState)
+            const res = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                }),
+            })
+            //Await for data for any desirable next steps
+            const response = await res.json()
+            if (response.message === 'User already exists') {
+                alert(`User with the email ${email} already exists, please login.`)
+            } else {
+                router.push('/login')
+            }
+        } catch (error) {
+            console.error(error,'err')
+        }
+    }
+
+    return (
+        <>
+            <NavBar />
+            <Box sx={{ m: 6, mb: 8 }}>
+                <Typography variant="h3" gutterBottom align="center">
+                    Sign Up
+                </Typography>
+                <Typography variant="body2" align="center">
+                    <Link href="/login" underline="always">
+                        Already have an account?
+                    </Link>
+                </Typography>
+            </Box>
+            <Box component="form" onSubmit={handleSubmit} sx={{mx: 12, mt: 6 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            autoFocus
+                            disabled={submitted}
+                            fullWidth
+                            label="First name"
+                            name="firstName"
+                            autoComplete="given-name"
+                            />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            disabled={submitted}
+                            fullWidth
+                            label="Last name"
+                            name="lastName"
+                            autoComplete="family-name"
                         />
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                    disabled={sent}
-                    autoComplete="family-name"
-                    fullWidth
-                    label="Last name"
-                    name="lastName"
+                <TextField
                     required
-                    />
-                </Grid>
-            </Grid>
-            <TextField
-            autoComplete="email"
-            disabled={sent}
-            fullWidth
-            label="Email"
-            margin="normal"
-            name="email"
-            required
-            />
-            <TextField
-            fullWidth
-            disabled={sent}
-            required
-            name="password"
-            autoComplete="new-password"
-            label="Password"
-            type="password"
-            margin="normal"
-            />
-            <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                <Button
-                    variant="contained"
-                    type="submit"
-                    disabled={sent}
-                    onClick={handleSubmit}
-                    sx={{ width: '100%', height: '4rem' }}
-                    >
-                    {sent ? 'In progress…' : 'Sign Up'}
-                </Button>
-            </Stack>
-        </Box>
-    </>
-  )
+                    disabled={submitted}
+                    fullWidth
+                    label="Email"
+                    name="email"
+                    type='email'
+                    margin="normal"
+                    autoComplete="email"
+                />
+                <TextField
+                    required
+                    fullWidth
+                    disabled={submitted}
+                    label="Password"
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    margin="normal"
+                />
+                <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        disabled={submitted}
+                        sx={{ width: '100%', height: '4rem' }}
+                        >
+                        {submitted ? 'In progress…' : 'Sign Up'}
+                    </Button>
+                </Stack>
+            </Box>
+        </>
+    )
 }
 
-export default SignUp
+export default signup
