@@ -42,11 +42,22 @@ export const authOptions: NextAuthOptions = {
                 return {
                     email: result.email,
                     name: result.firstName,
+                    // Note: We're using the `image` property to store vehicle data instead of a user profile picture URL.
                     image: result.vehicles,
                 }
             },
         }),
     ],
+    callbacks: {
+        jwt({ token, trigger, session }) {
+            if (trigger === "update" && session?.image) {
+                // Note: We're using the `picture` property to store vehicle data instead of a user profile picture URL. 
+                // Updating token.picture updates the session.image for the overall app but updating token.image does not update the returned session.image
+                token.picture = session.image
+            }
+            return token
+        }
+    }
   }
 
 export default NextAuth(authOptions)
