@@ -24,6 +24,7 @@ export interface User {
     image?: Vehicle[]
 }
 export interface Vehicle {
+    name?: string
     year: number
     make: string
     model: string
