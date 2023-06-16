@@ -15,7 +15,6 @@ const ChangePassword = () => {
             newPW: event.currentTarget.newPW.value,
             confirmPW: event.currentTarget.confirmPW.value,
         }
-
         //Confirmed Password Validation
         if (newPW !== confirmPW) {
             alert('New Password does not match Confirmed Password. Please retype new passwords.')
@@ -32,7 +31,7 @@ const ChangePassword = () => {
             })
             togglePasswordForm()
 
-            //Await for data for any desirable next steps
+            //Await for data
             const response = await res.json()
             if (response.message) {
                 alert (`${response.message}`)
@@ -76,9 +75,14 @@ const ChangePassword = () => {
                         required
                         sx={{mt:1}}
                         />
-                    <Button type="submit" variant="contained" sx={{mt:1}}>
-                        Update Password
-                    </Button>
+                    <Box>
+                        <Button type="submit" variant="contained" color="primary" sx={{ my: 1 }}>
+                            Update Password
+                        </Button>
+                        <Button variant="contained" sx={{ m: 1 }} color="secondary" onClick={togglePasswordForm}>
+                            Cancel
+                        </Button>
+                    </Box>
                 </Box>
             )}
         </>

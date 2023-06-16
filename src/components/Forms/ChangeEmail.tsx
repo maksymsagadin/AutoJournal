@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { TextField, Button, Box } from '@mui/material'
+import Close from '@mui/icons-material/Close'
 import { Credentials } from '@/utils/types'
 import { signIn } from 'next-auth/react'
 
@@ -92,9 +93,14 @@ const ChangeEmail = () => {
                         required
                         sx={{mt:1}}
                         />
-                    <Button type="submit" variant="contained" sx={{mt:1}}>
-                        Update Email
-                    </Button>
+                    <Box>
+                        <Button type="submit" variant="contained" color="primary" sx={{ my: 1 }}>
+                            Update Email
+                        </Button>
+                        <Button variant="contained" sx={{ m: 1 }} color="secondary" onClick={toggleEmailForm}>
+                            Cancel
+                        </Button>
+                    </Box>
                 </Box>
             )}
         </>

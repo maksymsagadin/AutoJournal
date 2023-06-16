@@ -4,14 +4,21 @@ import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { useSession } from 'next-auth/react'
 
+import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import { Box, Typography, Grid } from '@mui/material'
 import Downloading from '@mui/icons-material/DownloadingOutlined'
-import AddIcon from '@mui/icons-material/Add'
-
+import AddVehicleForm from '@/components/Forms/AddVehicleForm'
+import VehicleCard from '@/components/VehicleCard'
 
 const dashboard: NextPage = () => {
-    const { data: session, status } = useSession()
+    const { data: session, status, update } = useSession()
+    const [vehicles, setVehicles] = useState(session?.user?.image || [])
+    const user = session?.user
+
+    const handleAddVehicle = (newVehicle) => {
+        setVehicles(prevVehicles => [...prevVehicles, newVehicle])
+    }
 
     if (status === 'loading') {
         return <Box><Downloading /></Box>
@@ -20,9 +27,6 @@ const dashboard: NextPage = () => {
         return <Box>Error: Not logged in</Box>
     }
     
-    const user = session?.user
-    const vehicles  = user?.image
-
     return (
         <>
             <NavBar />
@@ -30,43 +34,19 @@ const dashboard: NextPage = () => {
                 <Typography variant="h4" component="h1" gutterBottom>
                 Welcome, {user?.name}
                 </Typography>
-                <Typography variant="h6" component="h2" gutterBottom>
-                You have {vehicles?.length} vehicles
-                </Typography>
-                <Grid container spacing={2}>
+                <Box display="flex" alignItems="center" margin='normal'>
+                    <Typography variant="h6" component="h2" gutterBottom>
+                        You have {vehicles?.length} vehicles,
+                    </Typography>
+                    <AddVehicleForm onAddVehicle={handleAddVehicle} />
+                </Box>
+                
+                <Grid container spacing={3}>
                     {vehicles?.map((vehicle: {}, index: number) => (
                         <Grid item key={index}>
-                            <Box
-                                width={150}
-                                height={150}
-                                border="1px solid gray"
-                                borderRadius={8}
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="center"
-                            >
-                                {vehicle}
-                            </Box>
+                            <VehicleCard vehicle={vehicle} />
                         </Grid>
                     ))}
-                    <Grid item>
-                        <Box
-                            component='button'
-                            // onClick={handleAddVehicle}
-                            width={150}
-                            height={150}
-                            border="1px dashed gray"
-                            borderRadius={8}
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                            flexDirection="column"
-                            sx={{ cursor: 'pointer' }}
-                            >
-                            <AddIcon fontSize="large" />
-                            Add Vehicle
-                        </Box>
-                    </Grid>
                 </Grid>
             </Box>
         </>
