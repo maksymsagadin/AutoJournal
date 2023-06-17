@@ -1,16 +1,22 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { v4 as uuidv4 } from 'uuid'
 import { Box, TextField, Button, Paper, Typography, Grid } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { Vehicle } from '@/utils/types'
 
-const AddVehicleForm = ({ onAddVehicle }) => {
-    const { data: session, update } = useSession()
+interface AddVehicleFormProps {
+    onAddVehicle: (vehicle: Vehicle) => void
+}
+
+const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ onAddVehicle }) => {
+    const { update } = useSession()
     const [isOpen, setIsOpen] = useState(false)
 
     const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const newVehicle: Vehicle = {
+            id: uuidv4(),
             name: event.currentTarget.name.value,
             year: event.currentTarget.year.value,
             make: event.currentTarget.make.value,
@@ -57,8 +63,8 @@ const AddVehicleForm = ({ onAddVehicle }) => {
                         Add New Vehicle
                     </Typography>
                     <Box component='form' onSubmit={handleSubmit}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={4}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={6}>
                                 <TextField
                                 label="Nick Name"
                                 name="name"
@@ -67,7 +73,7 @@ const AddVehicleForm = ({ onAddVehicle }) => {
                                 fullWidth
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <TextField
                                     label="Year"
                                     name="year"
@@ -77,7 +83,7 @@ const AddVehicleForm = ({ onAddVehicle }) => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <TextField
                                     label="Make"
                                     name="make"
@@ -87,7 +93,7 @@ const AddVehicleForm = ({ onAddVehicle }) => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <TextField
                                     label="Model"
                                     name="model"
@@ -97,7 +103,7 @@ const AddVehicleForm = ({ onAddVehicle }) => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
 
                                 <TextField
                                     label="Color"
@@ -108,7 +114,7 @@ const AddVehicleForm = ({ onAddVehicle }) => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <TextField
                                     label="Mileage"
                                     name="mileage"
@@ -118,7 +124,7 @@ const AddVehicleForm = ({ onAddVehicle }) => {
                                     required
                                 />
                             </Grid>
-                            <Grid item display="flex" justifyContent="end" xs={12}>
+                            <Grid item xs={12}>
                                 <Button type="submit" variant="contained" color="primary" sx={{ my: 1 }}>
                                     Submit
                                 </Button>
