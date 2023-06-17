@@ -25,12 +25,13 @@ export interface User {
 }
 export interface Vehicle {
     name?: string
+    id: string
     year: number
     make: string
     model: string
     color: string
     mileage: number
-    journalEntries: JournalEntry[]
+    journalEntries?: JournalEntry[]
 }
   
 export interface JournalEntry {

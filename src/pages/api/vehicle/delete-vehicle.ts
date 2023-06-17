@@ -1,11 +1,13 @@
+// api/vehicle/delete-vehicle.ts
+
 import { NextApiRequest, NextApiResponse } from 'next'
 import { connectToDatabase } from '@/lib/mongodb'
 import { authOptions } from '../auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 
-export default async function addVehicleHandler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method === 'POST') {
-        const newVehicle = req.body
+export default async function deleteVehicleHandler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method === 'DELETE') {
+        const vehicleToDelete = req.body
         const session = await getServerSession(req, res, authOptions)
 
         if (!session) {
@@ -23,12 +25,18 @@ export default async function addVehicleHandler(req: NextApiRequest, res: NextAp
             return
         }
 
-        // Add the new vehicle to the user's vehicles
+        // Remove the vehicle from the user's vehicles
         const result = await db.updateOne(
             { email: user.email },
-            { $push: { vehicles: newVehicle } }
+            { $pull: { vehicles: { id: vehicleToDelete.id } } }
         )
-        // Find updated user
+
+        if (result.modifiedCount === 0) {
+            res.status(404).json({ message: 'Vehicle not found.' })
+            return
+        }
+
+        // Fetch updated user
         const updatedUser = await db.findOne({ email: session.user?.email })
         
         res.status(200).json(updatedUser.vehicles)
