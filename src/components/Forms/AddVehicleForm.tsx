@@ -17,12 +17,12 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ onAddVehicle }) => {
         event.preventDefault()
         const newVehicle: Vehicle = {
             id: uuidv4(),
-            name: event.currentTarget.name.value,
-            year: event.currentTarget.year.value,
-            make: event.currentTarget.make.value,
-            model: event.currentTarget.model.value,
-            color: event.currentTarget.color.value,
-            mileage: event.currentTarget.mileage.value,
+            name: (event.currentTarget.elements.namedItem('name') as HTMLInputElement).value,
+            year: parseInt((event.currentTarget.elements.namedItem('year') as HTMLInputElement).value),
+            make: (event.currentTarget.elements.namedItem('make') as HTMLInputElement).value,
+            model: (event.currentTarget.elements.namedItem('model') as HTMLInputElement).value,
+            color: (event.currentTarget.elements.namedItem('color') as HTMLInputElement).value,
+            mileage: parseInt((event.currentTarget.elements.namedItem('mileage') as HTMLInputElement).value),
             journalEntries: [],
         }
 
