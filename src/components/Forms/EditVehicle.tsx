@@ -5,13 +5,13 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Vehicle } from '@/utils/types'
 
-interface EditVehicleFormProps {
+interface EditVehicleProps {
     vehicle: Vehicle,
     onEdit: (vehicle: Vehicle) => void
     onDelete: (vehicle: Vehicle) => void
 }
 
-const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDelete }) => {
+const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) => {
     const { update } = useSession()
     const [editedVehicle, setEditedVehicle] = useState(vehicle)
     const [isEditing, setIsEditing] = useState(false)
@@ -28,7 +28,7 @@ const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDe
         event.preventDefault()
 
         // Call your API endpoint to update the vehicle
-        const res = await fetch('/api/vehicle/edit-vehicle', {
+        const res = await fetch('/api/vehicle/edit', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDe
     }
     const handleDeleteVehicle = async () => {
         // Call your API endpoint to delete the vehicle
-        const res = await fetch('/api/vehicle/delete-vehicle', {
+        const res = await fetch('/api/vehicle/delete', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -165,9 +165,14 @@ const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDe
                         <EditIcon />
                     </IconButton>
                     {isDeleting ? (
+                        <>
                         <Button variant="contained" color="error" onClick={handleDeleteVehicle}>
                             Click again to delete
                         </Button>
+                        <Button variant="contained" color="secondary" onClick={() => setIsDeleting(false)}>
+                            Cancel
+                        </Button>
+                        </>
                     ) : (
                         <IconButton onClick={() => setIsDeleting(prevState => !prevState)}>
                             <DeleteIcon />
@@ -179,4 +184,4 @@ const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDe
     )
 }
 
-export default EditVehicleForm
+export default EditVehicle

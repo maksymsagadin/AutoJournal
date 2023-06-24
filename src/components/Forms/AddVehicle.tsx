@@ -5,11 +5,11 @@ import { Box, TextField, Button, Paper, Typography, Grid } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { Vehicle } from '@/utils/types'
 
-interface AddVehicleFormProps {
+interface AddVehicleProps {
     onAddVehicle: (vehicle: Vehicle) => void
 }
 
-const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ onAddVehicle }) => {
+const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
     const { update } = useSession()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -27,7 +27,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ onAddVehicle }) => {
         }
 
         // Send the new vehicle data to the server
-        const res = await fetch('/api/vehicle/add-vehicle', {
+        const res = await fetch('/api/vehicle/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -140,4 +140,4 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ onAddVehicle }) => {
     )
 }
 
-export default AddVehicleForm
+export default AddVehicle

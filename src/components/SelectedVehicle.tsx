@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { Box, Typography, IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import { Vehicle } from '@/utils/types'
-import EditVehicleForm from '@/components/Forms/EditVehicleForm'
+import EditVehicle from '@/components/Forms/EditVehicle'
+import AddJournalEntry from './Forms/AddJournalEntry'
+import JournalEntryCard from '@/components/JournalEntryCard'
 
 interface SelectedVehicleProps {
     vehicle: Vehicle,
@@ -14,13 +16,12 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
     
     return (
         <Box>
-            <Box display='flex' alignItems='center'>
+            <Box textAlign={'center'}>
                 <Typography variant="h5" component="h2">
                     Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
                 </Typography>
-                <EditVehicleForm vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />
+                <EditVehicle vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />
             </Box>
-
             <Typography variant="h5" component="h4">
                 Vehicle: {vehicle.make} {vehicle.model}
             </Typography>
@@ -33,6 +34,12 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <Typography variant="body1" component="p">
                 Mileage: {vehicle.mileage}
             </Typography>
+            <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
+            <Box>
+                {vehicle.journalEntries.map((entry, index) => (
+                    <JournalEntryCard key={index} entry={entry} />
+                ))}
+            </Box>
         </Box>
     )
 }

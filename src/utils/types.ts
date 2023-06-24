@@ -36,10 +36,11 @@ export interface Vehicle {
   
 export interface JournalEntry {
     date: Date
+    id: string
     service: string
     notes: string
     spent?: number
-    toolsUsed?: string
+    tools?: string
     parts?: string
 }
   

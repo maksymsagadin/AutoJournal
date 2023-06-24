@@ -8,20 +8,20 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import { Box, Typography, Grid, Button } from '@mui/material'
 import Downloading from '@mui/icons-material/DownloadingOutlined'
-import AddVehicleForm from '@/components/Forms/AddVehicleForm'
+import AddVehicle from '@/components/Forms/AddVehicle'
 import VehicleCard from '@/components/VehicleCard'
 import SelectedVehicle from '@/components/SelectedVehicle'
 import { Vehicle } from '@/utils/types'
 
 const dashboard: NextPage = () => {
-    const { data: session, status, update } = useSession({required: true})
+    const { data: session, status } = useSession({required: true})
     const [vehicles, setVehicles] = useState(session?.user?.image || [])
     const [selectedVehicle, setSelectedVehicle] = useState(true)
     const [showVehicles, setShowVehicles] = useState(true)
     const user = session?.user
 
     // Handle State after Adding a vehicle
-    const handleAddVehicle = (newVehicle) => {
+    const handleAddVehicle = (newVehicle: Vehicle) => {
         setVehicles(prevVehicles => [...prevVehicles, newVehicle])
     }
     // Handle State after Selecting a vehicle
@@ -61,25 +61,24 @@ const dashboard: NextPage = () => {
     return (
         <>
             <NavBar />
-            <Box mt={4} mx={2}>
+            <Box textAlign={'center'} mt={4} mx={2}>
                 <Typography variant="h4" component="h1" gutterBottom>
                 Welcome, {user?.name}
                 </Typography>
                 {showVehicles ? (
                     <>
-                        <Box alignItems="center" margin='normal'>
+                        <Box alignItems="center" mb={2}>
                             <Typography variant="h6" component="h2" gutterBottom>
                                 You have {vehicles?.length} vehicles.
                             </Typography>
-                            <AddVehicleForm onAddVehicle={handleAddVehicle} />
+                            <AddVehicle onAddVehicle={handleAddVehicle} />
                         </Box>
                         <Grid display='flex' justifyContent='center' container spacing={2}>
-                            {vehicles?.map((vehicle: {}, index: number) => (
+                            {vehicles?.map((vehicle: Vehicle, index: number) => (
                                 <Grid item key={index}>
                                     <VehicleCard 
                                         vehicle={vehicle} 
                                         onSelect={handleSelectVehicle}
-                                        // onDeleteVehicle={handleDeleteVehicle} 
                                     />
                                 </Grid>
                             ))}
@@ -87,7 +86,7 @@ const dashboard: NextPage = () => {
                     </>
                 ) : (
                     <>
-                        <Button variant="outlined" onClick={() => setShowVehicles(true)}>Back to Vehicles</Button>
+                        <Button variant="outlined" sx={{m:1}} onClick={() => setShowVehicles(true)}>Back to Vehicles</Button>
                         <SelectedVehicle vehicle={selectedVehicle} onEdit={handleEditVehicle} onDelete={handleDeleteVehicle} />
                     </>
                 )}
