@@ -19,12 +19,18 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
 
         const newEntry: JournalEntry = {
             id: uuidv4(),
-            date: new Date(),
+            date: new Date((event.currentTarget.elements.namedItem('date') as HTMLInputElement).value),
             service: (event.currentTarget.elements.namedItem('service') as HTMLInputElement).value,
+            mileage: parseInt((event.currentTarget.elements.namedItem('mileage') as HTMLInputElement).value),
             notes: (event.currentTarget.elements.namedItem('notes') as HTMLInputElement).value,
             spent: parseFloat((event.currentTarget.elements.namedItem('spent') as HTMLInputElement).value),
             tools: (event.currentTarget.elements.namedItem('tools') as HTMLInputElement).value,
             parts: (event.currentTarget.elements.namedItem('parts') as HTMLInputElement).value,
+        }
+
+        // Check if the mileage is higher than the current vehicle's mileage and update it
+        if (newEntry.mileage > vehicle.mileage) {
+            vehicle.mileage = newEntry.mileage;
         }
         // Add the new journal entry to the vehicle's journalEntries array
         const updatedVehicle = { ...vehicle, journalEntries: [...vehicle.journalEntries, newEntry] }
@@ -66,8 +72,8 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                         Add New Journal Entry
                     </Typography>
                     <Box component='form' onSubmit={handleSubmit}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={6}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={3}>
                                 <TextField
                                     select
                                     label="Service"
@@ -85,7 +91,38 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     <MenuItem value={'Repair'}>Repair</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={3}>
+                                <TextField
+                                    label="Date"
+                                    name="date"
+                                    type='date'
+                                    defaultValue={new Date().toISOString().split('T')[0]} // Current date
+                                    margin='dense'
+                                    fullWidth
+                                    required
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    InputProps={{
+                                        startAdornment: <InputAdornment position="start">✣</InputAdornment>,
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <TextField
+                                    label="Mileage"
+                                    name="mileage"
+                                    type='number'
+                                    defaultValue={vehicle.mileage}
+                                    margin='dense'
+                                    fullWidth
+                                    required
+                                    InputProps={{
+                                        startAdornment: <InputAdornment position="start">🛣️</InputAdornment>,
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
                                 <TextField
                                     label="Spent"
                                     name="spent"

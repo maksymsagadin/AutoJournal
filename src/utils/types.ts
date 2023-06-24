@@ -24,8 +24,8 @@ export interface User {
     image?: Vehicle[]
 }
 export interface Vehicle {
-    name?: string
     id: string
+    name?: string
     year: number
     make: string
     model: string
@@ -35,9 +35,10 @@ export interface Vehicle {
 }
   
 export interface JournalEntry {
-    date: Date
     id: string
+    date: Date
     service: string
+    mileage: number
     notes: string
     spent?: number
     tools?: string

@@ -10,17 +10,22 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry }) => {
         <Card sx={{ m: 2 }}>
             <CardContent>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={3}>
                         <Typography variant="h6" component="h2">
                             Service: {entry.service}
                         </Typography>
                     </Grid>
-                    <Grid item xs={6} sm={4}>
+                    <Grid item xs={4} sm={3}>
                         <Typography variant="body1" component="p">
                             Date: {new Date(entry.date).toLocaleDateString()}
                         </Typography>
                     </Grid>
-                    <Grid item xs={6} sm={4}>
+                    <Grid item xs={4} sm={3}>
+                        <Typography variant="body1" component="p">
+                            Mileage: {entry.mileage}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={4} sm={3}>
                         <Typography variant="body1" component="p">
                             Spent: ${entry.spent}
                         </Typography>
