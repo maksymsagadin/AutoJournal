@@ -1,11 +1,38 @@
-import { Card, CardContent, Grid, Typography } from '@mui/material'
+import { useState } from 'react'
+import { Card, CardContent, Grid, IconButton, Typography } from '@mui/material'
 import { JournalEntry } from '@/utils/types'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditJournalEntry from './Forms/EditJournalEntry'
 
 interface JournalEntryCardProps {
-    entry: JournalEntry
+    entry: JournalEntry,
+    onEdit: (entry: JournalEntry) => void,
+    onDelete: (entry: JournalEntry) => void,
 }
 
-const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry }) => {
+const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDelete }) => {
+    const [isEditing, setIsEditing] = useState(false)
+
+    const handleEdit = (updatedEntry: JournalEntry) => {
+        onEdit(updatedEntry)
+        setIsEditing(false)
+    }
+
+    const handleDelete = (entryToDelete: JournalEntry) => {
+        onDelete(entryToDelete)
+    }
+
+    if (isEditing) {
+        return (
+            <EditJournalEntry 
+                entry={entry} 
+                onEdit={handleEdit} 
+                onCancel={() => setIsEditing(false)} 
+            />
+        )
+    }
+
     return (
         <Card sx={{ m: 2 }}>
             <CardContent>
@@ -44,6 +71,14 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry }) => {
                         <Typography variant="body1" component="p">
                             Notes: {entry.notes}
                         </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <IconButton onClick={() => setIsEditing(true)}>
+                            <EditIcon />
+                        </IconButton>
+                        <IconButton onClick={() => onDelete(entry)}>
+                            <DeleteIcon />
+                        </IconButton>
                     </Grid>
                 </Grid>
             </CardContent>

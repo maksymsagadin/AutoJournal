@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Box, Typography, IconButton } from '@mui/material'
+import { useSession } from 'next-auth/react'
+import { Box, Typography, Grid } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
-import { Vehicle } from '@/utils/types'
+import { JournalEntry, Vehicle } from '@/utils/types'
 import EditVehicle from '@/components/Forms/EditVehicle'
 import AddJournalEntry from './Forms/AddJournalEntry'
 import JournalEntryCard from '@/components/JournalEntryCard'
@@ -13,7 +14,69 @@ interface SelectedVehicleProps {
 }
 
 const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDelete }) => {
-    
+    const { update } = useSession()
+
+    const handleEditEntry = async (updatedEntry: JournalEntry) => {
+        // Check if the mileage is higher than the current vehicle's mileage and update it
+        if (updatedEntry.mileage > vehicle.mileage) {
+            vehicle.mileage = updatedEntry.mileage
+        }
+
+        // Update vehicle with the updated journal entry
+        const entryIndex = vehicle.journalEntries.findIndex(entry => entry.id === updatedEntry.id)
+        const updatedEntries = [...vehicle.journalEntries]
+        updatedEntries[entryIndex] = updatedEntry
+        const updatedVehicle = { ...vehicle, journalEntries: updatedEntries }
+
+        // Update Vehicle
+        // Call your API endpoint to update server data
+        const result = await fetch('/api/vehicle/edit', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedVehicle),
+        })
+        if (result.ok) {
+            // If the server responded with a success status
+            // update the local state
+            onEdit(updatedVehicle)
+            
+            // update the session image with updated data
+            const updatedVehicles = await result.json()
+            await update({ image: updatedVehicles })
+        } else {
+            // If the server responded with an error status, handle the error
+            console.error('Error editing vehicle')
+        }
+    }
+
+    const handleDeleteEntry = async (entryToDelete: JournalEntry) => {
+        const updatedEntries = vehicle.journalEntries.filter(entry => entry.id !== entryToDelete.id)
+        const updatedVehicle = { ...vehicle, journalEntries: updatedEntries }
+        
+        // Update Vehicle
+        // Call your API endpoint to update server data
+        const result = await fetch('/api/vehicle/edit', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedVehicle),
+        })
+        if (result.ok) {
+            // If the server responded with a success status
+            // update the local state
+            onEdit(updatedVehicle)
+            
+            // update the session image with updated data
+            const updatedVehicles = await result.json()
+            await update({ image: updatedVehicles })
+        } else {
+            // If the server responded with an error status, handle the error
+            console.error('Error editing vehicle')
+        }
+    }
     return (
         <Box>
             <Box textAlign={'center'}>
@@ -35,11 +98,13 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 Mileage: {vehicle.mileage}
             </Typography>
             <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
-            <Box>
+            <Grid container>
                 {vehicle.journalEntries.map((entry, index) => (
-                    <JournalEntryCard key={index} entry={entry} />
+                    <Grid item xs={12} md={6} lg={4} xl={3} key={index}>
+                        <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
+                    </Grid>
                 ))}
-            </Box>
+            </Grid>
         </Box>
     )
 }

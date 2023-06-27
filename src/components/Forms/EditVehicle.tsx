@@ -18,36 +18,42 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
     const [isDeleting, setIsDeleting] = useState(false)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
         setEditedVehicle({
             ...editedVehicle,
             [event.target.name]: event.target.value
         })
     }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSave = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        // Call your API endpoint to update the vehicle
-        const res = await fetch('/api/vehicle/edit', {
+        // Call API endpoint to update the vehicle
+        const result = await fetch('/api/vehicle/edit', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(editedVehicle),
         })
-        if (res.ok) {
-            // If the server responded with a success status, update the local state
-            const updatedVehicles = await res.json()
+        if (result.ok) {
+            // If the server responded with a success status
+            // update the local state
             onEdit(editedVehicle)
+            
+            // update the session image with updated data
+            const updatedVehicles = await result.json()
             await update({ image: updatedVehicles })
         } else {
             // If the server responded with an error status, handle the error
             console.error('Error editing vehicle')
         }
+
+
     }
     const handleDeleteVehicle = async () => {
         // Call your API endpoint to delete the vehicle
-        const res = await fetch('/api/vehicle/delete', {
+        const result = await fetch('/api/vehicle/delete', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,12 +61,14 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
             body: JSON.stringify(vehicle),
         })
     
-        if (res.ok) {
-            // If the server responded with a success status, update the local state
-            const updatedVehicles = await res.json()
+        if (result.ok) {
+            // If the server responded with a success status, 
+            // update the local state
             onDelete(vehicle)
+            
+            // update the session image with updated data
+            const updatedVehicles = await result.json()
             await update({ image: updatedVehicles })
-
         } else {
             // If the server responded with an error status, handle the error
             console.error('Error deleting vehicle')
@@ -75,7 +83,7 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
                     <Typography variant="h6" gutterBottom>
                         Edit Vehicle
                     </Typography>
-                    <Box component='form' onSubmit={handleSubmit}>
+                    <Box component='form' onSubmit={handleSave}>
                         <Grid container spacing={1}>
                             <Grid item xs={6}>
                                 <TextField

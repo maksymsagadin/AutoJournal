@@ -30,7 +30,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
 
         // Check if the mileage is higher than the current vehicle's mileage and update it
         if (newEntry.mileage > vehicle.mileage) {
-            vehicle.mileage = newEntry.mileage;
+            vehicle.mileage = newEntry.mileage
         }
         // Add the new journal entry to the vehicle's journalEntries array
         const updatedVehicle = { ...vehicle, journalEntries: [...vehicle.journalEntries, newEntry] }
