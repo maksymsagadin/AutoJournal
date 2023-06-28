@@ -49,7 +49,7 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
                     </Grid>
                     <Grid item xs={4} sm={3}>
                         <Typography variant="body1" component="p">
-                            Mileage: {entry.mileage}
+                            Odo: {entry.mileage}
                         </Typography>
                     </Grid>
                     <Grid item xs={4} sm={3}>
@@ -59,12 +59,12 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="body1" component="p">
-                            Parts: {entry.parts}
+                            {entry.parts ? `Parts: ${entry.parts}` : ''}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="body1" component="p">
-                            Tools: {entry.tools}
+                            {entry.tools ? `Tools: ${entry.tools}` : ''}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>

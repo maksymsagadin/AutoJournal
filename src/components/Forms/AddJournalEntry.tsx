@@ -16,8 +16,6 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const dateValue = (event.currentTarget.elements.namedItem('date') as HTMLInputElement).value
-        const [year, month, day] = dateValue.split('-').map(Number)
         const newEntry: JournalEntry = {
             id: uuidv4(),
             date: new Date((event.currentTarget.elements.namedItem('date') as HTMLInputElement).value),

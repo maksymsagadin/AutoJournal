@@ -80,7 +80,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
 
     return (
         <Box>
-            <Box textAlign={'center'}>
+            <Box display='flex' justifyContent='center'>
                 <Typography variant="h5" component="h2">
                     Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
                 </Typography>
