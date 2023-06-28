@@ -14,7 +14,6 @@ interface JournalEntryCardProps {
 const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDelete }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
-    console.log(entry.date,'entry date', entry.notes)
     const handleEdit = (updatedEntry: JournalEntry) => {
         onEdit(updatedEntry)
         setIsEditing(false)
