@@ -4,7 +4,6 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import {connectToDatabase} from '@/lib/mongodb'
 import {verifyPassword} from '@/lib/bcryptpw'
 import { Credentials } from '@/utils/types'
-import { NextApiRequest } from 'next'
 
 export const authOptions: NextAuthOptions = {
     //Configure JWT
@@ -22,12 +21,12 @@ export const authOptions: NextAuthOptions = {
     //Specify Provider
     providers: [
         CredentialsProvider({
-            name: 'Credentials',
-            credentials: {
-                email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
-                password: { label: 'Password', type: 'password' }
-            },
-            async authorize(credentials?: Credentials, _req: NextApiRequest) {
+            // name: 'Credentials',
+            // credentials: {
+            //     email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
+            //     password: { label: 'Password', type: 'password' }
+            // },
+            async authorize(credentials: Record<"email" | "password", string> | undefined) {
                 if (!credentials) {
                     throw new Error('No credentials provided')
                 }
