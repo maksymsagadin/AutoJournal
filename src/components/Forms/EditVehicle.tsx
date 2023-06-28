@@ -27,7 +27,6 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
 
     const handleSave = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
         // Call API endpoint to update the vehicle
         const result = await fetch('/api/vehicle/edit', {
             method: 'PATCH',
@@ -48,9 +47,8 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
             // If the server responded with an error status, handle the error
             console.error('Error editing vehicle')
         }
-
-
     }
+
     const handleDeleteVehicle = async () => {
         // Call your API endpoint to delete the vehicle
         const result = await fetch('/api/vehicle/delete', {
@@ -174,12 +172,12 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
                     </IconButton>
                     {isDeleting ? (
                         <>
-                        <Button variant="contained" color="error" onClick={handleDeleteVehicle}>
-                            Click again to delete
-                        </Button>
-                        <Button variant="contained" color="secondary" onClick={() => setIsDeleting(false)}>
-                            Cancel
-                        </Button>
+                            <Button variant="contained" color="error" onClick={handleDeleteVehicle}>
+                                Click again to delete
+                            </Button>
+                            <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={() => setIsDeleting(false)}>
+                                Cancel
+                            </Button>
                         </>
                     ) : (
                         <IconButton onClick={() => setIsDeleting(prevState => !prevState)}>

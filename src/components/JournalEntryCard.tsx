@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card, CardContent, Grid, IconButton, Typography } from '@mui/material'
+import { Button, Card, CardContent, Grid, IconButton, Typography } from '@mui/material'
 import { JournalEntry } from '@/utils/types'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -13,6 +13,7 @@ interface JournalEntryCardProps {
 
 const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDelete }) => {
     const [isEditing, setIsEditing] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
 
     const handleEdit = (updatedEntry: JournalEntry) => {
         onEdit(updatedEntry)
@@ -76,9 +77,20 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
                         <IconButton onClick={() => setIsEditing(true)}>
                             <EditIcon />
                         </IconButton>
-                        <IconButton onClick={() => onDelete(entry)}>
-                            <DeleteIcon />
-                        </IconButton>
+                        {isDeleting ? (
+                            <>
+                                <Button variant="contained" color="error" onClick={() => onDelete(entry)}>
+                                    Click again to delete
+                                </Button>
+                                <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={() => setIsDeleting(false)}>
+                                    Cancel
+                                </Button>
+                            </>
+                        ) : (
+                            <IconButton onClick={() => setIsDeleting(prevState => !prevState)}>
+                                <DeleteIcon />
+                            </IconButton>
+                        )}
                     </Grid>
                 </Grid>
             </CardContent>

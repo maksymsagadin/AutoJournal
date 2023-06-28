@@ -24,7 +24,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
     }
 
     return (
-        <Box component='form' onSubmit={handleSave}>
+        <Box component='form' onSubmit={handleSave} sx={{ m: 1 }}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={3}>
                     <TextField
