@@ -18,7 +18,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
 
     const handleEditEntry = async (updatedEntry: JournalEntry) => {
         // Check if the mileage is higher than the current vehicle's mileage and update it
-        if (updatedEntry.mileage > vehicle.mileage) {
+        if (Number(updatedEntry.mileage) > Number(vehicle.mileage)) {
             vehicle.mileage = updatedEntry.mileage
         }
 
@@ -77,7 +77,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             console.error('Error editing vehicle')
         }
     }
-    
+
     return (
         <Box>
             <Box textAlign={'center'}>
