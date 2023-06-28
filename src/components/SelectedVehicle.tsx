@@ -77,6 +77,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             console.error('Error editing vehicle')
         }
     }
+    
     return (
         <Box>
             <Box textAlign={'center'}>
