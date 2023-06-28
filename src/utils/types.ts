@@ -12,9 +12,9 @@ export interface UserData {
 }
 
 export interface PasswordUpdate {
-    email: string,
-    oldPW: string,
-    newPW: string,
+    email: string
+    oldPW: string
+    newPW: string
 }
 
 export interface User {
