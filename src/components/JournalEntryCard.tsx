@@ -36,7 +36,7 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
     return (
         <Card sx={{ m: 2 }}>
             <CardContent>
-                <Grid container spacing={2}>
+                <Grid container textAlign='left' spacing={2}>
                     <Grid item xs={12} sm={3}>
                         <Typography variant="h6" component="h2">
                             Service: {entry.service}
