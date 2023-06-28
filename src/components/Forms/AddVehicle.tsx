@@ -5,11 +5,11 @@ import { Box, TextField, Button, Paper, Typography, Grid } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { Vehicle } from '@/utils/types'
 
-interface AddVehicleFormProps {
+interface AddVehicleProps {
     onAddVehicle: (vehicle: Vehicle) => void
 }
 
-const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ onAddVehicle }) => {
+const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
     const { update } = useSession()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -17,17 +17,17 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ onAddVehicle }) => {
         event.preventDefault()
         const newVehicle: Vehicle = {
             id: uuidv4(),
-            name: event.currentTarget.name.value,
-            year: event.currentTarget.year.value,
-            make: event.currentTarget.make.value,
-            model: event.currentTarget.model.value,
-            color: event.currentTarget.color.value,
-            mileage: event.currentTarget.mileage.value,
+            name: (event.currentTarget.elements.namedItem('name') as HTMLInputElement).value,
+            year: parseInt((event.currentTarget.elements.namedItem('year') as HTMLInputElement).value),
+            make: (event.currentTarget.elements.namedItem('make') as HTMLInputElement).value,
+            model: (event.currentTarget.elements.namedItem('model') as HTMLInputElement).value,
+            color: (event.currentTarget.elements.namedItem('color') as HTMLInputElement).value,
+            mileage: parseInt((event.currentTarget.elements.namedItem('mileage') as HTMLInputElement).value),
             journalEntries: [],
         }
 
         // Send the new vehicle data to the server
-        const res = await fetch('/api/vehicle/add-vehicle', {
+        const res = await fetch('/api/vehicle/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -140,4 +140,4 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ onAddVehicle }) => {
     )
 }
 
-export default AddVehicleForm
+export default AddVehicle

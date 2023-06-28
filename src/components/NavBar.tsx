@@ -29,12 +29,34 @@ const NavBar = () => {
     return (
         <AppBar position="sticky">
             <Toolbar sx={{ justifyContent: 'space-between' }}>
-                <Box sx={{ flex: 1 }} />
+                <Box sx={{ flex: 1 }} >
+                {!session ? (
+                            <Link
+                                color="inherit"
+                                variant="h6"
+                                underline="none"
+                                href="/"
+                                sx={rightLink}
+                                >
+                                {'Home'}
+                            </Link>
+                    ) : (
+                        <Link
+                            color="inherit"
+                            variant="h6"
+                            underline="none"
+                            href="/dashboard"
+                            sx={rightLink}
+                            >
+                            {'Dashboard'}
+                        </Link>
+                    )}
+                </Box>
                 <Link
                     variant="h6"
                     underline="none"
                     color="inherit"
-                    href="/dashboard"
+                    href="/"
                     sx={{ display:'flex' }}
                     >
                     <Image src={logo} alt='logo for Auto Journal' priority height={75} width={75} />
@@ -82,7 +104,6 @@ const NavBar = () => {
                             </Link>
                         </>
                     )}
-                    
                 </Box>
             </Toolbar>
         </AppBar>

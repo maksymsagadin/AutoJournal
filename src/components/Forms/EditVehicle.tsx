@@ -5,49 +5,53 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Vehicle } from '@/utils/types'
 
-interface EditVehicleFormProps {
+interface EditVehicleProps {
     vehicle: Vehicle,
     onEdit: (vehicle: Vehicle) => void
     onDelete: (vehicle: Vehicle) => void
 }
 
-const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDelete }) => {
+const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) => {
     const { update } = useSession()
     const [editedVehicle, setEditedVehicle] = useState(vehicle)
     const [isEditing, setIsEditing] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
         setEditedVehicle({
             ...editedVehicle,
             [event.target.name]: event.target.value
         })
     }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSave = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
-        // Call your API endpoint to update the vehicle
-        const res = await fetch('/api/vehicle/edit-vehicle', {
+        // Call API endpoint to update the vehicle
+        const result = await fetch('/api/vehicle/edit', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(editedVehicle),
         })
-        if (res.ok) {
-            // If the server responded with a success status, update the local state
-            const updatedVehicles = await res.json()
+        if (result.ok) {
+            // If the server responded with a success status
+            // update the local state
             onEdit(editedVehicle)
+            
+            // update the session image with updated data
+            const updatedVehicles = await result.json()
             await update({ image: updatedVehicles })
         } else {
             // If the server responded with an error status, handle the error
             console.error('Error editing vehicle')
         }
     }
+
     const handleDeleteVehicle = async () => {
         // Call your API endpoint to delete the vehicle
-        const res = await fetch('/api/vehicle/delete-vehicle', {
+        const result = await fetch('/api/vehicle/delete', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,12 +59,14 @@ const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDe
             body: JSON.stringify(vehicle),
         })
     
-        if (res.ok) {
-            // If the server responded with a success status, update the local state
-            const updatedVehicles = await res.json()
+        if (result.ok) {
+            // If the server responded with a success status, 
+            // update the local state
             onDelete(vehicle)
+            
+            // update the session image with updated data
+            const updatedVehicles = await result.json()
             await update({ image: updatedVehicles })
-
         } else {
             // If the server responded with an error status, handle the error
             console.error('Error deleting vehicle')
@@ -75,7 +81,7 @@ const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDe
                     <Typography variant="h6" gutterBottom>
                         Edit Vehicle
                     </Typography>
-                    <Box component='form' onSubmit={handleSubmit}>
+                    <Box component='form' onSubmit={handleSave}>
                         <Grid container spacing={1}>
                             <Grid item xs={6}>
                                 <TextField
@@ -165,9 +171,14 @@ const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDe
                         <EditIcon />
                     </IconButton>
                     {isDeleting ? (
-                        <Button variant="contained" color="error" onClick={handleDeleteVehicle}>
-                            Click again to delete
-                        </Button>
+                        <>
+                            <Button variant="contained" color="error" onClick={handleDeleteVehicle}>
+                                Click again to delete
+                            </Button>
+                            <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={() => setIsDeleting(false)}>
+                                Cancel
+                            </Button>
+                        </>
                     ) : (
                         <IconButton onClick={() => setIsDeleting(prevState => !prevState)}>
                             <DeleteIcon />
@@ -179,4 +190,4 @@ const EditVehicleForm: React.FC<EditVehicleFormProps> = ({ vehicle, onEdit, onDe
     )
 }
 
-export default EditVehicleForm
+export default EditVehicle
