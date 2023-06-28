@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import {connectToDatabase} from '@/lib/mongodb'
 import {verifyPassword} from '@/lib/bcryptpw'
 import { Credentials } from '@/utils/types'
+import { NextApiRequest } from 'next'
 
 export const authOptions: NextAuthOptions = {
     //Configure JWT
@@ -21,19 +22,29 @@ export const authOptions: NextAuthOptions = {
     //Specify Provider
     providers: [
         CredentialsProvider({
-            async authorize(credentials: Credentials) {
+            name: 'Credentials',
+            credentials: {
+                email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
+                password: { label: 'Password', type: 'password' }
+            },
+            async authorize(credentials?: Credentials, _req: NextApiRequest) {
+                if (!credentials) {
+                    throw new Error('No credentials provided')
+                }
+                const { email, password } = credentials as Credentials
+
                 //Connect to DB
                 const client = await connectToDatabase()
                 //Get all the users
                 const users = await client.db().collection('users')
                 //Find user with the email  
-                const result = await users.findOne({email: credentials.email})
+                const result = await users.findOne({email: email})
                 //Not found - send error res
                 if (!result) {
                     throw new Error('No user found with that email')
                 }
                 //Check hashed password with DB password
-                const checkPassword = await verifyPassword(credentials.password, result.password)
+                const checkPassword = await verifyPassword(password, result.password)
                 //Incorrect password - send response
                 if (!checkPassword) {
                     throw new Error('Password doesnt match')
@@ -50,7 +61,7 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         jwt({ token, trigger, session }) {
-            if (trigger === "update" && session?.image) {
+            if (trigger === 'update' && session?.image) {
                 // Note: We're using the `picture` property to store vehicle data instead of a user profile picture URL. 
                 // Updating token.picture updates the session.image for the overall app but updating token.image does not update the returned session.image
                 token.picture = session.image
