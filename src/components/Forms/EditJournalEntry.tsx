@@ -46,12 +46,12 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         <MenuItem value={'Repair'}>Repair</MenuItem>
                     </TextField>
                 </Grid>
-                <Grid item xs={4} sm={3}>
+                <Grid item xs={4} sm={4}>
                     <TextField
                         label="Date"
                         name="date"
                         type='date'
-                        value={new Date(editedEntry.date).toISOString().split('T')[0]} // Current date,TODO  double check this isn't rounding the date up.
+                        value={new Date(editedEntry.date).toISOString().split('T')[0]} // Current date
                         onChange={handleChange}
                         margin='dense'
                         fullWidth
@@ -79,7 +79,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         }}
                     />
                 </Grid>
-                <Grid item xs={4} sm={3}>
+                <Grid item xs={4} sm={2}>
                     <TextField
                         label="Spent"
                         name="spent"
