@@ -32,7 +32,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
             vehicle.mileage = newEntry.mileage
         }
         // Add the new journal entry to the vehicle's journalEntries array
-        const updatedVehicle = { ...vehicle, journalEntries: [...vehicle.journalEntries, newEntry] }
+        const updatedVehicle = { ...vehicle, journalEntries: [...vehicle.journalEntries ?? [], newEntry] }
 
         // Send the updated vehicle data to the server
         const res = await fetch(`/api/vehicle/edit`, {
