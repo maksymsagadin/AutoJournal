@@ -26,11 +26,11 @@ export const authOptions: NextAuthOptions = {
             //     email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
             //     password: { label: 'Password', type: 'password' }
             // },
-            async authorize(credentials: Credentials) {
+            async authorize(credentials, req) {
                 if (!credentials) {
                     throw new Error('No credentials provided')
                 }
-                const { email, password } = credentials as Credentials
+                const { email, password } = credentials
 
                 //Connect to DB
                 const client = await connectToDatabase()
