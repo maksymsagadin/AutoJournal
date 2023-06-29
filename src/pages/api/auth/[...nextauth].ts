@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth'
-import type { NextAuthOptions } from 'next-auth'
+import type { NextAuthOptions, RequestInternal } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import {connectToDatabase} from '@/lib/mongodb'
 import {verifyPassword} from '@/lib/bcryptpw'
@@ -11,7 +11,6 @@ export const authOptions: NextAuthOptions = {
         strategy: 'jwt',
         // Seconds - How long until an idle session expires and is no longer valid.
         maxAge: 30 * 24 * 60 * 60, // 30 days * 2
-        
     },
     useSecureCookies: process.env.NODE_ENV === 'production',
     secret: process.env.SECRET,
@@ -26,7 +25,7 @@ export const authOptions: NextAuthOptions = {
                 email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
                 password: { label: 'Password', type: 'password' }
             },
-            async authorize(credentials: Credentials) {
+            async authorize(credentials: Record<"email" | "password", string> | undefined, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">) {
                 if (!credentials) {
                     throw new Error('No credentials provided')
                 }
