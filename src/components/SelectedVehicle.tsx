@@ -101,7 +101,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
             <Grid container>
                 {vehicle.journalEntries?.map((entry, index) => (
-                    <Grid item xs={12} md={6} lg={4} xl={3} key={index}>
+                    <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
                         <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
                     </Grid>
                 ))}

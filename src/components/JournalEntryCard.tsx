@@ -37,39 +37,39 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
         <Card sx={{ m: 2 }}>
             <CardContent>
                 <Grid container textAlign='left' spacing={2}>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} sm={7}>
                         <Typography variant="h6" component="h2">
                             Service: {entry.service}
                         </Typography>
                     </Grid>
-                    <Grid item xs={4} sm={3}>
+                    <Grid item xs={6} sm={5}>
+                        <Typography variant="body1" component="p">
+                            Mileage: {entry.mileage}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={6} sm={7}>
                         <Typography variant="body1" component="p">
                             Date: {new Date(entry.date).toISOString().split('T')[0]}
                         </Typography>
                     </Grid>
-                    <Grid item xs={4} sm={3}>
+                    <Grid item xs={6} sm={5}>
                         <Typography variant="body1" component="p">
-                            Odo: {entry.mileage}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4} sm={3}>
-                        <Typography variant="body1" component="p">
-                            {entry.spent ? `Spent: ${entry.spent}`: 'Spent: ~'}
+                            {entry.spent ? `$: ${entry.spent}`: '$: ~'}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="body1" component="p">
-                            {entry.parts ? `Parts: ${entry.parts}` : ''}
+                            {entry.parts ? `🔩: ${entry.parts}` : ''}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="body1" component="p">
-                            {entry.tools ? `Tools: ${entry.tools}` : ''}
+                            {entry.tools ? `🔧: ${entry.tools}` : ''}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="body1" component="p">
-                            Notes: {entry.notes}
+                           ≢ Notes: {entry.notes}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
