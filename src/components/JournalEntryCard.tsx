@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Card, CardContent, Grid, IconButton, Typography } from '@mui/material'
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import { JournalEntry } from '@/utils/types'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -38,57 +38,59 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
             <CardContent>
                 <Grid container textAlign='left' spacing={2}>
                     <Grid item xs={6} sm={7}>
-                        <Typography variant="h6" component="h2">
+                        <Typography variant='h6' component='h2'>
                             Service: {entry.service}
                         </Typography>
                     </Grid>
                     <Grid item xs={6} sm={5}>
-                        <Typography variant="h6" component="p">
+                        <Typography variant='h6' component='p'>
                             🛣️ : {entry.mileage}
                         </Typography>
                     </Grid>
                     <Grid item xs={7} sm={7}>
-                        <Typography variant="overline" fontSize={'1.2rem'} component="p">
+                        <Typography variant='overline' fontSize={'1.2rem'} component='p'>
                             📆 : {new Date(entry.date).toISOString().split('T')[0]}
                         </Typography>
                     </Grid>
                     <Grid item xs={5} sm={5}>
-                        <Typography variant="overline" fontSize={'1.2rem'} component="p">
+                        <Typography variant='overline' fontSize={'1.2rem'} component='p'>
                             {entry.spent ? `💸: ${entry.spent}`: '💸: ~'}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="overline" fontSize={'1.1rem'} component="p">
+                        <Typography variant='overline' fontSize={'1.1rem'} component='p'>
                             {entry.parts ? `🔩: ${entry.parts}` : ''}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="overline" fontSize={'1.1rem'} component="p">
+                        <Typography variant='overline' fontSize={'1.1rem'} component='p'>
                             {entry.tools ? `🔧: ${entry.tools}` : ''}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="overline" fontSize={'1rem'} component="p">
+                        <Typography variant='overline' fontSize={'1rem'} component='p'>
                             📝 : {entry.notes}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <IconButton onClick={() => setIsEditing(true)}>
+                        <Button variant='contained' color='primary' onClick={() => setIsEditing(true)}>
                             <EditIcon />
-                        </IconButton>
+                            <Typography variant='overline'>Edit</Typography>
+                        </Button>
                         {isDeleting ? (
                             <>
-                                <Button variant="contained" color="error" onClick={() => onDelete(entry)}>
-                                    Click again to delete
+                                <Button sx={{m: 1}} variant='contained' color='error' onClick={() => onDelete(entry)}>
+                                    Are you sure?
                                 </Button>
-                                <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={() => setIsDeleting(false)}>
+                                <Button variant='contained' color='secondary' onClick={() => setIsDeleting(false)}>
                                     Cancel
                                 </Button>
                             </>
                         ) : (
-                            <IconButton onClick={() => setIsDeleting(prevState => !prevState)}>
+                            <Button sx={{m: 1}} variant='contained' color='error' onClick={() => setIsDeleting(prevState => !prevState)}>
                                 <DeleteIcon />
-                            </IconButton>
+                                <Typography variant='overline'>Delete</Typography>
+                            </Button>
                         )}
                     </Grid>
                 </Grid>
