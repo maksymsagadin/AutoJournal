@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
                 email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
                 password: { label: 'Password', type: 'password' }
             },
-            async authorize(credentials, req) {
+            async authorize(credentials) {
                 if (!credentials) {
                     throw new Error('No credentials provided')
                 }
@@ -50,6 +50,7 @@ export const authOptions: NextAuthOptions = {
                 }
                 //Else send success response
                 return {
+                    id : result._id,
                     email: result.email,
                     name: result.firstName,
                     // Note: We're using the `image` property to store vehicle data instead of a user profile picture URL.
