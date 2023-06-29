@@ -80,12 +80,9 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
 
     return (
         <Box>
-            <Box display='flex' justifyContent='center'>
-                <Typography variant="h5" component="h2">
-                    Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
-                </Typography>
-                <EditVehicle vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />
-            </Box>
+            <Typography variant="h5" component="h2">
+                Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
+            </Typography>
             <Typography variant="h5" component="h4">
                 Vehicle: {vehicle.make} {vehicle.model}
             </Typography>
@@ -98,6 +95,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <Typography variant="body1" component="p">
                 Mileage: {vehicle.mileage}
             </Typography>
+            <EditVehicle vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />
             <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
             <Grid container>
                 {vehicle.journalEntries?.map((entry, index) => (
