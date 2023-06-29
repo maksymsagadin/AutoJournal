@@ -20,7 +20,6 @@ export interface PasswordUpdate {
 export interface User {
     email: string
     name: string
-    vehicles?: Vehicle[]
     image?: Vehicle[]
 }
 export interface Vehicle {

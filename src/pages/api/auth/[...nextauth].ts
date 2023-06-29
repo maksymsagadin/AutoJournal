@@ -21,11 +21,11 @@ export const authOptions: NextAuthOptions = {
     //Specify Provider
     providers: [
         CredentialsProvider({
-            // name: 'Credentials',
-            // credentials: {
-            //     email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
-            //     password: { label: 'Password', type: 'password' }
-            // },
+            name: 'Credentials',
+            credentials: {
+                email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
+                password: { label: 'Password', type: 'password' }
+            },
             async authorize(credentials, req) {
                 if (!credentials) {
                     throw new Error('No credentials provided')
