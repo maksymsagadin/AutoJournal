@@ -89,7 +89,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         margin='dense'
                         fullWidth
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">💸</InputAdornment>,
                         }}
                     />
                 </Grid>

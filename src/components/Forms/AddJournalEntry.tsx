@@ -119,7 +119,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                         shrink: true,
                                     }}
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">📆 </InputAdornment>,
+                                        startAdornment: <InputAdornment position="start">📆</InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -131,7 +131,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     margin='dense'
                                     fullWidth
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                        startAdornment: <InputAdornment position="start">💸</InputAdornment>,
                                     }}
                                 />
                             </Grid>
