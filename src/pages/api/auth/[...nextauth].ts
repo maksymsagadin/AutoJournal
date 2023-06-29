@@ -50,7 +50,6 @@ export const authOptions: NextAuthOptions = {
                 }
                 //Else send success response
                 return {
-                    id : result._id,
                     email: result.email,
                     name: result.firstName,
                     // Note: We're using the `image` property to store vehicle data instead of a user profile picture URL.
