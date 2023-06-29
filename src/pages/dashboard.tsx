@@ -15,8 +15,8 @@ import { Vehicle } from '@/utils/types'
 
 const dashboard: NextPage = () => {
     const { data: session, status } = useSession({required: true})
-    const [vehicles, setVehicles] = useState(session?.user?.image || [])
-    const [selectedVehicle, setSelectedVehicle] = useState(true)
+    const [vehicles, setVehicles] = useState<Vehicle[]>(session.user.image as any as Vehicle[] || [])
+    const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null)
     const [showVehicles, setShowVehicles] = useState(true)
     const user = session?.user
 
@@ -47,7 +47,7 @@ const dashboard: NextPage = () => {
         )
         if (selectedVehicle.id === deletedVehicle.id) {
             setShowVehicles(true)
-            setSelectedVehicle(false)
+            setSelectedVehicle(null)
         }
     }
 
