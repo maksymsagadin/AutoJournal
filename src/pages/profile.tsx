@@ -1,22 +1,19 @@
-import { useState } from 'react'
 import type { Session } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
 import { useSession } from 'next-auth/react'
 import { getServerSession } from 'next-auth/next'
 import { NextPage, GetServerSideProps } from 'next'
 
-import { User } from '@/utils/types'
 import NavBar from '@/components/NavBar'
 import ChangePassword from '@/components/Forms/ChangePassword'
 import ChangeEmail from '@/components/Forms/ChangeEmail'
-import { Box, Typography, Button, TextField  } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import Downloading from '@mui/icons-material/DownloadingOutlined'
 
 
 const Profile: NextPage = () => {
-    // const [updatingEmail, setUpdatingEmail] = useState(false)
     const { data: session, status } = useSession({required: true})
-    const user: User = session?.user    
+    const user = session?.user
 
     if (status === 'loading') {
         return <Box><Downloading /></Box>
