@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
             //     email: { label: 'Email', type: 'email ', placeholder: 'meow@meows' },
             //     password: { label: 'Password', type: 'password' }
             // },
-            async authorize(credentials: Record<"email" | "password", string> | undefined) {
+            async authorize(credentials: Credentials) {
                 if (!credentials) {
                     throw new Error('No credentials provided')
                 }
