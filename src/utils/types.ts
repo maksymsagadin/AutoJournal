@@ -22,6 +22,7 @@ export interface User {
     name: string
     image?: Vehicle[]
 }
+
 export interface Vehicle {
     id: string
     name?: string

@@ -75,7 +75,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                             shrink: true,
                         }}
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">✣</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">📆</InputAdornment>,
                         }}
                     />
                 </Grid>
@@ -129,7 +129,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         fullWidth
                         required
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">≢</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">📝</InputAdornment>,
                         }}
                     />
                 </Grid>
