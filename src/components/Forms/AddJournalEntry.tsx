@@ -59,7 +59,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
         <Box justifyContent='center' sx={{m:1}}>
             {!isOpen ? (
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     startIcon={<AddIcon />}
                     onClick={() => setIsOpen(true)}
                     >

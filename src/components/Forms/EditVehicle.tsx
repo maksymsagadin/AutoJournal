@@ -27,7 +27,6 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
 
     const handleSave = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        // Call API endpoint to update the vehicle
         const result = await fetch('/api/vehicle/edit', {
             method: 'PATCH',
             headers: {
@@ -36,21 +35,17 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
             body: JSON.stringify(editedVehicle),
         })
         if (result.ok) {
-            // If the server responded with a success status
             // update the local state
             onEdit(editedVehicle)
-            
             // update the session image with updated data
             const updatedVehicles = await result.json()
             await update({ image: updatedVehicles })
         } else {
-            // If the server responded with an error status, handle the error
             console.error('Error editing vehicle')
         }
     }
 
     const handleDeleteVehicle = async () => {
-        // Call your API endpoint to delete the vehicle
         const result = await fetch('/api/vehicle/delete', {
             method: 'DELETE',
             headers: {
@@ -60,15 +55,12 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
         })
     
         if (result.ok) {
-            // If the server responded with a success status, 
             // update the local state
             onDelete(vehicle)
-            
             // update the session image with updated data
             const updatedVehicles = await result.json()
             await update({ image: updatedVehicles })
         } else {
-            // If the server responded with an error status, handle the error
             console.error('Error deleting vehicle')
         }
     }
@@ -167,22 +159,24 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete }) 
                 </Paper>
             ) : (
                 <>
-                    <IconButton onClick={() => setIsEditing(prevState => !prevState)}>
+                    <Button variant='contained' color='primary' onClick={() => setIsEditing(prevState => !prevState)}>
                         <EditIcon />
-                    </IconButton>
+                        <Typography variant='overline'>Edit</Typography>
+                    </Button>
                     {isDeleting ? (
                         <>
-                            <Button variant="contained" color="error" onClick={handleDeleteVehicle}>
-                                Click again to delete
+                            <Button sx={{m: 1}} variant="contained" color="error" onClick={handleDeleteVehicle}>
+                                Sure?
                             </Button>
-                            <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={() => setIsDeleting(false)}>
-                                Cancel
+                            <Button variant="contained" color="secondary" onClick={() => setIsDeleting(false)}>
+                                No
                             </Button>
                         </>
                     ) : (
-                        <IconButton onClick={() => setIsDeleting(prevState => !prevState)}>
+                        <Button sx={{m: 1, px:2}} variant='outlined' color='error' onClick={() => setIsDeleting(prevState => !prevState)}>
                             <DeleteIcon />
-                        </IconButton>
+                            <Typography variant='overline'>Del</Typography>
+                        </Button>
                     )}
                 </>
             )}

@@ -93,7 +93,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 Color: {vehicle.color}
             </Typography>
             <Typography variant="body1" component="p">
-                Mileage: {vehicle.mileage}
+                Odometer: {vehicle.mileage}
             </Typography>
             <EditVehicle vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />
             <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />

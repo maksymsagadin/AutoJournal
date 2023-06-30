@@ -72,7 +72,7 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
                             📝 : {entry.notes}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item textAlign={'center'} xs={12}>
                         <Button variant='contained' color='primary' onClick={() => setIsEditing(true)}>
                             <EditIcon />
                             <Typography variant='overline'>Edit</Typography>
@@ -80,16 +80,16 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
                         {isDeleting ? (
                             <>
                                 <Button sx={{m: 1}} variant='contained' color='error' onClick={() => onDelete(entry)}>
-                                    Are you sure?
+                                    Sure?
                                 </Button>
                                 <Button variant='contained' color='secondary' onClick={() => setIsDeleting(false)}>
-                                    Cancel
+                                    No
                                 </Button>
                             </>
                         ) : (
-                            <Button sx={{m: 1}} variant='contained' color='error' onClick={() => setIsDeleting(prevState => !prevState)}>
+                            <Button sx={{m: 1, px:2}} variant='outlined' color='error' onClick={() => setIsDeleting(prevState => !prevState)}>
                                 <DeleteIcon />
-                                <Typography variant='overline'>Delete</Typography>
+                                <Typography variant='overline'>Del</Typography>
                             </Button>
                         )}
                     </Grid>

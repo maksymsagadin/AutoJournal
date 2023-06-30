@@ -20,7 +20,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle, onSelect }) => {
                     Color: {vehicle.color}
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">
-                    Mileage: {vehicle.mileage}
+                    Odometer: {vehicle.mileage}
                 </Typography>
             </CardContent>
         </Card>
