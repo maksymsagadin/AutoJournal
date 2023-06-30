@@ -98,7 +98,7 @@ const NavBar = () => {
                                 underline='none'
                                 component='button'
                                 onClick={handleSignOut}
-                                sx={{ ...rightLink, color: 'orangered' }}
+                                sx={{ ...rightLink, color: '#bd1e30' }}
                                 >
                                 {'Sign Out'}
                             </Link>
