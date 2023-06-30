@@ -42,23 +42,23 @@ const LogIn: NextPage = () => {
     <>
       <NavBar />
       <Box sx={{ m: 6, mb: 8 }}>
-        <Typography variant="h3" gutterBottom align="center">
+        <Typography variant='h3' gutterBottom align='center'>
           Log In
         </Typography>
-        <Typography variant="body2" align="center">
-          <Link href="/sign-up" underline="always">
-            Don't have an account?
+        <Typography variant='body2' align='center'>
+          <Link href='/sign-up' underline='always'>
+            Don&apos;t have an account?
           </Link>
         </Typography>
       </Box>
-      <Box component="form" onSubmit={handleLogIn} sx={{mx: 12, mt: 6 }}>
+      <Box component='form' onSubmit={handleLogIn} sx={{mx: 12, mt: 6 }}>
         <TextField
           autoFocus
           disabled={loggedIn}
           fullWidth
-          label="Email"
-          margin="normal"
-          name="email"
+          label='Email'
+          margin='normal'
+          name='email'
           type='email'
           required
         />
@@ -66,15 +66,15 @@ const LogIn: NextPage = () => {
           fullWidth
           disabled={loggedIn}
           required
-          name="password"
-          label="Password"
-          type="password"
-          margin="normal"
+          name='password'
+          label='Password'
+          type='password'
+          margin='normal'
         />
-        <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+        <Stack direction='row' alignItems='center' spacing={2} sx={{ mt: 2 }}>
           <Button
-            variant="contained"
-            type="submit"
+            variant='contained'
+            type='submit'
             disabled={loggedIn}
             sx={{ width: '100%', height: '4rem' }}
             >
