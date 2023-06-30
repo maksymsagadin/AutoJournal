@@ -47,7 +47,7 @@ const SignUp: NextPage = () => {
     return (
         <>
             <NavBar />
-            <Box sx={{ m: 6, mb: 8 }}>
+            <Box sx={{ my: 5 }}>
                 <Typography variant='h3' gutterBottom align='center'>
                     Sign Up
                 </Typography>
@@ -57,7 +57,7 @@ const SignUp: NextPage = () => {
                     </Link>
                 </Typography>
             </Box>
-            <Box component='form' onSubmit={handleSubmit} sx={{mx: 12, mt: 6 }}>
+            <Box component='form' onSubmit={handleSubmit} sx={{mx: 5, mt: 6 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
