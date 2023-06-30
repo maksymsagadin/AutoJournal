@@ -51,23 +51,23 @@ const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
         <Box justifyContent='center' sx={{m:1}}>
             {!isOpen ? (
                 <Button
-                    variant="outlined"
+                    variant='contained'
                     startIcon={<AddIcon />}
                     onClick={() => setIsOpen(true)}
                     >
-                    Add Vehicle
+                    <Typography variant='overline'>Vehicle</Typography>
                 </Button>
             ) : (
                 <Paper elevation={3} sx={{ p: 2, m: 2 }}>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography variant='h6' gutterBottom>
                         Add New Vehicle
                     </Typography>
                     <Box component='form' onSubmit={handleSubmit}>
                         <Grid container spacing={1}>
                             <Grid item xs={6}>
                                 <TextField
-                                label="Nick Name"
-                                name="name"
+                                label='Nick Name'
+                                name='name'
                                 type='text'
                                 margin='dense'
                                 fullWidth
@@ -75,8 +75,8 @@ const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
-                                    label="Year"
-                                    name="year"
+                                    label='Year'
+                                    name='year'
                                     type='number'
                                     margin='dense'
                                     fullWidth
@@ -85,8 +85,8 @@ const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
-                                    label="Make"
-                                    name="make"
+                                    label='Make'
+                                    name='make'
                                     type='text'
                                     margin='dense'
                                     fullWidth
@@ -95,8 +95,8 @@ const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
-                                    label="Model"
-                                    name="model"
+                                    label='Model'
+                                    name='model'
                                     type='text'
                                     margin='dense'
                                     fullWidth
@@ -106,8 +106,8 @@ const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
                             <Grid item xs={6}>
 
                                 <TextField
-                                    label="Color"
-                                    name="color"
+                                    label='Color'
+                                    name='color'
                                     type='text'
                                     margin='dense'
                                     fullWidth
@@ -116,8 +116,8 @@ const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
-                                    label="Mileage"
-                                    name="mileage"
+                                    label='Mileage'
+                                    name='mileage'
                                     type='number'
                                     margin='dense'
                                     fullWidth
@@ -125,10 +125,10 @@ const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <Button type="submit" variant="contained" color="primary" sx={{ my: 1 }}>
+                                <Button type='submit' variant='contained' color='primary' sx={{ my: 1 }}>
                                     Submit
                                 </Button>
-                                <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={() => setIsOpen(false)}>
+                                <Button variant='contained' color='secondary' sx={{ m: 1 }} onClick={() => setIsOpen(false)}>
                                     Cancel
                                 </Button>
                             </Grid>

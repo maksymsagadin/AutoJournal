@@ -32,7 +32,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
             vehicle.mileage = newEntry.mileage
         }
         // Add the new journal entry to the vehicle's journalEntries array
-        const updatedVehicle = { ...vehicle, journalEntries: [...vehicle.journalEntries, newEntry] }
+        const updatedVehicle = { ...vehicle, journalEntries: [...vehicle.journalEntries ?? [], newEntry] }
 
         // Send the updated vehicle data to the server
         const res = await fetch(`/api/vehicle/edit`, {
@@ -59,31 +59,31 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
         <Box justifyContent='center' sx={{m:1}}>
             {!isOpen ? (
                 <Button
-                    variant="outlined"
+                    variant='contained'
                     startIcon={<AddIcon />}
                     onClick={() => setIsOpen(true)}
                     >
-                    Add Journal Entry
+                    <Typography variant='overline' >Journal Entry</Typography>
                 </Button>
             ) : (
                 <Paper elevation={3} sx={{ p: 2, m: 2 }}>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography variant='h6' gutterBottom>
                         Add New Journal Entry
                     </Typography>
                     <Box component='form' onSubmit={handleSubmit}>
                         <Grid container spacing={2}>
-                            <Grid item xs={3}>
+                            <Grid item xs={6} sm={7}>
                                 <TextField
                                     select
-                                    label="Service"
-                                    name="service"
+                                    label='Service'
+                                    name='service'
                                     type='text'
                                     margin='dense'
                                     fullWidth
                                     required
                                     defaultValue='Upgrade'
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">〄</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'>〄</InputAdornment>,
                                     }}
                                 >
                                     <MenuItem value={'Service'}>Service</MenuItem>
@@ -91,10 +91,25 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     <MenuItem value={'Repair'}>Repair</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item xs={6} sm={5}>
                                 <TextField
-                                    label="Date"
-                                    name="date"
+                                    label='Mileage'
+                                    name='mileage'
+                                    type='number'
+                                    defaultValue={vehicle.mileage}
+                                    margin='dense'
+                                    fullWidth
+                                    required
+                                    InputProps={{
+                                        startAdornment: <InputAdornment position='start'>🛣️</InputAdornment>,
+                                    }}
+                                />
+                                
+                            </Grid>
+                            <Grid item xs={6} sm={7}>
+                                <TextField
+                                    label='Date'
+                                    name='date'
                                     type='date'
                                     defaultValue={new Date().toLocaleDateString('en-CA')} // Current date
                                     margin='dense'
@@ -104,78 +119,64 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                         shrink: true,
                                     }}
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">✣</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'>📆</InputAdornment>,
                                     }}
                                 />
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item xs={6} sm={5}>
                                 <TextField
-                                    label="Mileage"
-                                    name="mileage"
-                                    type='number'
-                                    defaultValue={vehicle.mileage}
-                                    margin='dense'
-                                    fullWidth
-                                    required
-                                    InputProps={{
-                                        startAdornment: <InputAdornment position="start">🛣️</InputAdornment>,
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={3}>
-                                <TextField
-                                    label="Spent"
-                                    name="spent"
+                                    label='Spent'
+                                    name='spent'
                                     type='number'
                                     margin='dense'
                                     fullWidth
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'>💸</InputAdornment>,
                                     }}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
-                                    label="Tools"
-                                    name="tools"
+                                    label='Parts'
+                                    name='parts'
                                     type='text'
                                     margin='dense'
                                     fullWidth
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">🔧</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'>🔩</InputAdornment>,
                                     }}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
-                                    label="Parts"
-                                    name="parts"
+                                    label='Tools'
+                                    name='tools'
                                     type='text'
                                     margin='dense'
                                     fullWidth
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">🔩</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'>🔧</InputAdornment>,
                                     }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-                                    label="Notes"
-                                    name="notes"
+                                    label='Notes'
+                                    name='notes'
                                     type='text'
                                     margin='dense'
                                     fullWidth
                                     required
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">≢</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
                                     }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <Button type="submit" variant="contained" color="primary" sx={{ my: 1 }}>
+                                <Button type='submit' variant='contained' color='primary' sx={{ my: 1 }}>
                                     Submit
                                 </Button>
-                                <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={() => setIsOpen(false)}>
+                                <Button variant='contained' color='secondary' sx={{ m: 1 }} onClick={() => setIsOpen(false)}>
                                     Cancel
                                 </Button>
                             </Grid>

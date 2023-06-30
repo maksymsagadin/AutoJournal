@@ -13,10 +13,10 @@ import VehicleCard from '@/components/VehicleCard'
 import SelectedVehicle from '@/components/SelectedVehicle'
 import { Vehicle } from '@/utils/types'
 
-const dashboard: NextPage = () => {
+const Dashboard: NextPage = () => {
     const { data: session, status } = useSession({required: true})
-    const [vehicles, setVehicles] = useState(session?.user?.image || [])
-    const [selectedVehicle, setSelectedVehicle] = useState(true)
+    const [vehicles, setVehicles] = useState<Vehicle[]>(session.user.image as any as Vehicle[] || [])
+    const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null)
     const [showVehicles, setShowVehicles] = useState(true)
     const user = session?.user
 
@@ -47,7 +47,7 @@ const dashboard: NextPage = () => {
         )
         if (selectedVehicle.id === deletedVehicle.id) {
             setShowVehicles(true)
-            setSelectedVehicle(false)
+            setSelectedVehicle(null)
         }
     }
 
@@ -62,13 +62,13 @@ const dashboard: NextPage = () => {
         <>
             <NavBar />
             <Box textAlign={'center'} mt={4} mx={2}>
-                <Typography variant="h4" component="h1" gutterBottom>
+                <Typography variant='h4' component='h1' gutterBottom>
                 Welcome, {user?.name}
                 </Typography>
                 {showVehicles ? (
                     <>
-                        <Box alignItems="center" mb={2}>
-                            <Typography variant="h6" component="h2" gutterBottom>
+                        <Box alignItems='center' mb={2}>
+                            <Typography variant='h6' component='h2' gutterBottom>
                                 You have {vehicles?.length} vehicles.
                             </Typography>
                             <AddVehicle onAddVehicle={handleAddVehicle} />
@@ -86,7 +86,7 @@ const dashboard: NextPage = () => {
                     </>
                 ) : (
                     <>
-                        <Button variant="outlined" sx={{m:1}} onClick={() => setShowVehicles(true)}>Back to Vehicles</Button>
+                        <Button variant='outlined' sx={{mb:2}} onClick={() => setShowVehicles(true)}>Select Vehicle</Button>
                         <SelectedVehicle vehicle={selectedVehicle} onEdit={handleEditVehicle} onDelete={handleDeleteVehicle} />
                     </>
                 )}
@@ -102,7 +102,7 @@ export const getServerSideProps: GetServerSideProps<{ session: Session | null }>
     if (!session) {
         return {
             redirect: {
-                destination: '/login',
+                destination: '/log-in',
                 permanent: false,
             },
         }
@@ -115,4 +115,4 @@ export const getServerSideProps: GetServerSideProps<{ session: Session | null }>
     }
 }
 
-export default dashboard
+export default Dashboard

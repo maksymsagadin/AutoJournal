@@ -12,17 +12,17 @@ export interface UserData {
 }
 
 export interface PasswordUpdate {
-    email: string,
-    oldPW: string,
-    newPW: string,
+    email: string
+    oldPW: string
+    newPW: string
 }
 
 export interface User {
     email: string
     name: string
-    vehicles?: Vehicle[]
     image?: Vehicle[]
 }
+
 export interface Vehicle {
     id: string
     name?: string

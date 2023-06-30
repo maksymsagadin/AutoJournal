@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Card, CardContent, Grid, IconButton, Typography } from '@mui/material'
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import { JournalEntry } from '@/utils/types'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -36,59 +36,59 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
     return (
         <Card sx={{ m: 2 }}>
             <CardContent>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={3}>
-                        <Typography variant="h6" component="h2">
+                <Grid container textAlign='left' spacing={2}>
+                    <Grid item xs={6} sm={7}>
+                        <Typography variant='h6' component='h2'>
                             Service: {entry.service}
                         </Typography>
                     </Grid>
-                    <Grid item xs={4} sm={3}>
-                        <Typography variant="body1" component="p">
-                            Date: {new Date(entry.date).toISOString().split('T')[0]}
+                    <Grid item xs={6} sm={5}>
+                        <Typography variant='h6' component='p'>
+                            🛣️ : {entry.mileage}
                         </Typography>
                     </Grid>
-                    <Grid item xs={4} sm={3}>
-                        <Typography variant="body1" component="p">
-                            Odo: {entry.mileage}
+                    <Grid item xs={7} sm={7}>
+                        <Typography variant='overline' fontSize={'1.2rem'} component='p'>
+                            📆 : {new Date(entry.date).toISOString().split('T')[0]}
                         </Typography>
                     </Grid>
-                    <Grid item xs={4} sm={3}>
-                        <Typography variant="body1" component="p">
-                            {entry.spent ? `Spent: ${entry.spent}`: 'Spent: ~'}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography variant="body1" component="p">
-                            {entry.parts ? `Parts: ${entry.parts}` : ''}
+                    <Grid item xs={5} sm={5}>
+                        <Typography variant='overline' fontSize={'1.2rem'} component='p'>
+                            {entry.spent ? `💸: ${entry.spent}`: '💸: ~'}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="body1" component="p">
-                            {entry.tools ? `Tools: ${entry.tools}` : ''}
+                        <Typography variant='overline' fontSize={'1.1rem'} component='p'>
+                            {entry.parts ? `🔩: ${entry.parts}` : ''}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Typography variant='overline' fontSize={'1.1rem'} component='p'>
+                            {entry.tools ? `🔧: ${entry.tools}` : ''}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="body1" component="p">
-                            Notes: {entry.notes}
+                        <Typography variant='overline' fontSize={'1rem'} component='p'>
+                            📝 : {entry.notes}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                        <IconButton onClick={() => setIsEditing(true)}>
-                            <EditIcon />
-                        </IconButton>
+                    <Grid item textAlign={'center'} xs={12}>
+                        <Button endIcon={<EditIcon />} variant='contained' color='primary' onClick={() => setIsEditing(true)}>
+                            <Typography variant='overline'>Edit</Typography>
+                        </Button>
                         {isDeleting ? (
                             <>
-                                <Button variant="contained" color="error" onClick={() => onDelete(entry)}>
-                                    Click again to delete
+                                <Button sx={{m: 1}} variant='contained' color='error' onClick={() => onDelete(entry)}>
+                                    Sure?
                                 </Button>
-                                <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={() => setIsDeleting(false)}>
-                                    Cancel
+                                <Button variant='contained' color='secondary' onClick={() => setIsDeleting(false)}>
+                                    No
                                 </Button>
                             </>
                         ) : (
-                            <IconButton onClick={() => setIsDeleting(prevState => !prevState)}>
-                                <DeleteIcon />
-                            </IconButton>
+                            <Button sx={{m: 1, px:2}} startIcon={<DeleteIcon />} variant='outlined' color='error' onClick={() => setIsDeleting(prevState => !prevState)}>
+                                <Typography variant='overline'>Del</Typography>
+                            </Button>
                         )}
                     </Grid>
                 </Grid>
