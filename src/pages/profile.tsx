@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps<{ session: Session | null }>
     if (!session) {
         return {
             redirect: {
-                destination: '/login',
+                destination: '/log-in',
                 permanent: false,
             },
         }

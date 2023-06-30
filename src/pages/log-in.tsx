@@ -7,8 +7,7 @@ import { Credentials } from '@/utils/types'
 import NavBar from '@/components/NavBar'
 import {Box, Link, Typography, TextField, Button, Stack} from '@mui/material'
 
-
-const login: NextPage = () => {
+const LogIn: NextPage = () => {
   const [loggedIn, setLoggedIn] = useState(false)
   const router = useRouter()
 
@@ -47,7 +46,7 @@ const login: NextPage = () => {
           Log In
         </Typography>
         <Typography variant="body2" align="center">
-          <Link href="/signup" underline="always">
+          <Link href="/sign-up" underline="always">
             Don't have an account?
           </Link>
         </Typography>
@@ -87,4 +86,4 @@ const login: NextPage = () => {
   )
 }
 
-export default login
+export default LogIn

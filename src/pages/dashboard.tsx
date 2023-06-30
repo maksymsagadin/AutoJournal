@@ -13,7 +13,7 @@ import VehicleCard from '@/components/VehicleCard'
 import SelectedVehicle from '@/components/SelectedVehicle'
 import { Vehicle } from '@/utils/types'
 
-const dashboard: NextPage = () => {
+const Dashboard: NextPage = () => {
     const { data: session, status } = useSession({required: true})
     const [vehicles, setVehicles] = useState<Vehicle[]>(session.user.image as any as Vehicle[] || [])
     const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null)
@@ -102,7 +102,7 @@ export const getServerSideProps: GetServerSideProps<{ session: Session | null }>
     if (!session) {
         return {
             redirect: {
-                destination: '/login',
+                destination: '/log-in',
                 permanent: false,
             },
         }
@@ -115,4 +115,4 @@ export const getServerSideProps: GetServerSideProps<{ session: Session | null }>
     }
 }
 
-export default dashboard
+export default Dashboard

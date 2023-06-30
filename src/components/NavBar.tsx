@@ -20,7 +20,7 @@ const NavBar = () => {
 
     const handleSignOut = async () => {
         //After signing out, the user will automatically be redirected to the login page once there is no longer a session.
-        await signOut({ callbackUrl: '/login' })
+        await signOut({ callbackUrl: '/log-in' })
     }
     if (loading) {
         return null // Render nothing while loading
@@ -68,7 +68,7 @@ const NavBar = () => {
                                 color="inherit"
                                 variant="h6"
                                 underline="none"
-                                href="/login"
+                                href="/log-in"
                                 sx={rightLink}
                                 >
                                 {'Login'}
@@ -76,7 +76,7 @@ const NavBar = () => {
                             <Link
                                 variant="h6"
                                 underline="none"
-                                href="/signup"
+                                href="/sign-up"
                                 sx={{ ...rightLink, color: 'secondary.main' }}
                                 >
                                 {'Sign Up'}

@@ -6,8 +6,7 @@ import { UserData } from '@/utils/types'
 import NavBar from '@/components/NavBar'
 import { Box, Grid, Link, Typography, TextField, Button, Stack } from '@mui/material'
 
-
-const signup: NextPage = () => {
+const SignUp: NextPage = () => {
     const [submitted, setSubmitted] = useState(false)
     const router = useRouter()
 
@@ -38,7 +37,7 @@ const signup: NextPage = () => {
             if (response.message === 'User already exists') {
                 alert(`User with the email ${email} already exists, please login.`)
             } else {
-                router.push('/login')
+                router.push('/log-in')
             }
         } catch (error) {
             console.error(error,'err')
@@ -53,7 +52,7 @@ const signup: NextPage = () => {
                     Sign Up
                 </Typography>
                 <Typography variant="body2" align="center">
-                    <Link href="/login" underline="always">
+                    <Link href="/log-in" underline="always">
                         Already have an account?
                     </Link>
                 </Typography>
@@ -117,4 +116,4 @@ const signup: NextPage = () => {
     )
 }
 
-export default signup
+export default SignUp
