@@ -9,9 +9,9 @@ import Toolbar from '@mui/material/Toolbar'
 import logo from '../../public/autojournalLogo.png'
 
 const rightLink = {
-  fontSize: 15,
+  fontSize: 14,
   color: 'common.white',
-  ml: 2,
+  ml: 1.75,
 }
 
 const NavBar = () => {
