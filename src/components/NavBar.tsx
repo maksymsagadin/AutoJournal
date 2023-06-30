@@ -19,7 +19,7 @@ const NavBar = () => {
     const loading = status === 'loading'
 
     const handleSignOut = async () => {
-        //After signing out, the user will automatically be redirected to the login page once there is no longer a session.
+        //redirect to the login page.
         await signOut({ callbackUrl: '/log-in' })
     }
     if (loading) {
@@ -27,25 +27,25 @@ const NavBar = () => {
     }
 
     return (
-        <AppBar position="sticky">
+        <AppBar position='sticky'>
             <Toolbar sx={{ justifyContent: 'space-between' }}>
                 <Box sx={{ flex: 1 }} >
                 {!session ? (
                             <Link
-                                color="inherit"
-                                variant="h6"
-                                underline="none"
-                                href="/"
+                                color='inherit'
+                                variant='h6'
+                                underline='none'
+                                href='/'
                                 sx={rightLink}
                                 >
                                 {'Home'}
                             </Link>
                     ) : (
                         <Link
-                            color="inherit"
-                            variant="h6"
-                            underline="none"
-                            href="/dashboard"
+                            color='inherit'
+                            variant='h6'
+                            underline='none'
+                            href='/dashboard'
                             sx={rightLink}
                             >
                             {'Dashboard'}
@@ -53,10 +53,10 @@ const NavBar = () => {
                     )}
                 </Box>
                 <Link
-                    variant="h6"
-                    underline="none"
-                    color="inherit"
-                    href="/"
+                    variant='h6'
+                    underline='none'
+                    color='inherit'
+                    href='/'
                     sx={{ display:'flex' }}
                     >
                     <Image src={logo} alt='logo for Auto Journal' priority height={75} width={75} />
@@ -65,18 +65,18 @@ const NavBar = () => {
                     {!session ? (
                         <>
                             <Link
-                                color="inherit"
-                                variant="h6"
-                                underline="none"
-                                href="/log-in"
+                                color='inherit'
+                                variant='h6'
+                                underline='none'
+                                href='/log-in'
                                 sx={rightLink}
                                 >
                                 {'Login'}
                             </Link>
                             <Link
-                                variant="h6"
-                                underline="none"
-                                href="/sign-up"
+                                variant='h6'
+                                underline='none'
+                                href='/sign-up'
                                 sx={{ ...rightLink, color: 'secondary.main' }}
                                 >
                                 {'Sign Up'}
@@ -85,18 +85,18 @@ const NavBar = () => {
                     ) : (
                         <>
                             <Link
-                                color="inherit"
-                                variant="h6"
-                                underline="none"
-                                href="/profile"
+                                color='inherit'
+                                variant='h6'
+                                underline='none'
+                                href='/profile'
                                 sx={rightLink}
                                 >
                                 {'Profile'}
                             </Link>
                             <Link
-                                variant="h6"
-                                underline="none"
-                                component="button"
+                                variant='h6'
+                                underline='none'
+                                component='button'
                                 onClick={handleSignOut}
                                 sx={{ ...rightLink, color: 'secondary.main' }}
                                 >

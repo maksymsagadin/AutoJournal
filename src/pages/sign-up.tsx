@@ -48,16 +48,16 @@ const SignUp: NextPage = () => {
         <>
             <NavBar />
             <Box sx={{ m: 6, mb: 8 }}>
-                <Typography variant="h3" gutterBottom align="center">
+                <Typography variant='h3' gutterBottom align='center'>
                     Sign Up
                 </Typography>
-                <Typography variant="body2" align="center">
-                    <Link href="/log-in" underline="always">
+                <Typography variant='body2' align='center'>
+                    <Link href='/log-in' underline='always'>
                         Already have an account?
                     </Link>
                 </Typography>
             </Box>
-            <Box component="form" onSubmit={handleSubmit} sx={{mx: 12, mt: 6 }}>
+            <Box component='form' onSubmit={handleSubmit} sx={{mx: 12, mt: 6 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -65,9 +65,9 @@ const SignUp: NextPage = () => {
                             autoFocus
                             disabled={submitted}
                             fullWidth
-                            label="First name"
-                            name="firstName"
-                            autoComplete="given-name"
+                            label='First name'
+                            name='firstName'
+                            autoComplete='given-name'
                             />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -75,9 +75,9 @@ const SignUp: NextPage = () => {
                             required
                             disabled={submitted}
                             fullWidth
-                            label="Last name"
-                            name="lastName"
-                            autoComplete="family-name"
+                            label='Last name'
+                            name='lastName'
+                            autoComplete='family-name'
                         />
                     </Grid>
                 </Grid>
@@ -85,26 +85,26 @@ const SignUp: NextPage = () => {
                     required
                     disabled={submitted}
                     fullWidth
-                    label="Email"
-                    name="email"
+                    label='Email'
+                    name='email'
                     type='email'
-                    margin="normal"
-                    autoComplete="email"
+                    margin='normal'
+                    autoComplete='email'
                 />
                 <TextField
                     required
                     fullWidth
                     disabled={submitted}
-                    label="Password"
-                    name="password"
-                    type="password"
-                    autoComplete="new-password"
-                    margin="normal"
+                    label='Password'
+                    name='password'
+                    type='password'
+                    autoComplete='new-password'
+                    margin='normal'
                 />
-                <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+                <Stack direction='row' alignItems='center' spacing={2} sx={{ mt: 2 }}>
                     <Button
-                        variant="contained"
-                        type="submit"
+                        variant='contained'
+                        type='submit'
                         disabled={submitted}
                         sx={{ width: '100%', height: '4rem' }}
                         >

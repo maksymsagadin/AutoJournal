@@ -29,8 +29,8 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                 <Grid item xs={6} sm={7}>
                     <TextField
                         select
-                        label="Service"
-                        name="service"
+                        label='Service'
+                        name='service'
                         value={editedEntry.service}
                         onChange={handleChange}
                         type='text'
@@ -38,7 +38,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         fullWidth
                         required
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">〄</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'>〄</InputAdornment>,
                         }}
                     >
                         <MenuItem value={'Service'}>Service</MenuItem>
@@ -48,8 +48,8 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                 </Grid>
                 <Grid item xs={6} sm={5}>
                     <TextField
-                        label="Mileage"
-                        name="mileage"
+                        label='Mileage'
+                        name='mileage'
                         type='number'
                         value={editedEntry.mileage}
                         onChange={handleChange}
@@ -57,14 +57,14 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         fullWidth
                         required
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">🛣️</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'>🛣️</InputAdornment>,
                         }}
                     />
                 </Grid>
                 <Grid item xs={6} sm={7}>
                     <TextField
-                        label="Date"
-                        name="date"
+                        label='Date'
+                        name='date'
                         type='date'
                         value={new Date(editedEntry.date).toISOString().split('T')[0]} // Current date
                         onChange={handleChange}
@@ -75,69 +75,69 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                             shrink: true,
                         }}
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">📆</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'>📆</InputAdornment>,
                         }}
                     />
                 </Grid>
                 <Grid item xs={6} sm={5}>
                     <TextField
-                        label="Spent"
-                        name="spent"
+                        label='Spent'
+                        name='spent'
                         type='number'
                         value={editedEntry.spent}
                         onChange={handleChange}
                         margin='dense'
                         fullWidth
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">💸</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'>💸</InputAdornment>,
                         }}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
-                        label="Parts"
-                        name="parts"
+                        label='Parts'
+                        name='parts'
                         value={editedEntry.parts}
                         onChange={handleChange}
                         margin='dense'
                         fullWidth
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">🔩</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'>🔩</InputAdornment>,
                         }}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
-                        label="Tools"
-                        name="tools"
+                        label='Tools'
+                        name='tools'
                         value={editedEntry.tools}
                         onChange={handleChange}
                         margin='dense'
                         fullWidth
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">🔧</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'>🔧</InputAdornment>,
                         }}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        label="Notes"
-                        name="notes"
+                        label='Notes'
+                        name='notes'
                         value={editedEntry.notes}
                         onChange={handleChange}
                         margin='dense'
                         fullWidth
                         required
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">📝</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
                         }}
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Button type="submit" variant="contained" color="primary" sx={{ my: 1 }}>
+                    <Button type='submit' variant='contained' color='primary' sx={{ my: 1 }}>
                         Save
                     </Button>
-                    <Button variant="contained" color="secondary" sx={{ m: 1 }} onClick={onCancel}>
+                    <Button variant='contained' color='secondary' sx={{ m: 1 }} onClick={onCancel}>
                         Cancel
                     </Button>
                 </Grid>

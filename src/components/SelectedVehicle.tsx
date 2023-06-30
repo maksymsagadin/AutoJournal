@@ -80,19 +80,19 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
 
     return (
         <Box>
-            <Typography variant="h5" component="h2">
+            <Typography variant='h5' component='h2'>
                 Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
             </Typography>
-            <Typography variant="h5" component="h4">
+            <Typography variant='h5' component='h4'>
                 Vehicle: {vehicle.make} {vehicle.model}
             </Typography>
-            <Typography variant="body1" component="p">
+            <Typography variant='body1' component='p'>
                 Year: {vehicle.year}
             </Typography>
-            <Typography variant="body1" component="p">
+            <Typography variant='body1' component='p'>
                 Color: {vehicle.color}
             </Typography>
-            <Typography variant="body1" component="p">
+            <Typography variant='body1' component='p'>
                 Odometer: {vehicle.mileage}
             </Typography>
             <EditVehicle vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />

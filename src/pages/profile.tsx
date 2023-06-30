@@ -26,9 +26,9 @@ const Profile: NextPage = () => {
         <>
             <NavBar />
             <Box mt={4} mx={2}>
-                <Typography variant="h4">Profile</Typography>
-                <Typography variant="body1">Email: {user?.email}</Typography>
-                <Typography variant="body1">Name: {user?.name}</Typography>
+                <Typography variant='h4'>Profile</Typography>
+                <Typography variant='body1'>Email: {user?.email}</Typography>
+                <Typography variant='body1'>Name: {user?.name}</Typography>
                 <ChangeEmail />
                 <ChangePassword />
             </Box>

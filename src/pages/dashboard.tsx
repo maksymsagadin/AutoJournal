@@ -62,13 +62,13 @@ const Dashboard: NextPage = () => {
         <>
             <NavBar />
             <Box textAlign={'center'} mt={4} mx={2}>
-                <Typography variant="h4" component="h1" gutterBottom>
+                <Typography variant='h4' component='h1' gutterBottom>
                 Welcome, {user?.name}
                 </Typography>
                 {showVehicles ? (
                     <>
-                        <Box alignItems="center" mb={2}>
-                            <Typography variant="h6" component="h2" gutterBottom>
+                        <Box alignItems='center' mb={2}>
+                            <Typography variant='h6' component='h2' gutterBottom>
                                 You have {vehicles?.length} vehicles.
                             </Typography>
                             <AddVehicle onAddVehicle={handleAddVehicle} />
@@ -86,7 +86,7 @@ const Dashboard: NextPage = () => {
                     </>
                 ) : (
                     <>
-                        <Button variant="outlined" sx={{mb:2}} onClick={() => setShowVehicles(true)}>Select Vehicle</Button>
+                        <Button variant='outlined' sx={{mb:2}} onClick={() => setShowVehicles(true)}>Select Vehicle</Button>
                         <SelectedVehicle vehicle={selectedVehicle} onEdit={handleEditVehicle} onDelete={handleDeleteVehicle} />
                     </>
                 )}

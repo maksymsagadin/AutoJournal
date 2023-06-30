@@ -20,10 +20,10 @@ function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
   const router = useRouter()
   const protectedRoutes = ['/dashboard','/profile']
 
-  // Check if current route is a protected route
+  // Check if current route is protected
   const isProtectedRoute = protectedRoutes.includes(router.pathname)
 
-  // If the current route is a protected route and the user is not authenticated,
+  // If the current route is a protected route,
   // redirect them to the login page
   useEffect(() => {
     if (isProtectedRoute && status !== 'loading' && !session) {
