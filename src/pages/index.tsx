@@ -9,10 +9,9 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AutoJournal</title>
+        <title> 🚗 - AutoJournal</title>
         <meta name='description' content='AutoJournal' />
         <meta name='keywords' content='Auto Journal'/>
-        <meta name="viewport" content='width=device-width, initial-scale=1, viewport-fit=cover' />
         <meta name='theme-color' content='#014785' />
       </Head>
       <NavBar />

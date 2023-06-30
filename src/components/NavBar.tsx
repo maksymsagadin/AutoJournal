@@ -9,9 +9,9 @@ import Toolbar from '@mui/material/Toolbar'
 import logo from '../../public/autojournalLogo.png'
 
 const rightLink = {
-  fontSize: 16,
+  fontSize: 14,
   color: 'common.white',
-  ml: 3,
+  ml: 1.75,
 }
 
 const NavBar = () => {
@@ -77,7 +77,7 @@ const NavBar = () => {
                                 variant='h6'
                                 underline='none'
                                 href='/sign-up'
-                                sx={{ ...rightLink, color: 'secondary.main' }}
+                                sx={{ ...rightLink, color: 'primary.main' }}
                                 >
                                 {'Sign Up'}
                             </Link>
@@ -98,7 +98,7 @@ const NavBar = () => {
                                 underline='none'
                                 component='button'
                                 onClick={handleSignOut}
-                                sx={{ ...rightLink, color: 'secondary.main' }}
+                                sx={{ ...rightLink, color: '#bd1e30' }}
                                 >
                                 {'Sign Out'}
                             </Link>

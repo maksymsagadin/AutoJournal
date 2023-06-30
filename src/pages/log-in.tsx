@@ -41,7 +41,7 @@ const LogIn: NextPage = () => {
   return (
     <>
       <NavBar />
-      <Box sx={{ m: 6, mb: 8 }}>
+      <Box sx={{ my: 5 }}>
         <Typography variant='h3' gutterBottom align='center'>
           Log In
         </Typography>
@@ -51,7 +51,7 @@ const LogIn: NextPage = () => {
           </Link>
         </Typography>
       </Box>
-      <Box component='form' onSubmit={handleLogIn} sx={{mx: 12, mt: 6 }}>
+      <Box component='form' onSubmit={handleLogIn} sx={{mx: 5, mt: 6 }}>
         <TextField
           autoFocus
           disabled={loggedIn}

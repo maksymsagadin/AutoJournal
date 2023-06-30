@@ -1,4 +1,5 @@
 import { NextPage, GetServerSideProps } from 'next'
+import Head from 'next/head'
 import type { Session } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
@@ -59,7 +60,11 @@ const Dashboard: NextPage = () => {
     }
     
     return (
-        <>
+        <>  
+            <Head>
+                <title>🏎️ - AutoJournal</title>
+                <meta name='description' content='Your personal vehicle dashboard on AutoJournal' />
+            </Head>
             <NavBar />
             <Box textAlign={'center'} mt={4} mx={2}>
                 <Typography variant='h4' component='h1' gutterBottom>
