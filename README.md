@@ -1,38 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AutoJournal
 
-## Getting Started
+Welcome to AutoJournal, a vehicle maintenance tracking application. This application is designed to help vehicle owners keep track of their vehicle's maintenance tasks and expenses in a simple and efficient way. 
 
-First, run the development server:
+## About the Project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+AutoJournal is built using [Next.js](https://nextjs.org/), a powerful React framework that enables server-side rendering and generating static websites for React based web applications. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For data storage, we use MongoDB, a source-available cross-platform document-oriented database program. It allows us to store our data in flexible, JSON-like documents, meaning fields can vary from document to document and data structure can be changed over time.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+User authentication is handled by NextAuth, a complete open source authentication solution for Next.js applications. It is designed from the ground up to support Next.js and Serverless.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The user interface is built using Material-UI, a popular React UI framework that implements Google's Material Design.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Visit the Application
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+You can visit and use the application at [https://autojournal-zero.vercel.app/](https://autojournal-zero.vercel.app/). 
+
+## Feedback and Contributions
+
+Your feedback and contributions are welcome! Feel free to open issues or submit pull requests in the GitHub repository for this project. 
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this project, check out the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [MongoDB Documentation](https://docs.mongodb.com/) - learn about MongoDB features and API.
+- [NextAuth.js Documentation](https://next-auth.js.org/getting-started/introduction) - learn about NextAuth.js features and API.
+- [Material-UI Documentation](https://mui.com/getting-started/usage/) - learn about Material-UI features and API.
