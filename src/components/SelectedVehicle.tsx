@@ -23,7 +23,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             border: '2px solid',
             borderColor: 'primary.main',
             borderBottom: 'transparent',
-            background: `linear-gradient(to bottom, #0171b9, transparent)`,
+            background: 'linear-gradient(to bottom, #0171b9, transparent)',
             color: 'white',
             fontWeight: 'bold',
             borderRadius: '5px 5px 0 0',
@@ -158,7 +158,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 </Grid>
             )}
             {tab === 1 && (
-               <Typography variant='body1' component='p' sx={{m: 2}}>Todo... Future projects or entries that you're thinking of now and want to add but haven't actually done the work yet.</Typography> 
+               <Typography variant='body1' component='p' sx={{m: 2}}>Todo... Future projects or entries that you&apos;re thinking of now and want to add but haven&apos;t actually done the work yet.</Typography> 
             )}
             {tab === 2 && (
                <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
