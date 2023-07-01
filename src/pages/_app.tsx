@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { AppProps } from 'next/app'
+import Head from 'next/head'
 import { SessionProvider, useSession } from 'next-auth/react'
 import { Router as NextRouter, useRouter } from 'next/router'
 import { CacheProvider, EmotionCache } from '@emotion/react'
@@ -24,7 +25,7 @@ function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
   const isProtectedRoute = protectedRoutes.includes(router.pathname)
 
   // If the current route is a protected route,
-  // redirect them to the login page
+  // redirect to login
   useEffect(() => {
     if (isProtectedRoute && status !== 'loading' && !session) {
       router.push('/login')
@@ -35,6 +36,12 @@ function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={dark}>
           <CssBaseline />
+          <Head>
+            <title> 🚓 - AutoJournal</title>
+            <meta name="viewport" content='width=device-width, initial-scale=1, viewport-fit=cover' />
+            <link rel="icon" type='image/png' href="/autojournalLogo.png" />
+            <link rel="apple-touch-icon" type='image/png' href="/autojournalLogo.png" />
+          </Head>
           <Component {...pageProps} />
         </ThemeProvider>
       </CacheProvider>

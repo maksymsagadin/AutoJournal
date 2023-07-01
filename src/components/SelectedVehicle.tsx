@@ -1,18 +1,42 @@
+import { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { Box, Typography, Grid } from '@mui/material'
+import { Box, Typography, Grid, Button, Tabs, Tab } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit'
 import { JournalEntry, Vehicle } from '@/utils/types'
 import EditVehicle from '@/components/Forms/EditVehicle'
 import AddJournalEntry from './Forms/AddJournalEntry'
 import JournalEntryCard from '@/components/JournalEntryCard'
 
 interface SelectedVehicleProps {
-    vehicle: Vehicle,
+    vehicle: Vehicle
     onEdit: (vehicle: Vehicle) => void
     onDelete: (vehicle: Vehicle) => void
 }
 
 const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDelete }) => {
     const { update } = useSession()
+    const [isEditing, setIsEditing] = useState(false)
+    const [tab, setTab] = useState(0)
+
+    const tabStyles = {
+        '&.Mui-selected': {
+            border: '2px solid',
+            borderColor: 'primary.main',
+            borderBottom: 'transparent',
+            background: 'linear-gradient(to bottom, #0171b9, transparent)',
+            color: 'white',
+            fontWeight: 'bold',
+            borderRadius: '5px 5px 0 0',
+        },
+        border: '1px solid',
+        borderColor: 'slate.500',
+        borderRadius: '5px 5px 0 0',
+        transition: '0.5s',
+    }
+
+    const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+        setTab(newValue)
+    }
 
     const handleEditEntry = async (updatedEntry: JournalEntry) => {
         if (vehicle?.journalEntries) {
@@ -78,11 +102,32 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
         }
     }
 
+    if (isEditing) {
+        return (
+            <Box>
+                <EditVehicle 
+                    vehicle={vehicle} 
+                    onEdit={(updatedVehicle: Vehicle) => {
+                        onEdit(updatedVehicle)
+                        setIsEditing(false)
+                    }}
+                    onDelete={onDelete}
+                    setIsEditing={setIsEditing}
+                />
+            </Box>
+        )
+    }
+
     return (
         <Box>
-            <Typography variant='h5' component='h2'>
-                Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
-            </Typography>
+            <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                <Typography variant='h5' component='h2'>
+                    Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
+                </Typography>
+                <Button sx={{m: 1}} variant='contained' endIcon={<EditIcon />} color='primary' onClick={() => setIsEditing(true)}>
+                    <Typography variant='overline'>Edit</Typography>
+                </Button>
+            </Box>
             <Typography variant='h5' component='h4'>
                 Vehicle: {vehicle.make} {vehicle.model}
             </Typography>
@@ -95,15 +140,29 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <Typography variant='body1' component='p'>
                 Odometer: {vehicle.mileage}
             </Typography>
-            <EditVehicle vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />
-            <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
-            <Grid container>
-                {vehicle.journalEntries?.map((entry, index) => (
-                    <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
-                        <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
-                    </Grid>
-                ))}
-            </Grid>
+            <Box sx={{pb: 1}}>
+                <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
+            </Box>
+            <Tabs value={tab} variant='fullWidth' TabIndicatorProps={{ style: { display: 'none' } }} onChange={handleTabChange}>
+                <Tab label='Journal Entries' sx={tabStyles} />
+                <Tab label='Todo Entries' sx={tabStyles} />
+                <Tab label='Spent' sx={tabStyles} />
+            </Tabs>
+            {tab === 0 && (
+                <Grid container sx={{m: 1}}>
+                    {vehicle.journalEntries?.map((entry, index) => (
+                        <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
+                            <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
+                        </Grid>
+                    ))}
+                </Grid>
+            )}
+            {tab === 1 && (
+               <Typography variant='body1' component='p' sx={{m: 2}}>Todo... Future projects or entries that you&apos;re thinking of now and want to add but haven&apos;t actually done the work yet.</Typography> 
+            )}
+            {tab === 2 && (
+               <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
+            )}
         </Box>
     )
 }
