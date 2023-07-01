@@ -2,24 +2,13 @@ import * as React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 import createEmotionServer from '@emotion/server/create-instance'
-
 import createEmotionCache from '@/utils/createEmotionCache'
 
 export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head >
-          <title> 🚓 - AutoJournal</title>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          />
-
-          <link rel="icon" type='image/png' href="/autojournalLogo.png" />
-          <link rel="apple-touch-icon" type='image/png' href="/autojournalLogo.png" />
-          <meta name="viewport" content='width=device-width, initial-scale=1, viewport-fit=cover' />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />
