@@ -1,18 +1,21 @@
+import { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { Box, Typography, Grid } from '@mui/material'
+import { Box, Typography, Grid, Button } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit'
 import { JournalEntry, Vehicle } from '@/utils/types'
 import EditVehicle from '@/components/Forms/EditVehicle'
 import AddJournalEntry from './Forms/AddJournalEntry'
 import JournalEntryCard from '@/components/JournalEntryCard'
 
 interface SelectedVehicleProps {
-    vehicle: Vehicle,
+    vehicle: Vehicle
     onEdit: (vehicle: Vehicle) => void
     onDelete: (vehicle: Vehicle) => void
 }
 
 const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDelete }) => {
     const { update } = useSession()
+    const [isEditing, setIsEditing] = useState(false)
 
     const handleEditEntry = async (updatedEntry: JournalEntry) => {
         if (vehicle?.journalEntries) {
@@ -78,11 +81,32 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
         }
     }
 
+    if (isEditing) {
+        return (
+            <Box>
+                <EditVehicle 
+                    vehicle={vehicle} 
+                    onEdit={(updatedVehicle: Vehicle) => {
+                        onEdit(updatedVehicle)
+                        setIsEditing(false)
+                    }}
+                    onDelete={onDelete}
+                    setIsEditing={setIsEditing}
+                />
+            </Box>
+        )
+    }
+
     return (
         <Box>
-            <Typography variant='h5' component='h2'>
-                Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
-            </Typography>
+            <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                <Typography variant='h5' component='h2'>
+                    Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
+                </Typography>
+                <Button sx={{m: 1}} variant='contained' endIcon={<EditIcon />} color='primary' onClick={() => setIsEditing(true)}>
+                    <Typography variant='overline'>Edit</Typography>
+                </Button>
+            </Box>
             <Typography variant='h5' component='h4'>
                 Vehicle: {vehicle.make} {vehicle.model}
             </Typography>
@@ -95,7 +119,6 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <Typography variant='body1' component='p'>
                 Odometer: {vehicle.mileage}
             </Typography>
-            <EditVehicle vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />
             <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
             <Grid container>
                 {vehicle.journalEntries?.map((entry, index) => (
