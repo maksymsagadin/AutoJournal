@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { Box, Typography, Grid, Button } from '@mui/material'
+import { Box, Typography, Grid, Button, Tabs, Tab } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import { JournalEntry, Vehicle } from '@/utils/types'
 import EditVehicle from '@/components/Forms/EditVehicle'
@@ -16,6 +16,27 @@ interface SelectedVehicleProps {
 const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDelete }) => {
     const { update } = useSession()
     const [isEditing, setIsEditing] = useState(false)
+    const [tab, setTab] = useState(0)
+
+    const tabStyles = {
+        '&.Mui-selected': {
+            border: '2px solid',
+            borderColor: 'primary.main',
+            borderBottom: 'transparent',
+            background: `linear-gradient(to bottom, #0171b9, transparent)`,
+            color: 'white',
+            fontWeight: 'bold',
+            borderRadius: '5px 5px 0 0',
+        },
+        border: '1px solid',
+        borderColor: 'slate.500',
+        borderRadius: '5px 5px 0 0',
+        transition: '0.5s',
+    }
+
+    const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+        setTab(newValue)
+    }
 
     const handleEditEntry = async (updatedEntry: JournalEntry) => {
         if (vehicle?.journalEntries) {
@@ -119,14 +140,29 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <Typography variant='body1' component='p'>
                 Odometer: {vehicle.mileage}
             </Typography>
-            <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
-            <Grid container>
-                {vehicle.journalEntries?.map((entry, index) => (
-                    <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
-                        <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
-                    </Grid>
-                ))}
-            </Grid>
+            <Box sx={{pb: 1}}>
+                <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
+            </Box>
+            <Tabs value={tab} variant='fullWidth' TabIndicatorProps={{ style: { display: 'none' } }} onChange={handleTabChange}>
+                <Tab label='Journal Entries' sx={tabStyles} />
+                <Tab label='Todo Entries' sx={tabStyles} />
+                <Tab label='Spent' sx={tabStyles} />
+            </Tabs>
+            {tab === 0 && (
+                <Grid container sx={{m: 1}}>
+                    {vehicle.journalEntries?.map((entry, index) => (
+                        <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
+                            <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
+                        </Grid>
+                    ))}
+                </Grid>
+            )}
+            {tab === 1 && (
+               <Typography variant='body1' component='p' sx={{m: 2}}>Todo... Future projects or entries that you're thinking of now and want to add but haven't actually done the work yet.</Typography> 
+            )}
+            {tab === 2 && (
+               <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
+            )}
         </Box>
     )
 }
