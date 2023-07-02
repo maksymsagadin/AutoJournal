@@ -37,6 +37,7 @@ export interface Vehicle {
 export interface JournalEntry {
     id: string
     date: Date
+    future: boolean
     service: string
     mileage: number
     notes: string

@@ -17,6 +17,8 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
     const { update } = useSession()
     const [isEditing, setIsEditing] = useState(false)
     const [tab, setTab] = useState(0)
+    const journalEntries = vehicle.journalEntries?.filter(entry => !entry.future).sort((a, b) => a.mileage - b.mileage)
+    const todoEntries = vehicle.journalEntries?.filter(entry => entry.future).sort((a, b) => a.mileage - b.mileage)
 
     const tabStyles = {
         '&.Mui-selected': {
@@ -150,15 +152,29 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             </Tabs>
             {tab === 0 && (
                 <Grid container sx={{m: 1}}>
-                    {vehicle.journalEntries?.map((entry, index) => (
-                        <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
-                            <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
-                        </Grid>
-                    ))}
+                    {journalEntries?.length > 0 ? (
+                        journalEntries.map((entry, index) => (
+                            <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
+                                <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
+                            </Grid>
+                        ))
+                    ) : (
+                        <Typography variant='body1' component='p' sx={{m: 2}}>No journal entries yet.</Typography>
+                    )}
                 </Grid>
             )}
             {tab === 1 && (
-               <Typography variant='body1' component='p' sx={{m: 2}}>Todo... Future projects or entries that you&apos;re thinking of now and want to add but haven&apos;t actually done the work yet.</Typography> 
+               <Grid container sx={{m: 1}}>
+                    {todoEntries?.length > 0 ? (
+                        todoEntries.map((entry, index) => (
+                            <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
+                                <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
+                            </Grid>
+                        ))
+                    ) : (
+                        <Typography variant='body1' component='p' sx={{m: 2}}>No future journal entries yet.</Typography>
+                    )}
+                </Grid>
             )}
             {tab === 2 && (
                <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
