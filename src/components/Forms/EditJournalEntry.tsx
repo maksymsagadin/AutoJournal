@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Button, Grid, InputAdornment, MenuItem, TextField } from '@mui/material'
+import { Box, Button, Checkbox, FormControlLabel, Grid, InputAdornment, MenuItem, TextField } from '@mui/material'
 import { JournalEntry } from '@/utils/types'
 
 interface EditJournalEntryProps {
@@ -41,7 +41,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                             startAdornment: <InputAdornment position='start'>〄</InputAdornment>,
                         }}
                     >
-                        <MenuItem value={'Service'}>Service</MenuItem>
+                        <MenuItem value={'Maintenance'}>Maintenance</MenuItem>
                         <MenuItem value={'Upgrade'}>Upgrade</MenuItem>
                         <MenuItem value={'Repair'}>Repair</MenuItem>
                     </TextField>
@@ -131,6 +131,19 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         InputProps={{
                             startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
                         }}
+                    />
+                </Grid>
+                <Grid item>
+                    <FormControlLabel
+                        label='Future?'
+                        control={
+                            <Checkbox
+                                name='future'
+                                checked={editedEntry.future}
+                                onChange={(event) => setEditedEntry({ ...editedEntry, future: event.target.checked })}
+                                color='primary'
+                            />
+                        }
                     />
                 </Grid>
                 <Grid item xs={12}>
