@@ -29,7 +29,7 @@ export default function Home() {
           <Image src={heroImage} alt='AutoJournal Hero Image' priority fill style={{objectFit:'cover', zIndex:'-1'}}  quality={100} />
           <Typography color='common.white' variant='h3' textAlign='center' sx={{ mb: 2, fontWeight: 'fontWeightBold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Welcome to AutoJournal</Typography>
           <Typography color='common.white' variant='h6' textAlign='center' sx={{ mb: 4, fontWeight: 'fontWeightMedium', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)' }}>
-            Your one-stop solution for managing all your car's information on repairs and upgrades.
+            Your one-stop solution for managing all your car&apos;s information on repairs and upgrades.
           </Typography>
           <Button variant='contained' color='primary' component={Link} href='/sign-up'>Get Started</Button>
         </Box>
@@ -46,7 +46,7 @@ export default function Home() {
           <SectionHeader>Why Us?</SectionHeader>
           <Typography variant='body1' component='p' my={1}>
             AutoJournal is a free service that helps you keep track of all the projects, upgrades, and repairs that you have done to your car. 
-            It's like CarFax but private. Preserve your car's story and stop having to open the overstuffed folder of paperwork. 
+            It&apos;s like CarFax but private. Preserve your car&apos;s story and stop having to open the overstuffed folder of paperwork. 
             Simply upload the information and search it up when you need it or bundle it up into a downloadable file to share with the next owner.
           </Typography>
         </Box>
