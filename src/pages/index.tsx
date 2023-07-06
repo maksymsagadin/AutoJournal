@@ -69,6 +69,12 @@ export default function Home() {
           </Typography>
           <Button variant='contained' color='primary' component={Link} href='/sign-up'>Sign Up</Button>
         </Box>
+        {/* Footer */}
+        <Box sx={{ p: 4, backgroundColor: 'background.paper', mt: 4 }}>
+          <Typography variant='body2' color='text.secondary' align='center'>
+            © 2023 AutoJournal. All rights reserved. | <a href='https://maksymsagadin.com/'>MS</a>
+          </Typography>
+        </Box>
       </Container>
     </>
   )
