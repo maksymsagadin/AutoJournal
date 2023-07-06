@@ -53,7 +53,7 @@ export default function Home() {
         <Box sx={sectionStyle}>
           <SectionHeader>Contact Us</SectionHeader>
           <Typography variant='body1' component='p' my={1}>
-            Have suggestions for updates or improvements? We'd love to hear from you. 
+            Have suggestions for updates or improvements? We&apos;d love to hear from you. 
             Please <a href='https://maksymsagadin.com/' target='_blank' rel='noopener noreferrer'>contact me</a> to share your thoughts.
           </Typography>
         </Box>
