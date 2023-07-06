@@ -37,7 +37,7 @@ const darkTheme: ThemeOptions = {
     fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400, 
-    fontWeightMedium: 500, 
+    fontWeightMedium: 600, 
     fontWeightBold: 700,
   },
   shape: {
