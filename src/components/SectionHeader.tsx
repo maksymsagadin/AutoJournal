@@ -19,7 +19,7 @@ const SectionHeader = ({ children }) => (
             borderColor: 'secondary.main',
             borderRadius: 2,
             width: '100%',
-            animation: `${fadeIn} 7s`,
+            animation: `${fadeIn} 5s`,
             '::after': {
                 content: '""',
                 position: 'absolute',
