@@ -29,7 +29,7 @@ export default function Home() {
           <Image src={heroImage} alt='AutoJournal Hero Image' priority fill style={{objectFit:'cover', zIndex:'-1'}}  quality={100} />
           <Typography color='common.white' variant='h3' textAlign='center' sx={{ mb: 2, fontWeight: 'fontWeightBold', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Welcome to AutoJournal</Typography>
           <Typography color='common.white' variant='h6' textAlign='center' sx={{ mb: 4, fontWeight: 'fontWeightMedium', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)' }}>
-            Your one-stop solution for managing all your car repairs and sales information.
+            Your one-stop solution for managing all your car's information on repairs and upgrades.
           </Typography>
           <Button variant='contained' color='primary' component={Link} href='/sign-up'>Get Started</Button>
         </Box>
