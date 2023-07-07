@@ -1,3 +1,6 @@
+import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -23,6 +26,16 @@ const heroText = {
 }
 
 export default function Home() {
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!loading && session) {
+      router.push('/dashboard')
+    }
+  }, [session, loading, router])
+  
   return (
     <>
       <Head>
