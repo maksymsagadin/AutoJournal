@@ -150,6 +150,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 <Tab label='Journal Entries' sx={tabStyles} />
                 <Tab label='Todo Entries' sx={tabStyles} />
                 <Tab label='Spent' sx={tabStyles} />
+                {/* <Tab label='History' sx={tabStyles} /> To Uncomment when working on next feature */}
             </Tabs>
             {tab === 0 && (
                 <Grid container sx={{m: 1}}>

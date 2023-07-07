@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell, AreaChart, Area, ResponsiveContainer } from 'recharts'
 import { JournalEntry } from '@/utils/types'
-import { Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
+import { Box, Select, MenuItem, FormControl, InputLabel, Typography } from '@mui/material'
 import { SelectChangeEvent } from '@mui/material/Select'
 
 interface SpentChartProps {
@@ -34,7 +34,10 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
     }
 
     return (
-        <>
+        <>  
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center', padding: 2 }}>
+                Total Spent: ${chartData[chartData.length-1].amount.toFixed(2)}
+            </Typography>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="chart-type-label">Chart Type</InputLabel>
                 <Select

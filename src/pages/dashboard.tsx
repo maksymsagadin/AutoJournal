@@ -66,7 +66,7 @@ const Dashboard: NextPage = () => {
                 <meta name='description' content='Your personal vehicle dashboard on AutoJournal' />
             </Head>
             <NavBar />
-            <Box textAlign={'center'} mt={4} mx={2}>
+            <Box textAlign={'center'} mt={4} mx={1}>
                 <Typography variant='h4' component='h1' gutterBottom>
                 Welcome, {user?.name}
                 </Typography>
