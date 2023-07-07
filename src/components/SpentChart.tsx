@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell, AreaChart, Area, ResponsiveContainer } from 'recharts'
 import { JournalEntry } from '@/utils/types'
 import { Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
@@ -13,18 +13,21 @@ const COLORS = ['#00befe', '#00C49F', '#FFBB28', '#192cff']
 const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
     const [chartType, setChartType] = useState('BarChart')
 
-    const chartData = journalEntries.reduce((total, entry) => {
-        const existingService = total.find(item => item.name === entry.service)
-        if (existingService) {
-            existingService.amount += Number(entry.spent)
-        } else {
-            total.push({ name: entry.service, amount: Number(entry.spent) })
-        }
-        return total
-    }, [] as { name: string, amount: number }[])
-    // Calculate the total spent across all services & add to chartData
-    const totalSpent = chartData.reduce((total, item) => total + item.amount, 0)
-    chartData.push({ name: 'Total', amount: totalSpent })
+    const chartData = useMemo(() => {
+        const data = journalEntries.reduce((total, entry) => {
+            const existingService = total.find(item => item.name === entry.service)
+            if (existingService) {
+                existingService.amount += Number(entry.spent)
+            } else {
+                total.push({ name: entry.service, amount: Number(entry.spent) })
+            }
+            return total
+        }, [] as { name: string, amount: number }[])
+        // Calculate the total spent across all services & add to chartData
+        const totalSpent = data.reduce((total, item) => total + item.amount, 0)
+        data.push({ name: 'Total', amount: totalSpent })
+        return data
+    }, [journalEntries])
 
     const handleChange = (event: SelectChangeEvent<string>) => {
         setChartType(event.target.value as string)
@@ -46,10 +49,10 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
                     <MenuItem value={'AreaChart'}>Area Chart</MenuItem>
                 </Select>
             </FormControl>
-            <Box display='flex' justifyContent='center'>
+            <Box display='flex' justifyContent='center' padding={2}>
                 {chartType === 'BarChart' && (
                     <ResponsiveContainer width="95%" height={400}>
-                        <BarChart width={500} height={300} data={chartData}>
+                        <BarChart data={chartData}>
                             <XAxis dataKey="name" />
                             <YAxis />
                             <Tooltip />
@@ -64,8 +67,8 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
                 )}
                 {chartType === 'PieChart' && (
                     <ResponsiveContainer width="95%" height={400}>
-                        <PieChart width={400} height={400}>
-                            <Pie dataKey="amount" isAnimationActive={false} data={chartData} cx="50%" cy="50%" outerRadius={100} fill="#8884d8" label>
+                        <PieChart>
+                            <Pie dataKey="amount" data={chartData} cx="50%" cy="50%" outerRadius={100} fill="#8884d8" label>
                                 {chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
                             </Pie>
                             <Tooltip />
@@ -74,7 +77,7 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
                 )}
                 {chartType === 'AreaChart' && (
                     <ResponsiveContainer width="95%" height={400}>
-                        <AreaChart width={500} height={400} data={chartData}>
+                        <AreaChart data={chartData}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" />
                             <YAxis />
