@@ -18,8 +18,8 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
     const { update } = useSession()
     const [isEditing, setIsEditing] = useState(false)
     const [tab, setTab] = useState(0)
-    const journalEntries = vehicle.journalEntries?.filter(entry => !entry.future).sort((a, b) => a.mileage - b.mileage)
-    const todoEntries = vehicle.journalEntries?.filter(entry => entry.future).sort((a, b) => a.mileage - b.mileage)
+    const journalEntries = vehicle.journalEntries?.filter(entry => !entry.future).sort((a, b) => b.mileage - a.mileage)
+    const todoEntries = vehicle.journalEntries?.filter(entry => entry.future).sort((a, b) => b.mileage - a.mileage)
 
     const tabStyles = {
         '&.Mui-selected': {
