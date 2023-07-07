@@ -6,7 +6,7 @@ import { JournalEntry, Vehicle } from '@/utils/types'
 import EditVehicle from '@/components/Forms/EditVehicle'
 import AddJournalEntry from './Forms/AddJournalEntry'
 import JournalEntryCard from '@/components/JournalEntryCard'
-import BarChart from '@/components/BarChart'
+import SpentChart from '@/components/SpentChart'
 
 interface SelectedVehicleProps {
     vehicle: Vehicle
@@ -180,7 +180,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             {tab === 2 && (
                 <>
                     <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
-                    <BarChart journalEntries={journalEntries}/>
+                    <SpentChart journalEntries={journalEntries}/>
                 </>
             )}
         </Box>
