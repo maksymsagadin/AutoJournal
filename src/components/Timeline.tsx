@@ -89,22 +89,22 @@ const TimelineComponent: React.FC<TimelineProps> = ({ journalEntries }) => {
                         </Typography>
                     </Box>
                     <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        Spent: ${selectedEntry?.spent}
+                        💸: ${selectedEntry?.spent}
                     </Typography>
                     <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        Mileage: {selectedEntry?.mileage}
+                        🛣️ : {selectedEntry?.mileage}
                     </Typography>
                     <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        Date: {selectedEntry?.date ? new Date(selectedEntry.date).toISOString().split('T')[0] : ''}
+                        📆 : {selectedEntry?.date ? new Date(selectedEntry.date).toISOString().split('T')[0] : ''}
                     </Typography>
                     <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        Parts: {selectedEntry?.parts}
+                        🔩: {selectedEntry?.parts}
                     </Typography>
                     <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        Tools: {selectedEntry?.tools}
+                        🔧: {selectedEntry?.tools}
                     </Typography>
                     <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-                        Notes: {selectedEntry?.notes}
+                        📝 : {selectedEntry?.notes}
                     </Typography>
                 </Box>
             </Modal>
