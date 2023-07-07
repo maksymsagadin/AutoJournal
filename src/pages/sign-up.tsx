@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 import { UserData } from '@/utils/types'
-
+import { signIn } from 'next-auth/react'
 import NavBar from '@/components/NavBar'
 import { Box, Grid, Link, Typography, TextField, Button, Stack } from '@mui/material'
 
@@ -32,12 +32,24 @@ const SignUp: NextPage = () => {
                     password,
                 }),
             })
-            //Await for data for any desirable next steps
+            //Await for data to confirm success and then sign in using that data or handle errors
             const response = await res.json()
             if (response.message === 'User already exists') {
                 alert(`User with the email ${email} already exists, please login.`)
             } else {
-                router.push('/log-in')
+                // Sign in the user after successful signup
+                const result = await signIn('credentials', {
+                    redirect: false,
+                    email,
+                    password,
+                })
+                if (result?.error) {
+                    console.error(result.error)
+                    alert(`${result.error}`)
+                } else {
+                    // Successful login
+                    router.push('/dashboard')
+                }
             }
         } catch (error) {
             console.error(error,'err')
