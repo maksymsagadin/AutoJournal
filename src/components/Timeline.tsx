@@ -81,9 +81,13 @@ const TimelineComponent: React.FC<TimelineProps> = ({ journalEntries }) => {
                     boxShadow: 24, 
                     p: 4 
                 }}>
-                    <Typography id='modal-modal-title' variant='h6' component='h2'>
-                        {selectedEntry?.service}
-                    </Typography>
+                    
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 1 }}>
+                        {selectedEntry && getIcon(selectedEntry.service)}
+                        <Typography id='modal-modal-title' variant='h6' component='h2'>
+                            {selectedEntry?.service}
+                        </Typography>
+                    </Box>
                     <Typography id='modal-modal-description' sx={{ mt: 2 }}>
                         Spent: ${selectedEntry?.spent}
                     </Typography>
