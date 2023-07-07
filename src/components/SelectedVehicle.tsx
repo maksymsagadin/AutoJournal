@@ -6,6 +6,7 @@ import { JournalEntry, Vehicle } from '@/utils/types'
 import EditVehicle from '@/components/Forms/EditVehicle'
 import AddJournalEntry from './Forms/AddJournalEntry'
 import JournalEntryCard from '@/components/JournalEntryCard'
+import SpentChart from '@/components/SpentChart'
 
 interface SelectedVehicleProps {
     vehicle: Vehicle
@@ -149,6 +150,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 <Tab label='Journal Entries' sx={tabStyles} />
                 <Tab label='Todo Entries' sx={tabStyles} />
                 <Tab label='Spent' sx={tabStyles} />
+                {/* <Tab label='History' sx={tabStyles} /> To Uncomment when working on next feature */}
             </Tabs>
             {tab === 0 && (
                 <Grid container sx={{m: 1}}>
@@ -177,7 +179,10 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 </Grid>
             )}
             {tab === 2 && (
-               <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
+                <>
+                    <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
+                    <SpentChart journalEntries={journalEntries}/>
+                </>
             )}
         </Box>
     )

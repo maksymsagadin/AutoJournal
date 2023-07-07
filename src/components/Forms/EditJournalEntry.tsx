@@ -12,9 +12,13 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
     const [editedEntry, setEditedEntry] = useState(entry)
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
+        let value: string | number = event.target.value = event.target.value
+        if (event.target.name === 'spent' || event.target.name === 'mileage') {
+            value = parseInt(value)
+        }
         setEditedEntry({
             ...editedEntry,
-            [event.target.name]: event.target.value
+            [event.target.name]: value
         })
     }
 
