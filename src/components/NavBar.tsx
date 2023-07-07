@@ -1,11 +1,6 @@
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
-
-import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-
+import { Box, AppBar, Toolbar, Link, Tooltip} from '@mui/material'
 import logo from '../../public/autojournalLogo.png'
 
 const rightLink = {
@@ -30,7 +25,7 @@ const NavBar = () => {
         <AppBar position='sticky'>
             <Toolbar sx={{ justifyContent: 'space-between' }}>
                 <Box sx={{ flex: 1 }} >
-                {!session ? (
+                    {!session ? (
                             <Link
                                 color='inherit'
                                 variant='h6'
@@ -52,15 +47,11 @@ const NavBar = () => {
                         </Link>
                     )}
                 </Box>
-                <Link
-                    variant='h6'
-                    underline='none'
-                    color='inherit'
-                    href='/'
-                    sx={{ display:'flex' }}
-                    >
-                    <Image src={logo} alt='logo for Auto Journal' priority height={75} width={75} />
-                </Link>
+                <Tooltip title='Oh hi there'>
+                    <Box sx={{ display:'flex', cursor: 'pointer' }}>
+                        <Image src={logo} alt='logo for Auto Journal' priority height={75} width={75} />
+                    </Box>
+                </Tooltip>
                 <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
                     {!session ? (
                         <>
