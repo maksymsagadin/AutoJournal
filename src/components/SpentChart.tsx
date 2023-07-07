@@ -34,17 +34,17 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
 
     return (
         <>  
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center', padding: 2 }}>
+            <Typography variant='h6' sx={{ flexGrow: 1, textAlign: 'center', padding: 2 }}>
                 Total Spent: ${totalSpent.toFixed(2)}
             </Typography>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="chart-type-label">Chart Type</InputLabel>
+            <FormControl variant='standard' sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id='chart-type-label'>Chart Type</InputLabel>
                 <Select
-                    labelId="chart-type-label"
-                    id="chart-type"
+                    labelId='chart-type-label'
+                    id='chart-type'
                     value={chartType}
                     onChange={handleChange}
-                    label="Chart Type"
+                    label='Chart Type'
                     >
                     <MenuItem value={'BarChart'}>Bar Chart</MenuItem>
                     <MenuItem value={'PieChart'}>Pie Chart</MenuItem>
@@ -53,13 +53,13 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
             </FormControl>
             <Box display='flex' justifyContent='center' padding={2}>
                 {chartType === 'BarChart' && (
-                    <ResponsiveContainer width="95%" height={400}>
+                    <ResponsiveContainer width='95%' height={400}>
                         <BarChart data={chartData}>
-                            <XAxis dataKey="name" />
+                            <XAxis dataKey='name' />
                             <YAxis />
                             <Tooltip />
-                            <CartesianGrid stroke="#f5f5f5" />
-                            <Bar dataKey="amount">
+                            <CartesianGrid stroke='#f5f5f5' />
+                            <Bar dataKey='amount'>
                                 {chartData.map((entry, index) => (
                                         <Cell key={index} fill={COLORS[index % COLORS.length]} />
                                     ))}
@@ -68,9 +68,9 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
                     </ResponsiveContainer>
                 )}
                 {chartType === 'PieChart' && (
-                    <ResponsiveContainer width="95%" height={400}>
+                    <ResponsiveContainer width='95%' height={400}>
                         <PieChart>
-                            <Pie dataKey="amount" data={chartData} cx="50%" cy="50%" outerRadius={100} fill="#8884d8" label>
+                            <Pie dataKey='amount' data={chartData} cx='50%' cy='50%' outerRadius={100} fill='#8884d8' label>
                                 {chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
                             </Pie>
                             <Tooltip />
@@ -78,13 +78,13 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
                     </ResponsiveContainer>
                 )}
                 {chartType === 'AreaChart' && (
-                    <ResponsiveContainer width="95%" height={400}>
+                    <ResponsiveContainer width='95%' height={400}>
                         <AreaChart data={chartData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
+                            <CartesianGrid strokeDasharray='3 3' />
+                            <XAxis dataKey='name' />
                             <YAxis />
                             <Tooltip />
-                            <Area type="monotone" dataKey="amount" stroke="#8884d8" fill="#8884d8" />
+                            <Area type='monotone' dataKey='amount' stroke='#8884d8' fill='#8884d8' />
                         </AreaChart>
                     </ResponsiveContainer>
                 )}
