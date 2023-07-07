@@ -10,7 +10,7 @@ import enthusiastImg from '../../public/enthusiastImage.jpeg'
 
 
 const sectionStyle = {
-  p: 4, 
+  p: 1, 
   backgroundColor: 'background.paper', 
   borderRadius: 2, 
   boxShadow: 1,

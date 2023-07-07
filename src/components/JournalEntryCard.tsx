@@ -34,7 +34,7 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
     }
 
     return (
-        <Card raised={!entry.future} sx={{ m: 2 }}>
+        <Card raised={!entry.spent} sx={{ m: 2 }}>
             <CardContent>
                 <Grid container textAlign='left' spacing={2}>
                     <Grid item xs={6} sm={7}>
