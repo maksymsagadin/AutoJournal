@@ -7,6 +7,7 @@ import EditVehicle from '@/components/Forms/EditVehicle'
 import AddJournalEntry from './Forms/AddJournalEntry'
 import JournalEntryCard from '@/components/JournalEntryCard'
 import SpentChart from '@/components/SpentChart'
+import TimelineComponent from '@/components/Timeline'
 
 interface SelectedVehicleProps {
     vehicle: Vehicle
@@ -18,8 +19,9 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
     const { update } = useSession()
     const [isEditing, setIsEditing] = useState(false)
     const [tab, setTab] = useState(0)
-    const journalEntries = vehicle.journalEntries?.filter(entry => !entry.future).sort((a, b) => b.mileage - a.mileage)
+    const journalEntries = vehicle.journalEntries?.filter(entry => !entry.future)
     const todoEntries = vehicle.journalEntries?.filter(entry => entry.future).sort((a, b) => b.mileage - a.mileage)
+    const sortedEntries =  vehicle.journalEntries?.filter(entry => !entry.future).sort((a, b) => b.mileage - a.mileage)
 
     const tabStyles = {
         '&.Mui-selected': {
@@ -150,12 +152,12 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 <Tab label='Journal Entries' sx={tabStyles} />
                 <Tab label='Todo Entries' sx={tabStyles} />
                 <Tab label='Spent' sx={tabStyles} />
-                {/* <Tab label='History' sx={tabStyles} /> To Uncomment when working on next feature */}
+                <Tab label='History' sx={tabStyles} />
             </Tabs>
             {tab === 0 && (
                 <Grid container sx={{m: 1}}>
                     {journalEntries?.length > 0 ? (
-                        journalEntries.map((entry, index) => (
+                        sortedEntries.map((entry, index) => (
                             <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
                                 <JournalEntryCard entry={entry} onEdit={handleEditEntry} onDelete={handleDeleteEntry}/>
                             </Grid>
@@ -182,6 +184,11 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 <>
                     <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
                     <SpentChart journalEntries={journalEntries}/>
+                </>
+            )}
+            {tab === 3 && (
+                <>
+                    <TimelineComponent journalEntries={journalEntries}/>
                 </>
             )}
         </Box>
