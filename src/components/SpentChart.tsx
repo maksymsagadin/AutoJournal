@@ -13,7 +13,7 @@ const COLORS = ['#00befe', '#00C49F', '#FFBB28', '#192cff']
 const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
     const [chartType, setChartType] = useState('BarChart')
 
-    const chartData = useMemo(() => {
+    const [chartData, totalSpent] = useMemo(() => {
         const data = journalEntries.reduce((total, entry) => {
             const existingService = total.find(item => item.name === entry.service)
             if (existingService) {
@@ -25,8 +25,7 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
         }, [] as { name: string, amount: number }[])
         // Calculate the total spent across all services & add to chartData
         const totalSpent = data.reduce((total, item) => total + item.amount, 0)
-        data.push({ name: 'Total', amount: totalSpent })
-        return data
+        return [data, totalSpent]
     }, [journalEntries])
 
     const handleChange = (event: SelectChangeEvent<string>) => {
@@ -36,7 +35,7 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
     return (
         <>  
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center', padding: 2 }}>
-                Total Spent: ${chartData[chartData.length-1].amount.toFixed(2)}
+                Total Spent: ${totalSpent.toFixed(2)}
             </Typography>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="chart-type-label">Chart Type</InputLabel>
