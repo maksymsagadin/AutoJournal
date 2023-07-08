@@ -6,6 +6,7 @@ import { JournalEntry, Vehicle } from '@/utils/types'
 import EditVehicle from '@/components/Forms/EditVehicle'
 import AddJournalEntry from './Forms/AddJournalEntry'
 import ImportButton from '@/components/ImportButton'
+import ExportButton from '@/components/ExportButton'
 import JournalEntryCard from '@/components/JournalEntryCard'
 import SpentChart from '@/components/SpentChart'
 import TimelineChart from '@/components/TimelineChart'
@@ -148,6 +149,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             </Typography>
             <Box display='flex' flexWrap='wrap' justifyContent='center' >
                 <ImportButton vehicle={vehicle} onImport={onEdit} />
+                <ExportButton vehicle={vehicle} />
                 <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
             </Box>
             <Tabs value={tab} variant='fullWidth' sx={{pt: 1}} TabIndicatorProps={{ style: { display: 'none' } }} onChange={handleTabChange}>
