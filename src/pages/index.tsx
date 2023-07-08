@@ -89,11 +89,10 @@ export default function Home() {
                 <Typography variant='h5' component='p'>
                 AutoJournal is a free service that helps you keep track of all the projects, upgrades, and repairs that you have done to your car. 
                 It&apos;s like CarFax but private. Preserve your car&apos;s story and stop having to open the overstuffed folder of paperwork. 
-                Simply upload the information and search it up when you need it or bundle it up into a downloadable file to share with the next owner.
+                Simply upload the information from a CSV and search it up when you need it or bundle it up into a downloadable file to share with the next owner.
                 </Typography>
               </Box>
             </Grid>
-            
           </Grid>
         </Box>
         <Box sx={sectionStyle}>

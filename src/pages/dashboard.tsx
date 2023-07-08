@@ -91,7 +91,7 @@ const Dashboard: NextPage = () => {
                     </>
                 ) : (
                     <>
-                        <Button variant='outlined' sx={{mb:2}} onClick={() => setShowVehicles(true)}>Select Vehicle</Button>
+                        <Button variant='outlined' color='warning' sx={{mb:2}} onClick={() => setShowVehicles(true)}>Select Vehicle</Button>
                         <SelectedVehicle vehicle={selectedVehicle} onEdit={handleEditVehicle} onDelete={handleDeleteVehicle} />
                     </>
                 )}

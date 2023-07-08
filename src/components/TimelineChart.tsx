@@ -12,7 +12,7 @@ interface TimelineProps {
     journalEntries: JournalEntry[]
 }
 
-const TimelineComponent: React.FC<TimelineProps> = ({ journalEntries }) => {
+const TimelineChart: React.FC<TimelineProps> = ({ journalEntries }) => {
     const [open, setOpen] = useState(false)
     const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null)
 
@@ -126,4 +126,4 @@ const TimelineComponent: React.FC<TimelineProps> = ({ journalEntries }) => {
     )
 }
 
-export default TimelineComponent
+export default TimelineChart
