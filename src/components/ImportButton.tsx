@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Button, Tooltip} from '@mui/material/'
+import {Box, Button, Tooltip, Typography} from '@mui/material/'
 import { v4 as uuidv4 } from 'uuid'
 import Papa from 'papaparse'
 import { useSession } from 'next-auth/react'
@@ -108,8 +108,8 @@ const ImportButton: React.FC<ImportButtonProps> = ({ vehicle, onImport }) => {
     return (
         <Box sx={{m:1}}>
             <Tooltip title='Header values must match the journal entry fields. Service, Mileage, Date, and Notes are required. Please update your file before importing.'>
-                <Button variant='outlined' component='label' sx={{p:1}}>
-                    Import from CSV
+                <Button variant='contained' color='warning'>
+                    <Typography variant='overline' >Import from CVS</Typography>
                     <input
                         type='file'
                         hidden
