@@ -8,7 +8,7 @@ import AddJournalEntry from './Forms/AddJournalEntry'
 import ImportButton from '@/components/ImportButton'
 import JournalEntryCard from '@/components/JournalEntryCard'
 import SpentChart from '@/components/SpentChart'
-import TimelineComponent from '@/components/Timeline'
+import TimelineChart from '@/components/TimelineChart'
 
 interface SelectedVehicleProps {
     vehicle: Vehicle
@@ -184,13 +184,12 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             )}
             {tab === 2 && (
                 <>
-                    <Typography variant='body1' component='p' sx={{m: 2}}>Do you really want to know how much you spent?...</Typography> 
                     <SpentChart journalEntries={journalEntries}/>
                 </>
             )}
             {tab === 3 && (
                 <>
-                    <TimelineComponent journalEntries={journalEntries}/>
+                    <TimelineChart journalEntries={journalEntries}/>
                 </>
             )}
         </Box>
