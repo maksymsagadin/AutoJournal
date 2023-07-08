@@ -107,8 +107,8 @@ const ImportButton: React.FC<ImportButtonProps> = ({ vehicle, onImport }) => {
 
     return (
         <Box sx={{m:1}}>
-            <Tooltip title='Import journal entries from a CSV file. The file must have headers that match the journal entry fields: Service, Mileage, Date, Notes, Parts, Tools, Spent, Future. Service, Mileage, Date, and Notes are required fields. The file must be in CSV format.'>
-                <Button variant='contained' color='warning'>
+            <Tooltip title='Header values must match the journal entry fields. Service, Mileage, Date, and Notes are required. Please update your file before importing, keep your file in CSV format.'>
+                <Button variant='contained' component='label' color='warning'>
                     <Typography variant='overline' >Import</Typography>
                     <input
                         type='file'
