@@ -47,7 +47,7 @@ const NavBar = () => {
                         </Link>
                     )}
                 </Box>
-                <Tooltip title='Oh hi there'>
+                <Tooltip title='Oh Hi!' arrow>
                     <Box sx={{ display:'flex', cursor: 'pointer' }}>
                         <Image src={logo} alt='logo for Auto Journal' priority height={75} width={75} />
                     </Box>
