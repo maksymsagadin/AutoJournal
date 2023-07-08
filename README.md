@@ -29,7 +29,7 @@ AutoJournal is built using a variety of modern web development technologies to p
 
 - [Material-UI](https://mui.com/): This popular React UI framework implements Google's Material Design, providing a sleek and modern look for AutoJournal's user interface. It also offers a wide range of components and customization options, making it easier to build a responsive and accessible application.
 
-- [Papa Parse](https://www.papaparse.com/): This powerful, in-browser CSV parser is used to handle the import of journal entries from CSV files. It enables robust error checking and provides a smooth user experience when importing data.
+- [Papa Parse](https://www.papaparse.com/): This powerful, in-browser CSV parser is used to handle the import of journal entries from CSV files. It enables robust error checking and provides a smooth user experience when importing data. - [Sample.csv](https://github.com/maksymsagadin/autojournal/files/11987261/Sample.csv)
 
 By leveraging these technologies, AutoJournal provides a comprehensive solution for tracking vehicle maintenance, upgrades, and repairs.
 
