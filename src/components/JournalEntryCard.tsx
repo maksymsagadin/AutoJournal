@@ -57,16 +57,16 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
                             {entry.spent ? `💸: ${entry.spent}`: '💸: ~'}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    {entry.parts && <Grid item xs={12} sm={6}>
                         <Typography variant='overline' fontSize={'1.1rem'} component='p'>
-                            {entry.parts ? `🔩: ${entry.parts}` : ''}
+                            🔩: {entry.parts}
                         </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
+                    </Grid>}
+                    {entry.tools && <Grid item xs={12} sm={6}>
                         <Typography variant='overline' fontSize={'1.1rem'} component='p'>
-                            {entry.tools ? `🔧: ${entry.tools}` : ''}
+                            🔧: {entry.tools}
                         </Typography>
-                    </Grid>
+                    </Grid>}
                     <Grid item xs={12}>
                         <Typography variant='overline' fontSize={'1rem'} component='p'>
                             📝 : {entry.notes}
