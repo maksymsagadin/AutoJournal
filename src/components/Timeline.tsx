@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot, TimelineOppositeContent } from '@mui/lab'
 import { Box, Typography, Modal } from '@mui/material'
 import TireRepairIcon from '@mui/icons-material/TireRepair'
-import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports'
-import CarRepairIcon from '@mui/icons-material/CarRepair'
+import SportsMotorsportsOutlinedIcon from '@mui/icons-material/SportsMotorsportsOutlined'
+import CarRepairOutlinedIcon from '@mui/icons-material/CarRepairOutlined'
 import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave'
 import HealingIcon from '@mui/icons-material/Healing'
 import { JournalEntry } from '@/utils/types'
@@ -28,13 +28,29 @@ const TimelineComponent: React.FC<TimelineProps> = ({ journalEntries }) => {
     const getIcon = (service: string) => {
         switch(service) {
             case 'Maintenance':
-                return <CarRepairIcon />
+                return (
+                    <TimelineDot color='primary' >
+                        <CarRepairOutlinedIcon />
+                    </TimelineDot>
+                )
             case 'Upgrade':
-                return <SportsMotorsportsIcon />
+                return (
+                    <TimelineDot color='success' variant='outlined'>
+                        <SportsMotorsportsOutlinedIcon />
+                    </TimelineDot>
+                )
             case 'Repair':
-                return <HealingIcon />
+                return (
+                    <TimelineDot color='warning' variant='outlined'>
+                        <HealingIcon />
+                    </TimelineDot>
+                )
             default:
-                return <TimeToLeaveIcon />
+                return (
+                    <TimelineDot>
+                        <TimeToLeaveIcon />
+                    </TimelineDot>
+                )
         }
     }
 
@@ -45,16 +61,14 @@ const TimelineComponent: React.FC<TimelineProps> = ({ journalEntries }) => {
                     <TimelineItem key={index} onClick={() => handleOpen(entry)}>
                         <TimelineOppositeContent
                             sx={{ m: 'auto 0' }}
-                            align="right"
-                            variant="body2"
-                            color="text.secondary"
+                            align='right'
+                            variant='body2'
+                            color='text.secondary'
                             >
-                            {new Date(entry.date).toISOString().split('T')[0]} {/* Display the date */}
+                            {new Date(entry.date).toISOString().split('T')[0]}
                         </TimelineOppositeContent>
                         <TimelineSeparator>
-                            <TimelineDot>
                                 {getIcon(entry.service)}
-                            </TimelineDot>
                             {index < journalEntries.length - 1 && <TimelineConnector />}
                         </TimelineSeparator>
                         <TimelineContent>
@@ -83,8 +97,8 @@ const TimelineComponent: React.FC<TimelineProps> = ({ journalEntries }) => {
                 }}>
                     
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', my: 1 }}>
-                        {selectedEntry && getIcon(selectedEntry.service)}
-                        <Typography id='modal-modal-title' variant='h6' component='h2'>
+                        {getIcon(selectedEntry?.service)}
+                        <Typography id='modal-modal-title' variant='h6' component='h2' ml={1}>
                             {selectedEntry?.service}
                         </Typography>
                     </Box>
