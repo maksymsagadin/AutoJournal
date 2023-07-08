@@ -22,7 +22,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
             service: (event.currentTarget.elements.namedItem('service') as HTMLInputElement).value,
             mileage: parseInt((event.currentTarget.elements.namedItem('mileage') as HTMLInputElement).value),
             date: new Date((event.currentTarget.elements.namedItem('date') as HTMLInputElement).value),
-            spent: parseInt((event.currentTarget.elements.namedItem('spent') as HTMLInputElement).value),
+            spent: parseFloat((event.currentTarget.elements.namedItem('spent') as HTMLInputElement).value),
             parts: (event.currentTarget.elements.namedItem('parts') as HTMLInputElement).value,
             tools: (event.currentTarget.elements.namedItem('tools') as HTMLInputElement).value,
             notes: (event.currentTarget.elements.namedItem('notes') as HTMLInputElement).value,
@@ -57,7 +57,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
     }
 
     return (
-        <Box justifyContent='center' sx={{m:1}}>
+        <Box sx={{m:1}}>
             {!isOpen ? (
                 <Button
                     variant='contained'
