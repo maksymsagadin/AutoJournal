@@ -11,7 +11,7 @@ interface SpentChartProps {
 const COLORS = ['#00befe', '#00C49F', '#FFBB28', '#192cff']
 
 const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
-    const [chartType, setChartType] = useState('BarChart')
+    const [chartType, setChartType] = useState('PieChart')
 
     const [chartData, totalSpent] = useMemo(() => {
         const data = journalEntries.reduce((total, entry) => {
@@ -68,7 +68,7 @@ const SpentChart: React.FC<SpentChartProps> = ({ journalEntries }) => {
                     </ResponsiveContainer>
                 )}
                 {chartType === 'PieChart' && (
-                    <ResponsiveContainer width='95%' height={400}>
+                    <ResponsiveContainer width='95%' height={250}>
                         <PieChart>
                             <Pie dataKey='amount' data={chartData} cx='50%' cy='50%' outerRadius={100} fill='#8884d8' label>
                                 {chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
