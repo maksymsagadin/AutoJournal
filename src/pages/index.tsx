@@ -35,7 +35,7 @@ export default function Home() {
       router.push('/dashboard')
     }
   }, [session, loading, router])
-  
+
   return (
     <>
       <Head>
@@ -54,7 +54,7 @@ export default function Home() {
           <Typography color='common.white' variant='h4' textAlign='center' sx={heroText}>
             Your personal car maintenance and upgrade tracker.
           </Typography>
-          <Button variant='contained' color='primary' size='large' component={Link} href='/sign-up'>Get Started</Button>
+          <Button variant='contained' color='primary' size='large' component={Link} href='/log-in'>Get Started</Button>
         </Box>
       </Box>
       <Container maxWidth='xl'>
