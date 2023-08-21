@@ -67,11 +67,12 @@ const Dashboard: NextPage = () => {
             </Head>
             <NavBar />
             <Box textAlign={'center'} mt={4} mx={1}>
-                <Typography variant='h4' component='h1' gutterBottom>
-                Welcome, {user?.name}
-                </Typography>
+                
                 {showVehicles ? (
                     <>
+                        <Typography variant='h4' component='h1' gutterBottom>
+                            Welcome, {user?.name}
+                        </Typography>
                         <Box alignItems='center' mb={2}>
                             <Typography variant='h6' component='h2' gutterBottom>
                                 You have {vehicles?.length} vehicles.
