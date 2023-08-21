@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { Box, Typography, Grid, Button, Tabs, Tab } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
+import EventNoteIcon from '@mui/icons-material/EventNote'
+import ColorLensIcon from '@mui/icons-material/ColorLens'
+import SpeedIcon from '@mui/icons-material/Speed'
+
 import { JournalEntry, Vehicle } from '@/utils/types'
 import EditVehicle from '@/components/Forms/EditVehicle'
 import AddJournalEntry from './Forms/AddJournalEntry'
@@ -127,18 +131,20 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
 
     return (
         <Box>
-            <Typography variant='h5' component='h5'>
+            <Typography variant='h5' component='h5' sx={{ marginBottom: 2 }}>
                 Vehicle: {vehicle.make} {vehicle.model}
             </Typography>
-            <Typography variant='body1' component='p'>
-                Year: {vehicle.year}
-            </Typography>
-            <Typography variant='body1' component='p'>
-                Color: {vehicle.color}
-            </Typography>
-            <Typography variant='body1' component='p'>
-                Odometer: {vehicle.mileage}
-            </Typography>
+            <Box display='flex' flexDirection={{ xs: 'column', md: 'row' }} justifyContent='space-around' alignItems='center' mb={2}>
+                <Typography variant='body1' component='p' sx={{ display: 'flex', alignItems: 'center', mb: { xs: 1, md: 0 } }}>
+                    <EventNoteIcon sx={{ marginRight: 1 }} /> Year: {vehicle.year}
+                </Typography>
+                <Typography variant='body1' component='p' sx={{ display: 'flex', alignItems: 'center', mb: { xs: 1, md: 0 } }}>
+                    <ColorLensIcon sx={{ marginRight: 1 }} /> Color: {vehicle.color}
+                </Typography>
+                <Typography variant='body1' component='p' sx={{ display: 'flex', alignItems: 'center' }}>
+                    <SpeedIcon sx={{ marginRight: 1 }} /> Odometer: {vehicle.mileage}
+                </Typography>
+            </Box>
             <Button sx={{m: 1}} variant='contained' startIcon={<EditIcon />} color='primary' onClick={() => setIsEditing(true)}>
                 <Typography variant='overline'>Edit Vehicle</Typography>
             </Button>
