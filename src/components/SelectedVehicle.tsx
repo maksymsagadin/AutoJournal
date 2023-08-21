@@ -127,15 +127,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
 
     return (
         <Box>
-            <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-                <Typography variant='h5' component='h2'>
-                    Selected Vehicle: {vehicle.name || `${vehicle.make} ${vehicle.model}`}
-                </Typography>
-                <Button sx={{m: 1}} variant='contained' endIcon={<EditIcon />} color='primary' onClick={() => setIsEditing(true)}>
-                    <Typography variant='overline'>Edit</Typography>
-                </Button>
-            </Box>
-            <Typography variant='h5' component='h4'>
+            <Typography variant='h5' component='h5'>
                 Vehicle: {vehicle.make} {vehicle.model}
             </Typography>
             <Typography variant='body1' component='p'>
@@ -147,6 +139,9 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <Typography variant='body1' component='p'>
                 Odometer: {vehicle.mileage}
             </Typography>
+            <Button sx={{m: 1}} variant='contained' startIcon={<EditIcon />} color='primary' onClick={() => setIsEditing(true)}>
+                <Typography variant='overline'>Edit Vehicle</Typography>
+            </Button>
             <Box display='flex' flexWrap='wrap' justifyContent='center' >
                 <ImportButton vehicle={vehicle} onImport={onEdit} />
                 <ExportButton vehicle={vehicle} />
@@ -159,7 +154,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 <Tab label='History' sx={tabStyles} />
             </Tabs>
             {tab === 0 && (
-                <Grid container sx={{m: 1}}>
+                <Grid container >
                     {journalEntries?.length > 0 ? (
                         sortedEntries.map((entry, index) => (
                             <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
@@ -172,7 +167,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 </Grid>
             )}
             {tab === 1 && (
-               <Grid container sx={{m: 1}}>
+               <Grid container >
                     {todoEntries?.length > 0 ? (
                         todoEntries.map((entry, index) => (
                             <Grid item xs={12} sm={6} lg={4} xl={3} key={index}>
