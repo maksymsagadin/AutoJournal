@@ -9,6 +9,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import { Box, Typography, Grid, Button } from '@mui/material'
 import Downloading from '@mui/icons-material/DownloadingOutlined'
+import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports'
 import AddVehicle from '@/components/Forms/AddVehicle'
 import VehicleCard from '@/components/VehicleCard'
 import SelectedVehicle from '@/components/SelectedVehicle'
@@ -67,11 +68,10 @@ const Dashboard: NextPage = () => {
             </Head>
             <NavBar />
             <Box textAlign={'center'} mt={4} mx={1}>
-                
                 {showVehicles ? (
                     <>
                         <Typography variant='h4' component='h1' gutterBottom>
-                            Welcome, {user?.name}
+                            Welcome, <SportsMotorsportsIcon /> {user?.name}
                         </Typography>
                         <Box alignItems='center' mb={2}>
                             <Typography variant='h6' component='h2' gutterBottom>
