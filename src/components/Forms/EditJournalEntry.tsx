@@ -48,6 +48,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         <MenuItem value={'Maintenance'}>Maintenance</MenuItem>
                         <MenuItem value={'Upgrade'}>Upgrade</MenuItem>
                         <MenuItem value={'Repair'}>Repair</MenuItem>
+                        <MenuItem value={'Repair'}>Other</MenuItem>
                     </TextField>
                 </Grid>
                 <Grid item xs={6} sm={5}>
@@ -97,7 +98,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         }}
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} >
                     <TextField
                         label='Parts'
                         name='parts'
@@ -105,12 +106,13 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         onChange={handleChange}
                         margin='dense'
                         fullWidth
+                        multiline
                         InputProps={{
                             startAdornment: <InputAdornment position='start'>🔩</InputAdornment>,
                         }}
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} >
                     <TextField
                         label='Tools'
                         name='tools'
@@ -118,6 +120,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         onChange={handleChange}
                         margin='dense'
                         fullWidth
+                        multiline
                         InputProps={{
                             startAdornment: <InputAdornment position='start'>🔧</InputAdornment>,
                         }}
@@ -132,6 +135,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         margin='dense'
                         fullWidth
                         required
+                        multiline
                         InputProps={{
                             startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
                         }}
