@@ -1,10 +1,17 @@
 import { useState } from 'react'
 import { Card, CardContent, Typography, IconButton, Collapse, Grid, Button } from '@mui/material'
 import { JournalEntry } from '@/utils/types'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import UnfoldMoreOutlinedIcon from '@mui/icons-material/UnfoldMoreOutlined' // expand
+import UnfoldLessOutlinedIcon from '@mui/icons-material/UnfoldLessOutlined' // collapse
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import CarRepairIcon from '@mui/icons-material/CarRepair' // service
+import EventNoteIcon from '@mui/icons-material/EventNote' // date
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney' // spent
+import SpeedIcon from '@mui/icons-material/Speed' // odometer
+import SportsIcon from '@mui/icons-material/Sports' // parts
+import ConstructionIcon from '@mui/icons-material/Construction' // tools
+import DescriptionIcon from '@mui/icons-material/Description' // notes
 import EditJournalEntry from './Forms/EditJournalEntry'
 
 interface JournalEntryCardProps {
@@ -47,47 +54,44 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
                 <Grid container textAlign='left' spacing={2}>
                     <Grid item xs={6} sm={7}>
                         <Typography variant='h6' component='h2'>
-                            Service: {entry.service}
+                            <CarRepairIcon sx={{ verticalAlign: 'middle' }} /> : {entry.service}
                         </Typography>
                     </Grid>
                     <Grid item xs={6} sm={5}>
                         <Typography variant='h6' component='p'>
-                            🛣️ : {entry.mileage}
+                            <SpeedIcon sx={{ verticalAlign: 'middle' }} /> : {entry.mileage}
                         </Typography>
                     </Grid>
                     <Grid item xs={7} sm={7}>
                         <Typography variant='overline' fontSize={'1.2rem'} component='p'>
-                            📆 : {new Date(entry.date).toISOString().split('T')[0]}
+                            <EventNoteIcon sx={{ verticalAlign: 'middle' }} /> : {new Date(entry.date).toISOString().split('T')[0]}
                         </Typography>
                     </Grid>
                     <Grid item xs={5} sm={5}>
                         <Typography variant='overline' fontSize={'1.2rem'} component='p'>
-                            {entry.spent ? `💸: ${entry.spent}` : '💸: ~'}
+                            <AttachMoneyIcon sx={{ verticalAlign: 'middle' }} /> {entry.spent ? `: ${entry.spent}` : '~'}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
                     {!expanded ? (
                         <Typography variant='overline' fontSize={'1rem'} component='p'>
-                            📝 : {entry.notes.substring(0, 75)}...
+                            <DescriptionIcon sx={{ verticalAlign: 'middle' }} /> : {entry.notes.substring(0, 75)}...
                         </Typography>
                     ) : (
                         <Typography variant='overline' fontSize={'1rem'} component='p'>
-                            📝 : {entry.notes}
+                            <DescriptionIcon sx={{ verticalAlign: 'middle' }} /> : {entry.notes}
                         </Typography>
                     )}
-                    <IconButton size="small" onClick={handleExpandClick}>
-                        {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                    </IconButton>
                 </Grid>
                     <Collapse in={expanded} timeout="auto" unmountOnExit sx={{ width: '100%', padding: '0 1rem' }}>
                         {entry.parts && <Grid item xs={12}>
                             <Typography variant='overline' fontSize={'1.1rem'} component='p'>
-                                🔩: {entry.parts}
+                                <SportsIcon sx={{ verticalAlign: 'middle' }} />: {entry.parts}
                             </Typography>
                         </Grid>}
                         {entry.tools && <Grid item xs={12}>
                             <Typography variant='overline' fontSize={'1.1rem'} component='p'>
-                                🔧: {entry.tools}
+                                <ConstructionIcon sx={{ verticalAlign: 'middle' }} /> : {entry.tools}
                             </Typography>
                         </Grid>}
                     </Collapse>
@@ -105,9 +109,14 @@ const JournalEntryCard: React.FC<JournalEntryCardProps> = ({ entry, onEdit, onDe
                                 </Button>
                             </>
                         ) : (
-                            <Button sx={{m: 1, px:2}} startIcon={<DeleteIcon />} variant='outlined' color='error' onClick={() => setIsDeleting(prevState => !prevState)}>
-                                <Typography variant='overline'>Del</Typography>
-                            </Button>
+                            <>
+                                <Button sx={{m: 1, px:2}} startIcon={<DeleteIcon />} variant='outlined' color='error' onClick={() => setIsDeleting(prevState => !prevState)}>
+                                    <Typography variant='overline'>Del</Typography>
+                                </Button>
+                                <IconButton  onClick={handleExpandClick}>
+                                    {expanded ? <UnfoldLessOutlinedIcon /> : <UnfoldMoreOutlinedIcon />}
+                                </IconButton>
+                            </>
                         )}
                     </Grid>
                 </Grid>
