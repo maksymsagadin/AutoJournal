@@ -98,6 +98,21 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         }}
                     />
                 </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        label='Notes'
+                        name='notes'
+                        value={editedEntry.notes}
+                        onChange={handleChange}
+                        margin='dense'
+                        fullWidth
+                        required
+                        multiline
+                        InputProps={{
+                            startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
+                        }}
+                    />
+                </Grid>
                 <Grid item xs={12} >
                     <TextField
                         label='Parts'
@@ -123,21 +138,6 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         multiline
                         InputProps={{
                             startAdornment: <InputAdornment position='start'>🔧</InputAdornment>,
-                        }}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        label='Notes'
-                        name='notes'
-                        value={editedEntry.notes}
-                        onChange={handleChange}
-                        margin='dense'
-                        fullWidth
-                        required
-                        multiline
-                        InputProps={{
-                            startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
                         }}
                     />
                 </Grid>

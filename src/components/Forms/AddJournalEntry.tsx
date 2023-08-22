@@ -90,6 +90,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     <MenuItem value={'Maintenance'}>Maintenance</MenuItem>
                                     <MenuItem value={'Upgrade'}>Upgrade</MenuItem>
                                     <MenuItem value={'Repair'}>Repair</MenuItem>
+                                    <MenuItem value={'Repair'}>Other</MenuItem>
                                 </TextField>
                             </Grid>
                             <Grid item xs={6} sm={5}>
@@ -105,7 +106,6 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                         startAdornment: <InputAdornment position='start'>🛣️</InputAdornment>,
                                     }}
                                 />
-                                
                             </Grid>
                             <Grid item xs={7} sm={7}>
                                 <TextField
@@ -138,6 +138,20 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    label='Notes'
+                                    name='notes'
+                                    type='text'
+                                    margin='dense'
+                                    fullWidth
+                                    required
+                                    multiline
+                                    InputProps={{
+                                        startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
                                     label='Parts'
                                     name='parts'
                                     type='text'
@@ -159,20 +173,6 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     multiline
                                     InputProps={{
                                         startAdornment: <InputAdornment position='start'>🔧</InputAdornment>,
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    label='Notes'
-                                    name='notes'
-                                    type='text'
-                                    margin='dense'
-                                    fullWidth
-                                    required
-                                    multiline
-                                    InputProps={{
-                                        startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
                                     }}
                                 />
                             </Grid>
