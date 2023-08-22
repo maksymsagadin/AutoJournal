@@ -136,25 +136,27 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     }}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 <TextField
                                     label='Parts'
                                     name='parts'
                                     type='text'
                                     margin='dense'
                                     fullWidth
+                                    multiline
                                     InputProps={{
                                         startAdornment: <InputAdornment position='start'>🔩</InputAdornment>,
                                     }}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 <TextField
                                     label='Tools'
                                     name='tools'
                                     type='text'
                                     margin='dense'
                                     fullWidth
+                                    multiline
                                     InputProps={{
                                         startAdornment: <InputAdornment position='start'>🔧</InputAdornment>,
                                     }}
@@ -168,6 +170,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     margin='dense'
                                     fullWidth
                                     required
+                                    multiline
                                     InputProps={{
                                         startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
                                     }}
