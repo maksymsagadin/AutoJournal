@@ -1,9 +1,17 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { v4 as uuidv4 } from 'uuid'
+import { JournalEntry, Vehicle } from '@/utils/types'
+
 import { Box, TextField, Checkbox, FormControlLabel, Button, Paper, Typography, Grid, InputAdornment, MenuItem } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import { JournalEntry, Vehicle } from '@/utils/types'
+import CarRepairIcon from '@mui/icons-material/CarRepair' // service
+import SpeedIcon from '@mui/icons-material/Speed' // odometer
+import EventNoteIcon from '@mui/icons-material/EventNote' // date
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney' // spent
+import DescriptionIcon from '@mui/icons-material/Description' // notes
+import SportsIcon from '@mui/icons-material/Sports' // parts
+import ConstructionIcon from '@mui/icons-material/Construction' // tools
 
 interface AddJournalEntryProps {
     vehicle: Vehicle,
@@ -67,7 +75,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                     <Typography variant='overline' >Journal Entry</Typography>
                 </Button>
             ) : (
-                <Paper elevation={3} sx={{ p: 2, m: 2 }}>
+                <Paper elevation={3} sx={{ p: 2, mb: 1 }}>
                     <Typography variant='h6' gutterBottom>
                         Add Journal Entry
                     </Typography>
@@ -84,13 +92,13 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     required
                                     defaultValue='Upgrade'
                                     InputProps={{
-                                        startAdornment: <InputAdornment position='start'>〄</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'><CarRepairIcon /></InputAdornment>,
                                     }}
                                 >
-                                    <MenuItem value={'Maintenance'}>Maintenance</MenuItem>
+                                    <MenuItem value={'Service'}>Service</MenuItem>
                                     <MenuItem value={'Upgrade'}>Upgrade</MenuItem>
                                     <MenuItem value={'Repair'}>Repair</MenuItem>
-                                    <MenuItem value={'Repair'}>Other</MenuItem>
+                                    <MenuItem value={'Other'}>Other</MenuItem>
                                 </TextField>
                             </Grid>
                             <Grid item xs={6} sm={5}>
@@ -103,7 +111,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     fullWidth
                                     required
                                     InputProps={{
-                                        startAdornment: <InputAdornment position='start'>🛣️</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'><SpeedIcon /></InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -120,7 +128,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                         shrink: true,
                                     }}
                                     InputProps={{
-                                        startAdornment: <InputAdornment position='start'>📆</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'><EventNoteIcon /></InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -132,7 +140,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     margin='dense'
                                     fullWidth
                                     InputProps={{
-                                        startAdornment: <InputAdornment position='start'>💸</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'><AttachMoneyIcon /></InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -146,7 +154,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     required
                                     multiline
                                     InputProps={{
-                                        startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'><DescriptionIcon /></InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -159,7 +167,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     fullWidth
                                     multiline
                                     InputProps={{
-                                        startAdornment: <InputAdornment position='start'>🔩</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'><SportsIcon /></InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -172,7 +180,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                     fullWidth
                                     multiline
                                     InputProps={{
-                                        startAdornment: <InputAdornment position='start'>🔧</InputAdornment>,
+                                        startAdornment: <InputAdornment position='start'><ConstructionIcon /></InputAdornment>,
                                     }}
                                 />
                             </Grid>
