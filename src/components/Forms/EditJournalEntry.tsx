@@ -1,6 +1,15 @@
 import { useState } from 'react'
-import { Box, Button, Checkbox, FormControlLabel, Grid, InputAdornment, MenuItem, TextField } from '@mui/material'
 import { JournalEntry } from '@/utils/types'
+
+import { Box, Button, Checkbox, FormControlLabel, Grid, InputAdornment, MenuItem, TextField } from '@mui/material'
+import CarRepairIcon from '@mui/icons-material/CarRepair' // service
+import SpeedIcon from '@mui/icons-material/Speed' // odometer
+import EventNoteIcon from '@mui/icons-material/EventNote' // date
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney' // spent
+import DescriptionIcon from '@mui/icons-material/Description' // notes
+import SportsIcon from '@mui/icons-material/Sports' // parts
+import ConstructionIcon from '@mui/icons-material/Construction' // tools
+
 
 interface EditJournalEntryProps {
     entry: JournalEntry,
@@ -42,13 +51,13 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         fullWidth
                         required
                         InputProps={{
-                            startAdornment: <InputAdornment position='start'>〄</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'><CarRepairIcon /></InputAdornment>,
                         }}
                     >
-                        <MenuItem value={'Maintenance'}>Maintenance</MenuItem>
+                        <MenuItem value={'Service'}>Service</MenuItem>
                         <MenuItem value={'Upgrade'}>Upgrade</MenuItem>
                         <MenuItem value={'Repair'}>Repair</MenuItem>
-                        <MenuItem value={'Repair'}>Other</MenuItem>
+                        <MenuItem value={'Other'}>Other</MenuItem>
                     </TextField>
                 </Grid>
                 <Grid item xs={6} sm={5}>
@@ -62,7 +71,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         fullWidth
                         required
                         InputProps={{
-                            startAdornment: <InputAdornment position='start'>🛣️</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'><SpeedIcon /></InputAdornment>,
                         }}
                     />
                 </Grid>
@@ -80,7 +89,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                             shrink: true,
                         }}
                         InputProps={{
-                            startAdornment: <InputAdornment position='start'>📆</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'><EventNoteIcon /></InputAdornment>,
                         }}
                     />
                 </Grid>
@@ -94,7 +103,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         margin='dense'
                         fullWidth
                         InputProps={{
-                            startAdornment: <InputAdornment position='start'>💸</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'><AttachMoneyIcon /></InputAdornment>,
                         }}
                     />
                 </Grid>
@@ -109,7 +118,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         required
                         multiline
                         InputProps={{
-                            startAdornment: <InputAdornment position='start'>📝</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'><DescriptionIcon /></InputAdornment>,
                         }}
                     />
                 </Grid>
@@ -123,7 +132,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         fullWidth
                         multiline
                         InputProps={{
-                            startAdornment: <InputAdornment position='start'>🔩</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'><SportsIcon /></InputAdornment>,
                         }}
                     />
                 </Grid>
@@ -137,7 +146,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                         fullWidth
                         multiline
                         InputProps={{
-                            startAdornment: <InputAdornment position='start'>🔧</InputAdornment>,
+                            startAdornment: <InputAdornment position='start'><ConstructionIcon /></InputAdornment>,
                         }}
                     />
                 </Grid>
