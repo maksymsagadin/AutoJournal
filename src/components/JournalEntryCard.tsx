@@ -6,12 +6,12 @@ import UnfoldLessOutlinedIcon from '@mui/icons-material/UnfoldLessOutlined' // c
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import CarRepairIcon from '@mui/icons-material/CarRepair' // service
+import SpeedIcon from '@mui/icons-material/Speed' // odometer
 import EventNoteIcon from '@mui/icons-material/EventNote' // date
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney' // spent
-import SpeedIcon from '@mui/icons-material/Speed' // odometer
+import DescriptionIcon from '@mui/icons-material/Description' // notes
 import SportsIcon from '@mui/icons-material/Sports' // parts
 import ConstructionIcon from '@mui/icons-material/Construction' // tools
-import DescriptionIcon from '@mui/icons-material/Description' // notes
 import EditJournalEntry from './Forms/EditJournalEntry'
 
 interface JournalEntryCardProps {
