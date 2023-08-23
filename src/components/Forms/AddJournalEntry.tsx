@@ -186,7 +186,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                             </Grid>
                             <Grid item>
                                 <FormControlLabel
-                                    label='Future?'
+                                    label='Future Entry?'
                                     control={
                                         <Checkbox
                                             name='future'

@@ -155,7 +155,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             </Box>
             <Tabs value={tab} variant='fullWidth' sx={{pt: 1}} TabIndicatorProps={{ style: { display: 'none' } }} onChange={handleTabChange}>
                 <Tab label='Journal Entries' sx={tabStyles} />
-                <Tab label='Todo Entries' sx={tabStyles} />
+                <Tab label='Future Entries' sx={tabStyles} />
                 <Tab label='Spent' sx={tabStyles} />
                 <Tab label='History' sx={tabStyles} />
             </Tabs>

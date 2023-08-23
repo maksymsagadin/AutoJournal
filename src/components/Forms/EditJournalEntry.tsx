@@ -152,7 +152,7 @@ const EditJournalEntry: React.FC<EditJournalEntryProps> = ({ entry, onEdit, onCa
                 </Grid>
                 <Grid item>
                     <FormControlLabel
-                        label='Future?'
+                        label='Future Entry?'
                         control={
                             <Checkbox
                                 name='future'
