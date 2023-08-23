@@ -82,7 +82,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                     <Box component='form' onSubmit={handleSubmit}>
                         <Grid container spacing={2}>
                             <Grid item xs={6} sm={7}>
-                                <Tooltip title="Enter the type of service performed" placement='top' enterTouchDelay={50}>
+                                <Tooltip title="Enter the type of service performed" placement='top' arrow enterTouchDelay={150} leaveTouchDelay={1500} >
                                     <TextField
                                         select
                                         label='Service'
@@ -104,7 +104,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                 </Tooltip>
                             </Grid>
                             <Grid item xs={6} sm={5}>
-                                <Tooltip title="Enter the mileage of the vehicle during this service" placement='top' enterTouchDelay={50}>
+                                <Tooltip title="Enter the mileage of the vehicle during this service" placement='top' arrow enterTouchDelay={150} leaveTouchDelay={1500}>
                                     <TextField
                                         label='Mileage'
                                         name='mileage'
@@ -120,7 +120,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                 </Tooltip>
                             </Grid>
                             <Grid item xs={7} sm={7}>
-                                <Tooltip title="Enter the date this service was performed" placement='top' enterTouchDelay={50}>
+                                <Tooltip title="Enter the date this service was performed" placement='top' arrow enterTouchDelay={150} leaveTouchDelay={1500}>
                                     <TextField
                                         label='Date'
                                         name='date'
@@ -139,7 +139,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                 </Tooltip>
                             </Grid>
                             <Grid item xs={5} sm={5}>
-                                <Tooltip title="How much was spent overall?" placement='top' enterTouchDelay={50}>
+                                <Tooltip title="How much was spent overall?" placement='top' arrow enterTouchDelay={150} leaveTouchDelay={1500}>
                                     <TextField
                                         label='Spent'
                                         name='spent'
@@ -153,7 +153,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                 </Tooltip>
                             </Grid>
                             <Grid item xs={12}>
-                            <Tooltip title="What did you do?" placement='top' enterTouchDelay={50}>
+                            <Tooltip title="What did you do?" placement='top' arrow enterTouchDelay={150} leaveTouchDelay={1500}>
                                     <TextField
                                         label='Notes'
                                         name='notes'
@@ -169,7 +169,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                 </Tooltip>
                             </Grid>
                             <Grid item xs={12}>
-                                <Tooltip title="What part(s) did you install or replace?" placement='top' enterTouchDelay={50}>
+                                <Tooltip title="What part(s) did you install or replace?" placement='top' arrow enterTouchDelay={150} leaveTouchDelay={1500}>
                                     <TextField
                                         label='Parts'
                                         name='parts'
@@ -184,7 +184,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                 </Tooltip>
                             </Grid>
                             <Grid item xs={12}>
-                                <Tooltip title="What tool(s) did you need?" placement='top' enterTouchDelay={50}>
+                                <Tooltip title="What tool(s) did you need?" placement='top' arrow enterTouchDelay={150} leaveTouchDelay={1500}>
                                     <TextField
                                         label='Tools'
                                         name='tools'
@@ -199,7 +199,7 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
                                 </Tooltip>
                             </Grid>
                             <Grid item>
-                                <Tooltip title="Future service or already completed?" placement='right' enterTouchDelay={50}>
+                                <Tooltip title="Future service or already completed?" placement='right' arrow enterTouchDelay={150} leaveTouchDelay={1500}>
                                     <FormControlLabel
                                         label='Future Entry?'
                                         control={
