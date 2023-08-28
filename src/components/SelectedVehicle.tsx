@@ -156,8 +156,8 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <Tabs value={tab} variant='fullWidth' sx={{pt: 1}} TabIndicatorProps={{ style: { display: 'none' } }} onChange={handleTabChange}>
                 <Tab label='Journal Entries' sx={tabStyles} />
                 <Tab label='Future Entries' sx={tabStyles} />
-                <Tab label='Spent' sx={tabStyles} />
                 <Tab label='History' sx={tabStyles} />
+                <Tab label='Spent' sx={tabStyles} />
             </Tabs>
             {tab === 0 && (
                 <Grid container >
@@ -187,12 +187,12 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             )}
             {tab === 2 && (
                 <>
-                    <SpentChart journalEntries={journalEntries}/>
+                    <TimelineChart journalEntries={journalEntries}/>
                 </>
             )}
             {tab === 3 && (
                 <>
-                    <TimelineChart journalEntries={journalEntries}/>
+                    <SpentChart journalEntries={journalEntries}/>
                 </>
             )}
         </Box>
