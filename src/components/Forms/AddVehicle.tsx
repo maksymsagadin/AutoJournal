@@ -7,9 +7,10 @@ import { Vehicle } from '@/utils/types'
 
 interface AddVehicleProps {
     onAddVehicle: (vehicle: Vehicle) => void
+    showSnackbar: (message: string, severity: 'success' | 'error' | 'warning' | 'info') => void
 }
 
-const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
+const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle, showSnackbar }) => {
     const { update } = useSession()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -40,9 +41,10 @@ const AddVehicle: React.FC<AddVehicleProps> = ({ onAddVehicle }) => {
             const updatedVehicles = await res.json()
             onAddVehicle(newVehicle)
             await update({ image: updatedVehicles })
+            showSnackbar('Vehicle added successfully!', 'success')
         } else {
             // If the server responded with an error status, handle the error
-            console.error('Error adding vehicle')
+            showSnackbar('Vehicle add unsuccessful!', 'error')
             setIsOpen(prevState => !prevState)
         }
     }

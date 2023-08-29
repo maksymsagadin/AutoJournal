@@ -19,9 +19,10 @@ interface SelectedVehicleProps {
     vehicle: Vehicle
     onEdit: (vehicle: Vehicle) => void
     onDelete: (vehicle: Vehicle) => void
+    showSnackbar: (message: string, severity: 'success' | 'error' | 'warning' | 'info') => void
 }
 
-const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDelete }) => {
+const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDelete, showSnackbar }) => {
     const { update } = useSession()
     const [isEditing, setIsEditing] = useState(false)
     const [tab, setTab] = useState(0)
@@ -78,9 +79,10 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                     // update the session image with updated data
                     const updatedVehicles = await result.json()
                     await update({ image: updatedVehicles })
+                    showSnackbar('Journal entry edited successfully!', 'success')
                 } else {
                     // If the server responded with an error status, handle the error
-                    console.error('Error editing vehicle')
+                    showSnackbar('Journal entry edit unsuccessful!', 'error')
                 }
             }
         }
@@ -106,9 +108,10 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                 // update the session image with updated data
                 const updatedVehicles = await result.json()
                 await update({ image: updatedVehicles })
+                showSnackbar('Journal entry deleted successfully!', 'success')
             } else {
                 // If the server responded with an error status, handle the error
-                console.error('Error editing vehicle')
+                showSnackbar('Journal entry delete unsuccessful!', 'error')
             }
         }
     }
@@ -124,6 +127,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
                     }}
                     onDelete={onDelete}
                     setIsEditing={setIsEditing}
+                    showSnackbar={showSnackbar}
                 />
             </Box>
         )
@@ -151,7 +155,7 @@ const SelectedVehicle: React.FC<SelectedVehicleProps> = ({ vehicle, onEdit, onDe
             <Box display='flex' flexWrap='wrap' justifyContent='center' >
                 <ImportButton vehicle={vehicle} onImport={onEdit} />
                 <ExportButton vehicle={vehicle} />
-                <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} />
+                <AddJournalEntry vehicle={vehicle} onAddEntry={onEdit} showSnackbar={showSnackbar} />
             </Box>
             <Tabs value={tab} variant='fullWidth' sx={{pt: 1}} TabIndicatorProps={{ style: { display: 'none' } }} onChange={handleTabChange}>
                 <Tab label='Journal Entries' sx={tabStyles} />

@@ -9,9 +9,10 @@ interface EditVehicleProps {
     onEdit: (vehicle: Vehicle) => void
     onDelete: (vehicle: Vehicle) => void
     setIsEditing: (isEditing: boolean) => void
+    showSnackbar: (message: string, severity: 'success' | 'error' | 'warning' | 'info') => void
 }
 
-const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete, setIsEditing }) => {
+const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete, setIsEditing, showSnackbar }) => {
     const { update } = useSession()
     const [editedVehicle, setEditedVehicle] = useState(vehicle)
     const [isDeleting, setIsDeleting] = useState(false)
@@ -39,8 +40,9 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete, se
             // update the session image with updated data
             const updatedVehicles = await result.json()
             await update({ image: updatedVehicles })
+            showSnackbar('Vehicle edited successfully!', 'success')
         } else {
-            console.error('Error editing vehicle')
+            showSnackbar('Vehicle edit unsuccessful!', 'error')
         }
     }
 
@@ -58,8 +60,9 @@ const EditVehicle: React.FC<EditVehicleProps> = ({ vehicle, onEdit, onDelete, se
             // update the session image with updated data
             const updatedVehicles = await result.json()
             await update({ image: updatedVehicles })
+            showSnackbar('Vehicle deleted successfully!', 'success')
         } else {
-            console.error('Error deleting vehicle')
+            showSnackbar('Vehicle delete unsuccessful!', 'error')
         }
     }
 

@@ -1,18 +1,20 @@
 import { NextPage, GetServerSideProps } from 'next'
+import { useState } from 'react'
 import Head from 'next/head'
 import type { Session } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth/next'
 import { useSession } from 'next-auth/react'
 
-import { useState } from 'react'
-import NavBar from '@/components/NavBar'
-import { Box, Typography, Grid, Button } from '@mui/material'
+import { Box, Typography, Grid, Button, Snackbar, Alert } from '@mui/material'
 import Downloading from '@mui/icons-material/DownloadingOutlined'
 import SportsMotorsportsIcon from '@mui/icons-material/SportsMotorsports'
+
+import NavBar from '@/components/NavBar'
 import AddVehicle from '@/components/Forms/AddVehicle'
 import VehicleCard from '@/components/VehicleCard'
 import SelectedVehicle from '@/components/SelectedVehicle'
+import useSnackbar from '@/hooks/useSnackbar'
 import { Vehicle } from '@/utils/types'
 
 const Dashboard: NextPage = () => {
@@ -21,6 +23,13 @@ const Dashboard: NextPage = () => {
     const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null)
     const [showVehicles, setShowVehicles] = useState(true)
     const user = session?.user
+    const {
+        snackbarOpen,
+        snackbarMessage,
+        snackbarSeverity,
+        showSnackbar,
+        closeSnackbar
+    } = useSnackbar()
 
     // Handle State after Adding a vehicle
     const handleAddVehicle = (newVehicle: Vehicle) => {
@@ -77,7 +86,7 @@ const Dashboard: NextPage = () => {
                             <Typography variant='h6' component='h2' gutterBottom>
                                 You have {vehicles?.length} vehicles.
                             </Typography>
-                            <AddVehicle onAddVehicle={handleAddVehicle} />
+                            <AddVehicle onAddVehicle={handleAddVehicle} showSnackbar={showSnackbar} />
                         </Box>
                         <Grid display='flex' justifyContent='center' container spacing={2}>
                             {vehicles?.map((vehicle: Vehicle, index: number) => (
@@ -93,10 +102,20 @@ const Dashboard: NextPage = () => {
                 ) : (
                     <>
                         <Button variant='outlined' color='warning' sx={{mb:2}} onClick={() => setShowVehicles(true)}>Select Vehicle</Button>
-                        <SelectedVehicle vehicle={selectedVehicle} onEdit={handleEditVehicle} onDelete={handleDeleteVehicle} />
+                        <SelectedVehicle vehicle={selectedVehicle} onEdit={handleEditVehicle} onDelete={handleDeleteVehicle} showSnackbar={showSnackbar}/>
                     </>
                 )}
             </Box>
+            <Snackbar 
+                open={snackbarOpen} 
+                autoHideDuration={6000} 
+                onClose={closeSnackbar}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            >
+                <Alert onClose={closeSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </>
         
     )

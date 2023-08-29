@@ -16,9 +16,10 @@ import ConstructionIcon from '@mui/icons-material/Construction' // tools
 interface AddJournalEntryProps {
     vehicle: Vehicle,
     onAddEntry: (vehicle: Vehicle) => void
+    showSnackbar: (message: string, severity: 'success' | 'error' | 'warning' | 'info') => void
 }
 
-const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }) => {
+const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry, showSnackbar }) => {
     const { update } = useSession()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -58,9 +59,10 @@ const AddJournalEntry: React.FC<AddJournalEntryProps> = ({ vehicle, onAddEntry }
             onAddEntry(updatedVehicle)
             await update({ image: updatedVehicles })
             setIsOpen(prevState => !prevState)
+            showSnackbar('Journal entry added successfully!', 'success')
         } else {
             // If the server responded with an error status, handle the error
-            console.error('Error adding journal entry')
+            showSnackbar('Journal entry not added!', 'error')
         }
     }
 
